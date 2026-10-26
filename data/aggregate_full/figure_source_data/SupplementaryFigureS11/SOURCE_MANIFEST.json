@@ -1,0 +1,60 @@
+{
+  "asset": "SupplementaryFigureS11",
+  "audits": {
+    "convergence_ok": false,
+    "n_sources": 10,
+    "panelA_rows": 60,
+    "panelB_rows": 20
+  },
+  "canonical_snapshot_root": "mechanism_v1_snapshot",
+  "freeze_id": "mechanism_v1_figure_source_freeze_v3_20260921",
+  "inputs": {
+    "result": {
+      "bytes": 2803,
+      "path": "B_navigation_separability/SEPARABILITY_RESULT.json",
+      "sha256": "b25590666b03d2f9e4c61d54716943d97dd0b7d1d14fdb0a1e66f0b6d2e47e7f"
+    },
+    "rho_curve": {
+      "bytes": 563,
+      "path": "B_navigation_separability/rho_curve.csv",
+      "sha256": "d4695ebbc45abd9576cbb9381b48f0255ab3a8eeb29e988708d2d0e12dbe6b0d"
+    },
+    "source_level": {
+      "bytes": 5268,
+      "path": "B_navigation_separability/source_level.csv",
+      "sha256": "8232774f41544f39a40e165e6802116d334d3a1f235b9af7b1c11b243b1f5deb"
+    },
+    "tests": {
+      "bytes": 370,
+      "path": "B_navigation_separability/separability_tests.csv",
+      "sha256": "c46a0ccd4ab26dd8e6d4ebc37a3dfb19ef8118ec996b40e739c076e77dd261d9"
+    }
+  },
+  "notes": [
+    "S11 has exactly three panels; zero-shot/refit detail is not a fourth panel."
+  ],
+  "outputs": {
+    "PANEL_CONTRACT.json": {
+      "bytes": 643,
+      "sha256": "eeca3d31e6698a9b49e388f8ce263c7d24b1845e718b145820e5b49d813687df"
+    },
+    "panelA_transfer_vs_navigation_competence.csv": {
+      "bytes": 2012,
+      "sha256": "dca14fd8ea8647a0628a481d75a07553fe818f2da2291a3fa4f70d3e59f154bc"
+    },
+    "panelB_excess_transfer_drop.csv": {
+      "bytes": 999,
+      "sha256": "6d0f4aa97f87814b9044cc33a7432a7251c11510b1a00daeae2ed256fafd780e"
+    },
+    "panelC_convergence_gate.csv": {
+      "bytes": 186,
+      "sha256": "2db2953325daaa857e6917efc79d483252196d9042bf2202ffdf622494bfd2ac"
+    },
+    "s11_statistics.json": {
+      "bytes": 981,
+      "sha256": "c0fe027a8cbdf9014cefe165d260713b41e5d539c110b57eb0fccf8be7114c35"
+    }
+  },
+  "schema_version": "mechanism_figure_source_freeze_v3",
+  "snapshot_sha256sums_sha256": "3c753cbb8e700f80da72275f7a0470f7fbefd4cb8830debbcc2feb4b2727f0e3"
+}

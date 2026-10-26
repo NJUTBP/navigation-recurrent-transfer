@@ -1,0 +1,8 @@
+# Validated representative model reconstruction environment: Python 3.11, CPU.
+# Install the CPU/CUDA build of torch 2.7.0 appropriate for your hardware first.
+-r requirements-figures.txt
+torch==2.7.0
+pyyaml==6.0
+scikit-learn==1.3.0
+joblib==1.4.2
+numba==0.57.1

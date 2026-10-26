@@ -1,0 +1,33 @@
+{
+  "assets": {
+    "Figure7": {
+      "directory": "Figure7",
+      "manifest_sha256": "62d16ae868938d394bd57dac946c7ad30dbbe9de9e624d0d02cd47deecac40cc"
+    },
+    "SupplementaryFigureS10": {
+      "directory": "SupplementaryFigureS10",
+      "manifest_sha256": "a289766d3bae94e6cff8eaafa10889a4c916742415260ecf632a14d5dd2ef0d3"
+    },
+    "SupplementaryFigureS11": {
+      "directory": "SupplementaryFigureS11",
+      "manifest_sha256": "c7cedd97ecefe6d6218567e46d74acf34b8f84933fed99cf707369dfa98b895a"
+    },
+    "SupplementaryFigureS8": {
+      "directory": "SupplementaryFigureS8",
+      "manifest_sha256": "4783c62bb457de364cad3e749097e2bbe9276caa89c0c11275f0eef2b4463587"
+    },
+    "SupplementaryFigureS9": {
+      "directory": "SupplementaryFigureS9",
+      "manifest_sha256": "fde84505f6292c9feb0ca060934398a75972a50a41c771da265ae994995096d2"
+    }
+  },
+  "freeze_id": "mechanism_v1_figure_source_freeze_v3_20260921",
+  "rules": [
+    "No new training or hypothesis tests.",
+    "Source seed is the inferential replication unit; target repeats are averaged within source before source-level figure data.",
+    "Plotting scripts must read only figure_source_data after this freeze."
+  ],
+  "schema_version": "mechanism_figure_source_freeze_v3",
+  "snapshot_sha256sums_sha256": "3c753cbb8e700f80da72275f7a0470f7fbefd4cb8830debbcc2feb4b2727f0e3",
+  "status": "complete"
+}

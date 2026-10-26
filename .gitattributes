@@ -1,0 +1,3 @@
+# Release checksums cover exact file bytes, including the frozen source tables.
+# Preserve line endings across Windows/Linux checkouts.
+* -text

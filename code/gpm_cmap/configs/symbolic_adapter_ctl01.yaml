@@ -1,0 +1,80 @@
+# Exp8 IID symbolic grounding with three scientifically distinct source arms.
+# The CTL-01 source is rejected automatically unless its checkpoint contains a
+# passing training gate and exact 4096x2 / 4096x4096 transfer tensors.
+project_name: gpm_cmap
+seed: 42
+n_seeds: 5
+device: cuda
+output_dir: outputs/symbolic_adapter_with_ctl01
+
+pretrained_sources:
+  - arm: nav_frozen
+    checkpoint: outputs/nav_pretrain_full/best_grid_balanced.pt
+    source_type: navigation
+    require_gate: false
+  - arm: ctl01_frozen
+    checkpoint: outputs/sequence_control_full/best_validation.pt
+    source_type: sequence_control
+    require_gate: true
+
+transfer:
+  mode: full
+
+episode_budgets: [10, 20, 50, 100, 200, 500, 1000, 7000]
+low_budget_max: 200
+include_scratch: false
+
+# Decisive task-characterisation controls requested during manuscript review.
+# They use the same train/validation/test split and episode budgets as the RNN
+# arms, but contain no recurrent reservoir.  The post-hoc recurrence ablation
+# is evaluated only at the main 1000-episode reporting point to limit overhead.
+controls:
+  include_action_count_linear: true
+  include_linear_accumulator: true
+  linear_accumulator_dim: 2
+  baseline_budgets: [10, 20, 50, 100, 200, 500, 1000]
+  baseline_train:
+    # Match the recurrent/adaptor training schedule for an equal-update comparison.
+    epochs: 80
+    lr: 0.01
+    weight_decay: 0.0
+    grad_clip: 1.0
+    eval_every: 5
+  recurrence_ablation_budgets: [1000]
+
+data:
+  task_name: social_hierarchy
+  n_levels: 4
+  coord_strategy: null
+  coord_dim: 2
+  normalize_displacements: true
+  num_episodes: 10000
+  seq_len: 8
+  batch_size: 128
+  split_ratio: 0.7
+  validation_ratio: 0.1
+  num_workers: 0
+  velocity_scale: 0.02
+  coord_scale: 0.02
+
+model:
+  hidden_dim: 4096
+  cell_type: rnn
+  use_bias: false
+  nonnegative: true
+  dropout: 0.0
+  content_dim: 64
+  periodic_scales: 0
+  use_position_head: false
+
+train:
+  epochs: 80
+  lr: 0.001
+  weight_decay: 0.0
+  grad_clip: 1.0
+  eval_every: 5
+
+runtime:
+  cpu_num_threads: -1
+  allow_device_fallback: false
+  deterministic_algorithms: false

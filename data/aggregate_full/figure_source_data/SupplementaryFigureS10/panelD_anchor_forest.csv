@@ -1,0 +1,7 @@
+anchor,split,difference,ci_low,ci_high,exact_p,interval_contains_zero
+anchor_rho0_minus_navigation_E09a,id_seen_short,-0.002083333333,-0.005316666667,0.0007333333333,0.28125,True
+anchor_rho0_minus_navigation_E09a,seen_long,-0.0009,-0.0212,0.01651666667,0.931640625,True
+anchor_rho0_minus_navigation_E09a,heldout_long,-0.0052,-0.0271675,0.01388375,0.642578125,True
+symmetry_rho0p9_minus_rho0p1,id_seen_short,0.002883333333,-0.002367083333,0.007233333333,0.283203125,True
+symmetry_rho0p9_minus_rho0p1,seen_long,0.01925,-0.008634166667,0.04760041667,0.240234375,True
+symmetry_rho0p9_minus_rho0p1,heldout_long,0.01775,-0.01026708333,0.04788375,0.294921875,True

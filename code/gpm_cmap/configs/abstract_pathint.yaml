@@ -1,0 +1,90 @@
+# =====================================================================
+#  Experiment 5: Abstract Path-Integration Reasoning
+#
+#  IMPORTANT: hidden_dim, cell_type, use_bias, nonnegative MUST match
+#  the navigation pre-training config for successful weight transfer.
+#  Default values below match nav_pretrain_full.yaml.
+# =====================================================================
+
+project_name: gpm_cmap
+seed: 186
+n_seeds: 5
+device: cuda
+output_dir: outputs/abstract_pathint
+
+# Primary navigation checkpoint for transfer.
+transfer_checkpoint: outputs/nav_pretrain_full/best_grid_balanced.pt
+
+transfer:
+  mode: full                 # full | input_only | recurrent_only
+  checkpoint_candidates:
+    - outputs/nav_pretrain_full/best.pt
+    - outputs/nav_pretrain_full/best_grid.pt
+    - outputs/nav_pretrain_full/best_grid_balanced.pt
+
+data:
+  # Supported: social_hierarchy | family_tree | transitive
+  task_name: social_hierarchy
+  n_levels: 4                  # used by social_hierarchy
+  n_items: 7                   # used by transitive
+  coord_strategy: null          # auto: social=real, family=spectral, transitive=rank
+  coord_dim: 2
+  normalize_displacements: true
+  num_episodes: 10000
+  seq_len: 8
+  batch_size: 128
+  split_ratio: 0.7
+  validation_ratio: 0.1
+  num_workers: 4
+  velocity_scale: 0.02
+  # Keep coordinate and velocity scales aligned so that, on a unit lattice,
+  # target_coords - start_coords equals the summed velocity sequence.
+  coord_scale: 0.02
+
+model:
+  hidden_dim: 4096
+  cell_type: rnn
+  use_bias: false
+  nonnegative: true
+  dropout: 0.0
+  content_dim: 64
+  periodic_scales: 0
+  use_position_head: true
+
+train:
+  epochs: 100
+  lr: 0.001
+  weight_decay: 0.0
+  whh_weight_decay: 0.0001
+  grad_clip: 1.0
+  position_loss_weight: 0.1
+  eval_every: 5
+  selection_metric: validation_accuracy
+
+controls:
+  action_map_mode: aligned
+  run_checkpoint_compare: true
+  run_action_mapping_control: true
+  run_generalization_split_control: true
+  run_held_out_length_control: true
+  held_out_length_range: [4, 16]
+  run_cross_graph_control: true
+  cross_graph_targets:
+    - task_name: social_hierarchy
+      n_levels: 3
+      label: social_3x3
+    - task_name: transitive
+      n_items: 7
+      label: transitive_chain
+  run_velocity_transform_control: true
+  run_no_coord_supervision_control: true
+  run_transfer_mode_control: true
+
+analysis:
+  max_grid_units: 64
+  save_distance_breakdown: true
+
+runtime:
+  cpu_num_threads: -1
+  allow_device_fallback: false
+  deterministic_algorithms: false

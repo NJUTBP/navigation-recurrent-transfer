@@ -1,0 +1,64 @@
+# CTL-01 — trained, non-navigation recurrent control source.
+# The GridRNN core, optimizer steps, batch size, hidden size, learning rate and
+# W_hh penalty coefficient match nav_pretrain_full.yaml.  The task is delayed
+# sequence reconstruction rather than path integration.
+project_name: gpm_cmap
+seed: 186
+device: cuda
+output_dir: outputs/sequence_control_full
+
+data:
+  # Navigation-matched input generation.
+  seq_len: 20
+  dt: 0.02
+  speed_scale: 0.8168140899
+  sigma_theta: 11.52
+  min_speed: 0.0
+  max_speed: 100.0
+  arena_size: 2.2
+  border_region: 0.03
+  boundary_mode: avoid
+  magnitude_mode: navigation_matched
+  shuffle_magnitudes: true
+
+  # Primary scientific target and dense auxiliary memory supervision.
+  delay: 10
+  auxiliary_lags: all_before_delay
+
+  # Matched optimization/sample budget.
+  batch_size: 200
+  steps_per_epoch: 1000
+
+model:
+  input_dim: 2
+  hidden_dim: 4096
+  activation: relu
+  nonnegative: true
+  cell_type: rnn
+  dropout: 0.0
+  use_bias: false
+
+train:
+  epochs: 150
+  lr: 0.0001
+  weight_decay: 0.0
+  whh_weight_decay: 0.0001
+  grad_clip: 0.0
+
+  # NMSE makes the task objective dimensionless; one is the zero-predictor
+  # baseline. Each lag receives equal weight, while checkpoint selection and
+  # the success gate use only the prespecified delay-10 target.
+  task_loss_scale: 1.0
+  primary_loss_weight: 1.0
+  auxiliary_loss_weight_per_lag: 1.0
+  log_every_steps: 100
+
+analysis:
+  val_num_sequences: 2000
+  success_primary_nmse_max: 0.50
+  success_min_relative_nmse_reduction: 0.20
+
+runtime:
+  cpu_num_threads: 4
+  allow_device_fallback: false
+  deterministic_algorithms: false

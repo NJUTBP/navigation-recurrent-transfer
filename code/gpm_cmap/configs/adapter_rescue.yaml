@@ -1,0 +1,73 @@
+# =====================================================================
+#  Exp7: 2x2 linear-adapter rescue (低维坐标重映射拯救)
+#  Positive-result bet #1 — 预注册判据见 exp7_adapter_rescue.py docstring
+#  运行:  python -m gpm_cmap.experiments.exp7_adapter_rescue \
+#             --config configs/adapter_rescue.yaml
+# =====================================================================
+project_name: gpm_cmap
+seed: 42
+n_seeds: 5
+device: cuda
+output_dir: outputs/adapter_rescue
+
+# 一个或多个导航源 checkpoint；训练出更多源后加进列表即可自动做 source-level 复制
+nav_checkpoints:
+  - outputs/nav_pretrain_full/best_grid_balanced.pt
+
+transfer:
+  mode: full            # full | input_only | recurrent_only
+
+# 固定坐标变换 T（施加到 train+val+test 的全部关系向量上，在 wrapper 内实现）
+transforms:
+  - none                            # 基线（恢复判据的分母）
+  - signflip                        # = 旋转180°，当前无适配器时 12.84%
+  - {name: rotate, degrees: 90}     # 当前无适配器时 15.47%
+  - {name: rotate, degrees: 30}
+  - {name: rotate, degrees: 135}
+  - {name: rotate, degrees: 270}
+  - {name: scale, factor: 0.5}
+  - scale2x                         # 当前无适配器时 68.20%
+  - {name: scale, factor: 4.0}
+  - {name: aniso, fx: 2.0, fy: 0.5}
+  - {name: shear, k: 0.5}
+
+recover_fraction: 0.90     # C1: nav_adapter ≥ 0.90 × 自身 none 基线（逐 seed 配对）
+run_noadapter_control: true   # C4 对照:A 冻结为 I,仅重训读出
+run_random_control: true      # C3 对照:随机冻结核 + 适配器
+
+data:
+  task_name: social_hierarchy
+  n_levels: 4
+  coord_strategy: null
+  coord_dim: 2
+  normalize_displacements: true
+  num_episodes: 10000
+  seq_len: 8
+  batch_size: 128
+  split_ratio: 0.7
+  validation_ratio: 0.1
+  num_workers: 0
+  velocity_scale: 0.02
+  coord_scale: 0.02
+
+model:
+  hidden_dim: 4096
+  cell_type: rnn
+  use_bias: false
+  nonnegative: true
+  dropout: 0.0
+  content_dim: 64
+  periodic_scales: 0
+  use_position_head: false   # 无坐标监督(position_loss_weight 在脚本内恒为 0)
+
+train:
+  epochs: 60
+  lr: 0.001
+  weight_decay: 0.0
+  grad_clip: 1.0
+  eval_every: 5
+
+runtime:
+  cpu_num_threads: -1
+  allow_device_fallback: false
+  deterministic_algorithms: false

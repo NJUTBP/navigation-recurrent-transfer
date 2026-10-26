@@ -1,0 +1,99 @@
+{
+  "asset": "Figure7",
+  "audits": {
+    "A_rows": 240,
+    "B_rows": 60,
+    "C_rows": 60,
+    "D_rows": 360,
+    "E_rows": 40,
+    "n_sources": 10
+  },
+  "canonical_snapshot_root": "mechanism_v1_snapshot",
+  "freeze_id": "mechanism_v1_figure_source_freeze_v3_20260921",
+  "inputs": {
+    "A_diagnostics": {
+      "bytes": 238,
+      "path": "A_retention_intervention/diagnostic_summary.csv",
+      "sha256": "bbbbe045edb2089cd7c702e441bb4071f9b9f2b3c42e248776581425ab91484f"
+    },
+    "A_source_contrasts": {
+      "bytes": 4102,
+      "path": "A_retention_intervention/source_contrasts.csv",
+      "sha256": "c4d20aeb429d48b6e5e8814ec965fad7aa58bc766bc0c6d36848aee86af4f4fe"
+    },
+    "A_tests": {
+      "bytes": 992,
+      "path": "A_retention_intervention/tests.csv",
+      "sha256": "6dd6b7ffacaaa7b8c01eb5313d466e0282c958b09790c124a2058c950a32f802"
+    },
+    "C1_curve": {
+      "bytes": 1362,
+      "path": "C1_autonomous_retention/rho_curve.csv",
+      "sha256": "8e6122942c57394d5938c919da0e8bc26c263731579ced18d2c9423523606566"
+    },
+    "C1_source": {
+      "bytes": 2097,
+      "path": "C1_autonomous_retention/source_level_retention.csv",
+      "sha256": "a813f1248de35bc2068f210749257e2444fba6eafe40e2ab6edbf30c33e9d78b"
+    },
+    "E067_state": {
+      "bytes": 553211,
+      "path": "E0_67_forward_diagnostics/all_state_diagnostics.csv",
+      "sha256": "216c235b5ad3bbd62843b3069e1e9cca8192ad63465cc7722826f32bc9cd3c5a"
+    },
+    "E6_metrics": {
+      "bytes": 325913,
+      "path": "E6_rho_scan/all_metrics.csv",
+      "sha256": "ea039969e3c54ac778a5a86c70b2b72184b432d30fedf600db87805b708e589c"
+    },
+    "E6_per_length": {
+      "bytes": 533969,
+      "path": "E6_rho_scan/all_per_length.csv",
+      "sha256": "ccaf1a71a288810b1d5bcb020a3544bc3c4259c8d25e01323f788d653b570f4a"
+    },
+    "E6_tests": {
+      "bytes": 929,
+      "path": "E6_rho_scan/main_and_anchor_tests.csv",
+      "sha256": "ef62162bd5c17453bb05993461f36209166fd8c96ef23ade60c7f6d6eb99b0f0"
+    }
+  },
+  "notes": [
+    "All target repeats are averaged within source before source-level plotting."
+  ],
+  "outputs": {
+    "PANEL_CONTRACT.json": {
+      "bytes": 1237,
+      "sha256": "ae3824e1520ac6694089c6955f6e9f6dcfa3530c9896e0a6028d7312349b7e0e"
+    },
+    "figure7_statistics.json": {
+      "bytes": 2187,
+      "sha256": "f19e616448fe2cc509032ffa28314726eb9a11fdd4eb2b1c32e21e4da639f52f"
+    },
+    "panelA_multistep_dynamics.csv": {
+      "bytes": 13928,
+      "sha256": "66679077d8f5dda687a3869c8cb96ac9bd9f825acf42b58401a9de249cbc36f2"
+    },
+    "panelB_accuracy_dose.csv": {
+      "bytes": 1862,
+      "sha256": "3f5e4af8086eaba86f90a362086a2824d2cba7d6ac22f8313a49d0afa590359a"
+    },
+    "panelC_retention_dose.csv": {
+      "bytes": 1355,
+      "sha256": "80484ab2a0611afd0dc752fac2457ed3937d232dc13c04ccae4ae1f9bb001579"
+    },
+    "panelD_horizon_profile.csv": {
+      "bytes": 8442,
+      "sha256": "30c6e1712cb3ee0e0af806fc18df4ce7d80d4303d7f7e7f474659a56d649112a"
+    },
+    "panelE_intervention_effects.csv": {
+      "bytes": 1703,
+      "sha256": "b3712e80736b7a344357a2034eabe53f36862703cc9eca891a8a61a8118b7bb2"
+    },
+    "panelE_retention_targets.csv": {
+      "bytes": 199,
+      "sha256": "940212e983fe82224ac64f04dbb38777a886cc504c47b209bfb7eba106572a80"
+    }
+  },
+  "schema_version": "mechanism_figure_source_freeze_v3",
+  "snapshot_sha256sums_sha256": "3c753cbb8e700f80da72275f7a0470f7fbefd4cb8830debbcc2feb4b2727f0e3"
+}

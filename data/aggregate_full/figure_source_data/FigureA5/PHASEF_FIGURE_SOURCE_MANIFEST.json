@@ -1,0 +1,27 @@
+{
+  "figure": "FigureA5",
+  "source_stage": "phaseF_fullscale_v1",
+  "source_path": "/fsb/home/wangwei/ww_liby/gpm_cmp/Grid-Prior/outputs/multinav/multinav_paper_v1/rerun_best_validation/hard8x8_diagnostics/audit_v1/phaseF_fullscale_v1/aggregate",
+  "aggregate_full_resolved": "/fsb/home/wangwei/ww_liby/gpm_cmp/Grid-Prior/outputs/multinav/multinav_paper_v1/rerun_best_validation/aggregate_full_attempts/try_003",
+  "frozen_followup_copy": "/fsb/home/wangwei/ww_liby/gpm_cmp/Grid-Prior/outputs/multinav/multinav_paper_v1/rerun_best_validation/aggregate_full_attempts/try_003/hard8x8_phaseF_followup",
+  "created_utc": "2026-09-18T07:00:00.491127+00:00",
+  "n_navigation_sources": 10,
+  "n_fresh_targets_per_source": 5,
+  "n_training_conditions": 15,
+  "plot_contract": "Phase-F final result only; legacy low-competence FigureA5 is not plotted",
+  "files_sha256": {
+    "condition_performance_matrix.csv": "babab3c665d0b83ee95d124a07a5a810cf0f107041ea8ca892607ccc897ece45",
+    "source_level_metrics.csv": "eca889e01fe12a5afd9d07ad899a3de3270d60a6a0ce7a66ba2a012ecdf8a5a7",
+    "source_level_baselines.csv": "1d7a0a55ffac1d1d1be707433c0bb18492253d9cb11af052711102a854abb0f2",
+    "primary_generalization_contrasts.csv": "5eb31b4e49252018a5cceb359dc26b51d2955006b8a1734df3d5cb3eca90e872",
+    "secondary_id_contrasts.csv": "201b850289b658f41a9b311b99790e54b218ac6a66584248b4849bd93f991515",
+    "all_per_length.csv": "4c1a0bd3cf52fb700796d8d564259206e8865bc22acc01aa48e7e97e782145d6",
+    "source_level_relation_interventions.csv": "7ff2e5f2a8b7cb055e1bc0a70a06ac8d974939566ab24ec8baeda7c41d97a899",
+    "source_level_condition_diagnostics.csv": "810c7cf0b4cc6d66695965fb66d26404b63e3d429e8097be90f7b40467c9893f",
+    "all_update_curves.csv": "3c15ca59bc3ff7a0c6733b5b051f75e700bf45ab838a7cf9fa52dba922f2decd",
+    "FINAL_RESULT.json": "c9066a6a77fdf0706379aad08e6c124ed3590890dcf8d5ac32acfedddfd8f408",
+    "FINAL_RESULT.md": "961cf88e18b04b31d45be1b3bfe37e1253b5cb5b2aeb826293a411c835f08920",
+    "READINESS.json": "4462b53fd3bf1772e2774e75ae524a206a2cd762c9944c11f9f3c94da4f40e20",
+    "READINESS.md": "0a81f240dccd12266b54485ed78e6436aaceb0116bb6ebd21b7cd5c526a25c90"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "claim_boundary": "Autonomous persistence is causally implicated but is not sufficient as a scalar mediator.",
+  "panelA": {
+    "new_tests": false,
+    "role": "multi_step_dynamics_context"
+  },
+  "panelB": {
+    "ci_high": -1.451733558558559,
+    "ci_low": -1.5502613738738735,
+    "difference": -1.5006666666666668,
+    "exact_p": 0.001953125,
+    "n_positive": 0,
+    "n_sources": 10,
+    "split": NaN,
+    "test": "main_seen_long_slope_on_rho"
+  },
+  "panelC": {
+    "ratio": 0.803201580358119,
+    "rho0": 0.9881568451722463,
+    "rho0p1": 0.7936891396840413,
+    "status": "exploratory_post_E6"
+  },
+  "panelD": {
+    "new_tests": false,
+    "role": "horizon_visualization_of_E6"
+  },
+  "panelE": [
+    {
+      "arm": "nav_impair",
+      "ci_high": -0.6201995833333334,
+      "ci_low": -0.6575166666666666,
+      "difference": -0.6411333333333332,
+      "exact_p": 0.001953125,
+      "n_positive": 0,
+      "n_sources": 10,
+      "role": "primary",
+      "split": "seen_long",
+      "supported": true,
+      "test": "nav_impair_seen_long"
+    },
+    {
+      "arm": "nav_impair",
+      "ci_high": -0.6129166666666667,
+      "ci_low": -0.6499333333333333,
+      "difference": -0.6335166666666667,
+      "exact_p": 0.001953125,
+      "n_positive": 0,
+      "n_sources": 10,
+      "role": "secondary",
+      "split": "difference_of_effects",
+      "supported": true,
+      "test": "nav_impair_seen_long_minus_id_seen_short_effect"
+    },
+    {
+      "arm": "rho01_rescue",
+      "ci_high": -0.0878487500000001,
+      "ci_low": -0.1514333333333333,
+      "difference": -0.1193666666666666,
+      "exact_p": 0.001953125,
+      "n_positive": 0,
+      "n_sources": 10,
+      "role": "primary",
+      "split": "seen_long",
+      "supported": false,
+      "test": "rho01_rescue_seen_long"
+    },
+    {
+      "arm": "rho01_rescue",
+      "ci_high": -0.09086625,
+      "ci_low": -0.1533504166666667,
+      "difference": -0.1216999999999999,
+      "exact_p": 0.001953125,
+      "n_positive": 0,
+      "n_sources": 10,
+      "role": "secondary",
+      "split": "difference_of_effects",
+      "supported": false,
+      "test": "rho01_rescue_seen_long_minus_id_seen_short_effect"
+    }
+  ]
+}

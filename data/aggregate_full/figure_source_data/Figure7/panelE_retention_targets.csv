@@ -1,0 +1,3 @@
+arm,n_cells,learned_gain_mean,source_retention_before_mean,source_retention_after_exact_mean
+nav_impair,30,103.7321304,0.9881568452,0.7936889515
+rho01_rescue,30,64.47716141,0.7936891397,0.9881570795

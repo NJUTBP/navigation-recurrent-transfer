@@ -1,0 +1,69 @@
+schema: multinav_v1
+run_id: multinav_paper_v1
+output_root: outputs/multinav
+# Independent, newly trained source pairs. Do not replace a seed after seeing results.
+source_seeds: [6101, 6102, 6103, 6104, 6105, 6106, 6107, 6108, 6109, 6110]
+control_source_seeds: [7101, 7102, 7103, 7104, 7105, 7106, 7107, 7108, 7109, 7110]
+target_repeats: 3
+hard_target_repeats: 3
+factorial_target_repeats: 3
+# Disjoint source-specific blocks; matched across arms WITHIN a block.
+target_seed_base: 1000
+# Current formal source rule: use the navigation checkpoint with minimum
+# navigation validation task loss. The earlier balanced/gridness checkpoint is
+# retained only as a sensitivity/mechanistic comparator, not as the main source.
+checkpoint_policy: best_validation
+# Train both source objectives for the full, recorded 150 x 1000 update budget.
+source_epochs: 150
+source_steps_per_epoch: 1000
+# Failed CTL qualification is retained and flagged, NOT relabelled as qualified.
+control_qualification_policy: retain_all_and_flag
+# Automatic Schoyen-style hidden-layer torus discovery.
+# Topology is analysed only on each source seed's validation best.pt.
+schoyen_topology:
+  cluster_trajectories: 10000
+  cluster_seq_len: 20
+  cluster_start_step: 10
+  cluster_resolution: 32
+  tda_trajectories: 5000
+  tda_seq_len: 20
+  tda_start_step: 0
+  tda_resolution: 64
+  rollout_batch_size: 200
+  silent_variance: 1.0e-12
+  bias_percentile: 99.75
+  rotation_resolution: 360
+  umap_neighbors: 20
+  umap_min_dist: 0.05
+  dbscan_eps: 0.5
+  dbscan_min_samples: 30
+  min_cluster_size: 64
+  top_band_clusters: 4
+  candidate_union_depth: 3
+  fallback_pairwise: true
+  pca_dim: 6
+  downsample_neighbors: 1000
+  downsample_points: 3000
+  ripser_n_perm: 500
+  ripser_coeff: 47
+  h1_gap_threshold: 1.5
+  h2_gap_threshold: 1.5
+  random_state: 42
+  max_missing_fraction_cluster: 0.005
+  max_missing_fraction_tda: 0.02
+threads: 8
+device: cuda
+deterministic_algorithms: false
+bootstrap_samples: 10000
+statistics_seed: 982451653
+profile: formal
+lsf:
+  queue: '<LSF_QUEUE>'
+  cores: 8
+  gpu: 'num=1'
+  python: <PYTHON>
+  # No named host appears in the supplied scripts; keep scheduler placement.
+  hosts: null
+  aggregate_queue: '<LSF_QUEUE>'
+  aggregate_gpu: null
+  walltime: null

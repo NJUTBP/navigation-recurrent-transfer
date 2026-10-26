@@ -1,0 +1,123 @@
+# Stage I3A: complete 2x2x2x2 recurrent/input origin/trainability factorial.
+project_name: gpm_cmap
+seed: 42
+device: cuda
+output_dir: outputs/runs/recurrent_factorial_001
+source_reduced_artifact: outputs/runs/source_reduced_v3_002/source_reduced_model_v3.pkl
+navigation_checkpoint: outputs/nav_pretrain_full/best_grid_balanced.pt
+matched_random_seed_offset: 70001
+
+screening:
+  target_seeds: [201, 202, 203, 204, 205]
+  episode_budgets: [50, 200]
+  cells: all
+
+confirmatory:
+  target_seeds: [301, 302, 303, 304, 305, 306, 307, 308, 309, 310]
+  episode_budgets: [10, 20, 50, 100, 200, 500, 1000]
+  cells:
+    - Ohh-navigation__Oih-navigation__Thh-frozen__Tih-frozen
+    - Ohh-navigation__Oih-matched_random__Thh-frozen__Tih-frozen
+    - Ohh-matched_random__Oih-navigation__Thh-frozen__Tih-frozen
+    - Ohh-matched_random__Oih-matched_random__Thh-frozen__Tih-frozen
+    - Ohh-navigation__Oih-navigation__Thh-trainable__Tih-frozen
+    - Ohh-navigation__Oih-navigation__Thh-frozen__Tih-trainable
+    - Ohh-navigation__Oih-navigation__Thh-trainable__Tih-trainable
+    - Ohh-matched_random__Oih-matched_random__Thh-trainable__Tih-trainable
+
+data:
+  task_name: social_hierarchy
+  n_levels: 8  # freeze to the I2 pilot recommendation
+  train_path_length: [1, 5]
+  id_test_path_length: [1, 5]
+  long_test_path_length: [6, 12]
+  episode_budgets: [10, 20, 50, 100, 200, 500, 1000]
+  validation_episodes: 1000
+  id_test_episodes: 2000
+  long_test_episodes: 2000
+  composition_test_episodes: 2000
+  held_out_action_bigrams: [[0, 2], [1, 3], [2, 1], [3, 0]]
+  velocity_scale: 0.02
+  coord_scale: 0.02
+  batch_size: 128
+  num_workers: 0
+  seed_offsets:
+    train: 1001
+    validation: 2001
+    id_test: 3001
+    long_test: 4001
+    composition_test: 5001
+
+model:
+  hidden_dim: 4096
+  content_dim: 64
+  nonnegative: true
+  cell_type: rnn
+  use_bias: false
+  dropout: 0.0
+  periodic_scales: 0
+  use_position_head: false
+  start_init: embedding
+  coord_dim: 2
+
+train:
+  max_gradient_updates: 2000
+  minimum_updates: 500
+  eval_every_updates: 100
+  early_stopping_patience_evals: 10
+  lr: 0.001
+  weight_decay: 0.0
+  whh_weight_decay: 0.0001
+  grad_clip: 1.0
+  position_loss_weight: 0.0
+  calibration_bins: 15
+
+matched_random:
+  iterations: 8
+  singular_rank: 16
+  probe_count: 64
+  strict_matching_gate: true
+  tolerances:
+    hh_frobenius_relative: 0.000001
+    hh_spectral_radius_relative: 0.50
+    ih_frobenius_relative: 0.000001
+    preactivation_variance_relative: 0.50
+    relu_active_fraction_absolute: 0.10
+    hidden_norm_relative: 0.50
+    jacobian_frobenius_relative: 0.50
+    top_singular_rmse_relative: 0.50
+
+# Optional non-factorial diagnostics from the upgrade plan. These conditions
+# are excluded from the balanced 2^4 contrasts and must be interpreted as
+# reservoir/grid-quality/basis-alignment controls only. Enable after providing
+# the two external checkpoint paths where applicable.
+extra_controls:
+  enabled: false
+  controls:
+    - name: spectrum_matched_shuffled_hh
+      kind: spectrum_matched_shuffled_hh
+      hh_trainability: frozen
+      ih_trainability: frozen
+      seed_offset: 81001
+    - name: navigation_hh_mismatched_ih_basis
+      kind: navigation_hh_mismatched_ih_basis
+      hh_trainability: frozen
+      ih_trainability: frozen
+      seed_offset: 82001
+    - name: low_grid_navigation_checkpoint
+      kind: low_grid_checkpoint
+      checkpoint: null
+      hh_trainability: frozen
+      ih_trainability: frozen
+    - name: non_grid_checkpoint
+      kind: non_grid_checkpoint
+      checkpoint: null
+      hh_trainability: frozen
+      ih_trainability: frozen
+
+statistics:
+  bootstrap_samples: 5000
+runtime:
+  cpu_num_threads: 1
+  allow_device_fallback: false
+  deterministic_algorithms: false

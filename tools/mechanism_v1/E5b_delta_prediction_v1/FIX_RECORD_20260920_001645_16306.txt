@@ -1,0 +1,5 @@
+fix=e5b_fix_20260919
+applied_utc=2026-09-19T16:16:45Z
+replaced=2
+added=1
+run_delta_sha256=a6c29b87a43be19dc9bfc815dd908a1e847d98aaf4c461af7cdf4192455631d6

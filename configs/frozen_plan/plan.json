@@ -1,0 +1,551 @@
+{
+  "schema": "multinav_plan_v1",
+  "created_utc": "2026-09-10T12:49:47.408076+00:00",
+  "config": {
+    "schema": "multinav_v1",
+    "run_id": "multinav_paper_v1",
+    "output_root": "outputs/multinav",
+    "source_seeds": [
+      6101,
+      6102,
+      6103,
+      6104,
+      6105,
+      6106,
+      6107,
+      6108,
+      6109,
+      6110
+    ],
+    "control_source_seeds": [
+      7101,
+      7102,
+      7103,
+      7104,
+      7105,
+      7106,
+      7107,
+      7108,
+      7109,
+      7110
+    ],
+    "target_repeats": 3,
+    "hard_target_repeats": 3,
+    "factorial_target_repeats": 3,
+    "target_seed_base": 1000,
+    "checkpoint_policy": "balanced_else_validation",
+    "source_epochs": 150,
+    "source_steps_per_epoch": 1000,
+    "control_qualification_policy": "retain_all_and_flag",
+    "topology_shuffles": 1000,
+    "pca_sweep_dims": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "threads": 8,
+    "device": "cuda",
+    "deterministic_algorithms": false,
+    "bootstrap_samples": 10000,
+    "statistics_seed": 982451653,
+    "profile": "formal",
+    "lsf": {
+      "queue": "<LSF_QUEUE>",
+      "cores": 8,
+      "gpu": "num=1",
+      "python": "<PYTHON>",
+      "hosts": null,
+      "aggregate_queue": "<LSF_QUEUE>",
+      "aggregate_gpu": null,
+      "walltime": null
+    }
+  },
+  "project_at_preparation": "<CLUSTER_PATH>",
+  "run_root": "outputs/multinav/multinav_paper_v1",
+  "code_root": "outputs/multinav/multinav_paper_v1/code",
+  "code_manifest": {
+    "sha256": "8fac49dbd92016ec66edceb4d322a254e6c598df14e41c1709074cc129cd33d2",
+    "files": {
+      "gpm_cmap/__init__.py": "55c393d47e25894d45452dcaaca9da6dcfd98315e9d6a30c143d96d0db317cb1",
+      "gpm_cmap/analysis/__init__.py": "d98c1620a1724079bcb357dc013a6d577937f8c76d402f8634b7acf2cb771a54",
+      "gpm_cmap/analysis/action_causality.py": "a9f7e9511e4fb6462f020cc3a7d76b995e91e3c7acd11e2f4fdbef56ed8217dd",
+      "gpm_cmap/analysis/gardner_torus.py": "3e8dc3038853be9cc7a5aaeb29c5b03c7107aa287e47c43814f661564330f05d",
+      "gpm_cmap/analysis/grid_score.py": "72d5e71015471b40dce8a222196f7878ef54dc66971f7462393a52e4bd95efa2",
+      "gpm_cmap/analysis/grid_score_google.py": "b627bc5240e68cb5ec3e5185a06d590e075ba8f790c3fd7a4c43c4958f978b17",
+      "gpm_cmap/analysis/hard_pathint.py": "8f909a72a94caccec870942540167b9bbf5121d384eb386bcfc38b0a45c5daba",
+      "gpm_cmap/analysis/hex_modulation.py": "47ee5de680a057e9b9b5784173388bafd693b8aed8a81ddde123a1b7e615edc7",
+      "gpm_cmap/analysis/inference_metrics.py": "39518c766ea5e94aa0a5f0c94d1b5e714b636feaa4da945a2916a62208e57b9c",
+      "gpm_cmap/analysis/manifold_interventions.py": "f471c03faf3b8f22291c760b19eb6d0249f481ba917d8d70021f4c8619a51acd",
+      "gpm_cmap/analysis/manifold_interventions_v2.py": "e519d31960a91cbc13f237b5dbbf7a8a98dedea6097dd7b8399b169f2881380d",
+      "gpm_cmap/analysis/path_invariance.py": "82c16caac60072570bb5f0063acd127ded954b4464f9ce020ae632a9abfca092",
+      "gpm_cmap/analysis/rate_map.py": "c7335f7074e40ad307fc9e3fe8c25eb2803662eefe06a4b5283564e979e2b57b",
+      "gpm_cmap/analysis/recurrent_factorial.py": "22400f4aeb6f6f806e8560153e613264d32b0c801d942ea86348449fc6c633cd",
+      "gpm_cmap/analysis/repr_geometry.py": "ae2d7a1694807d6f65afd7135d1908b72669a8864c842f1e37796293ef62b242",
+      "gpm_cmap/analysis/shared_manifold.py": "8478db1d846a61e931678173ed209b9580fe84a2fa4c1bd56ff806784793d738",
+      "gpm_cmap/analysis/source_reduced_v3.py": "cb7656e5769136811594304df19bbaa66f234cb189c145c5ef59f37216065302",
+      "gpm_cmap/analysis/toroidal_models.py": "eba7a512438c8b29efe6b20c42442be34e0ee7b4c9deca0d66c50d07d7ccf620",
+      "gpm_cmap/analysis/torus_vis.py": "d1a7005d9b92e2c5db8b13ac553a69eee44756dbdfa02c7fbc8667b69953f2e9",
+      "gpm_cmap/analysis/upgrade_contracts.py": "820950e3cef3b1f66a7e8dcfe89d78476aaaf3e72e2608d76e9aef8116997528",
+      "gpm_cmap/configs/abstract_pathint.yaml": "e2879a6aa7f4818ffcfe3affd9156693e5c108719a0c523f7bafe4b3e30d66b3",
+      "gpm_cmap/configs/abstract_pathint_ctl01.yaml": "f1c2c100b686d22bdefd5c3ec39d05d52bcc8b5488842d68675967e340de852c",
+      "gpm_cmap/configs/abstract_pathint_ctl01_matched.yaml": "b55339522b47f0794368563fdb1736adf94c8a021278900ece9022a5e7ae228f",
+      "gpm_cmap/configs/abstract_pathint_desat.yaml": "deb28ffd97ed7655a183e9584d7a5d8a803a45a55c6df3197f6ff8e867305e77",
+      "gpm_cmap/configs/abstract_pathint_hard.yaml": "34735b542ea36c8f51d8bd86edd9ee0efa4a2d578b862afbc0ea1057db234c69",
+      "gpm_cmap/configs/abstract_task.yaml": "5a760997e0567c573e434a33108cefac5c58f56b62174cf8603c878690279819",
+      "gpm_cmap/configs/abstract_task_full.yaml": "af4e77e782686afc3f0e76b7434fac8034f6f1e0421b6327e80f97542ed68ca4",
+      "gpm_cmap/configs/action_causality.yaml": "d97c97dc4111c6b96827faf9c360535e661f93f60f65ab9ba45917bbaf625485",
+      "gpm_cmap/configs/adapter_rescue.yaml": "f579c81d2cfaa6c1d7a4b5aa49475b3fd086b58505e2241ab969847d3d4d333c",
+      "gpm_cmap/configs/comparison_social.yaml": "f17e4c76d37e395d169b5f2f99221d28d217e08f737ad6ce20c7ae57da25f783",
+      "gpm_cmap/configs/comparison_transitive.yaml": "be6213ce9cb41a2ee26f71120bed1ab899a9924e7835f0fd79461a15b30ff0c0",
+      "gpm_cmap/configs/constraint_ablation.yaml": "bbbdde6b1934e191c4768a350915b048580858ded9b5da04a1e5a13718eb4470",
+      "gpm_cmap/configs/manifold_interventions_v2.yaml": "cd660fcce79dd8c3060da3d4524b1d051cea00888e8464c976c701f7877f5efd",
+      "gpm_cmap/configs/nav_pretrain.yaml": "bfc87ba800752642323d25c38d82dcb7ddc643d6b8baafe4a682fbcbae0d6da6",
+      "gpm_cmap/configs/nav_pretrain_512_gridtuned.yaml": "96228da034581f252781eee515c071f25ae2b1e2715d3a3991d8065dc7c5c53c",
+      "gpm_cmap/configs/nav_pretrain_512_ref.yaml": "c1d5557b84c7bc063e2cf71ee9e0845e84b210a0791800577087f007cef861d1",
+      "gpm_cmap/configs/nav_pretrain_desat_512.yaml": "dbb98c788492a8da64caad5c4453551c8960810e4a0eb779c6d120cc01ae918a",
+      "gpm_cmap/configs/nav_pretrain_full.yaml": "7986acaad17d7fe943e5c8c34bf4ae42189248266f441109204981dc15e4be18",
+      "gpm_cmap/configs/nav_pretrain_phase_corrected.yaml": "54d3b0c0c0fd088d65708d2fed414fd55e00c02e8ed489c186c8746d0247a268",
+      "gpm_cmap/configs/path_invariance.yaml": "b0a8b5ae526c2c5326ac43a32e2360c600694c99109ed11f3b1086d62e53c27c",
+      "gpm_cmap/configs/potent_null.yaml": "8a8a23a2cf5736b295fe01f980ef2c05f24e3c83d28d26d182e1e3a887ddbdae",
+      "gpm_cmap/configs/recurrent_factorial.yaml": "6198d573e1e645df53e9d4507defd2cc7f7ad673fc8f92ae4f2c3a68532c6a14",
+      "gpm_cmap/configs/sequence_control_pretrain.yaml": "5ac4152c287c2d059d42d3861b65d4d5ae25dc594f041c4419efee6114b1d6fe",
+      "gpm_cmap/configs/shared_manifold.yaml": "b0715e8c1c1dece25eb2f99247ade71f43b70f0e32c9907e1ff4939eb6ad45c1",
+      "gpm_cmap/configs/source_reduced_v3.yaml": "13e2f529a002cc5b631a8ba2dd15244ed2a083c66eab1f22cdb48d313b7411f0",
+      "gpm_cmap/configs/symbolic_adapter.yaml": "8346f06fe68b1b7e2d8cdc77d483e066353683855e1f35c6eab4bddecaf6e662",
+      "gpm_cmap/configs/symbolic_adapter_ctl01.yaml": "7e82506484e5b845b52277a9d57ea920e74100f825e6f28a76cbae4644ea5adb",
+      "gpm_cmap/configs/symbolic_adapter_ctl01_heldout_pairs.yaml": "1b52c596b5b1ba6029bcaedaaa1b7cff09794e3e8eddeed379962840076ed1fd",
+      "gpm_cmap/configs/symbolic_simple_controls_heldout_pairs.yaml": "92026173706281223b2d7e1ff168f005e33a16bbca47795b78078b7adb4e6b78",
+      "gpm_cmap/configs/symbolic_simple_controls_iid.yaml": "c46fa624d08b207701bfb35fc6c1c12c217f9ee883df4e8ff4e0614c59b6c0a0",
+      "gpm_cmap/configs/toy_memory.yaml": "f2199c4e77ec4f2a82361e04a5fc6772a17c57897a9a586284fecd41d22841b7",
+      "gpm_cmap/configs/visual_concept_space.yaml": "909a88bcf0c8d6224fa6b1247cba6343c8434a07070fdaf0032e7f57cdefffd4",
+      "gpm_cmap/configs/visual_task.yaml": "fe4c2548f631b55d4f36d88ad75ecfab0d80ca043f9cffd617fd822005c92d0b",
+      "gpm_cmap/configs/visual_task_full.yaml": "1f0d68130244235ec7dde88d5b2ef713bca0756ade5eecaf9057619c74d998d4",
+      "gpm_cmap/data/__init__.py": "0a21c9f7038412b5bbb80b60a39a07f320a04bd740944c3e2e6eeb04011012db",
+      "gpm_cmap/data/graph_tasks/__init__.py": "afac6fcd89d78355d78d5e3b9bc2f00961aa1e337d90288b5d5e48d3bb1a95f1",
+      "gpm_cmap/data/graph_tasks/common.py": "92f29368dbcce141eda0f9054964ac41d0de88630df2333dbe132c45337349a9",
+      "gpm_cmap/data/graph_tasks/family_tree.py": "963f6892e9a3d5c8bed112c93fae40e8f091eb491df6c2e4bad76202068f83b2",
+      "gpm_cmap/data/graph_tasks/hard_pathint.py": "3b8db164fdc7b79934205a8c05feca90a9f60ed4726e297b334d06b9e2cb8e81",
+      "gpm_cmap/data/graph_tasks/path_invariance.py": "d4b747026a49300cae2333661f89528bdba060204b598fa88ab0362470a30389",
+      "gpm_cmap/data/graph_tasks/pathint_episodes.py": "090de82817b00c1e6ffdb0f819653d19c908c3bac5624c8734ffd215a515261a",
+      "gpm_cmap/data/graph_tasks/social_comparison.py": "2b773195d56819f7c901ff098ed8560bd9b955c0cd84f42eeb302b733d2064ee",
+      "gpm_cmap/data/graph_tasks/social_hierarchy.py": "e6af75e7723b5314d70bd9decff9966370bd5ad47c8de451192c50cbb806be64",
+      "gpm_cmap/data/graph_tasks/transitive.py": "78a580615b4bd2dbe882c12e5038290490ce29b1a12b2e742027e32beaff39f7",
+      "gpm_cmap/data/graph_tasks/transitive_comparison.py": "c4bc8137d5d2a994c4f2f68bc47cd8452e93f8f59aaddb94f38856a6f811ba57",
+      "gpm_cmap/data/nav_env/__init__.py": "f1fbc3365131f072d74e8d38b5c4ea79a78041ca4fe56ab0dfeea31179b7378d",
+      "gpm_cmap/data/nav_env/dataset.py": "56e50e7bc8612bd6c0480c08c12060ff38bf964d6366972056b74a2289242eb8",
+      "gpm_cmap/data/nav_env/open_field.py": "a1fe2107f49185253daf3e482b7ab9642a9f1a667093532ea6d4e0fb081bc703",
+      "gpm_cmap/data/nav_env/place_cells.py": "687e7aa9d6740a9b82d612d16e4b6ecc939e6064ca866060b72983da6f6c5ac7",
+      "gpm_cmap/data/nav_env/sequence_control.py": "5cda09ebdbc9f0ce36ac68549d540f75a93c784c0bf4d05f313f642b80d0541d",
+      "gpm_cmap/data/visual/__init__.py": "61a1568df0ae0d7001a914aeca1a813b8bd8463b3cbbec13eae864feabc62337",
+      "gpm_cmap/data/visual/concept_graph.py": "a333ed3e9f99baa5efad9dea1196b01cf047ef017320f8bf829e753a6c01f8b6",
+      "gpm_cmap/data/visual/concept_vae.py": "c19d17151d430562f748f1962f44f3dd7942467ed044cc324d68159e4f3683b2",
+      "gpm_cmap/data/visual/few_shot_episodes.py": "fe7dae6a585b192af840d1ea27be5a4b1ed18b0c291447572f77c1511fd47459",
+      "gpm_cmap/data/visual/styled_digits.py": "d5600e06ef625017b06a71c58dbee04eccd20785e38d6d2c9e5a110c009f1044",
+      "gpm_cmap/experiments/__init__.py": "929d8434606a04762a53a455a208dd7e20021ff8cabb69d911ad64b618375485",
+      "gpm_cmap/experiments/aggregate_shared_manifold_cohort.py": "4cce3dc3cd6854eb7d9e4f79922ff19cb6239d39fb348fc261a58f9ea2a86722",
+      "gpm_cmap/experiments/analyze_manifold_interventions.py": "be6e176354e53091d576982fc4ae109d1a154c5ab138352649804f4ebbefa8a8",
+      "gpm_cmap/experiments/analyze_manifold_interventions_v2.py": "1ae8b6ddcd6426bbbe6a0a34456ca5b18fc2f38cd554427834fe2e5939a9ed51",
+      "gpm_cmap/experiments/analyze_path_invariance.py": "3fc83b9ea12df6c66bedb814fb6204a6480f9a9411358f81120a3656225a618c",
+      "gpm_cmap/experiments/analyze_shared_manifold.py": "7b52831d71e8953bdf660711776f78c8b51c177d43cde959962a27338753de22",
+      "gpm_cmap/experiments/analyze_source_reduced_model.py": "aeb450256412f0e460533a1377297f60d2dde3c73201a0109b38b74c370fac36",
+      "gpm_cmap/experiments/analyze_target_action_causality.py": "4007ce0b7187aef846a7afc63937a399d5918e13db6afa89cdc436c4e9734997",
+      "gpm_cmap/experiments/analyze_torus.py": "950b375bc7be7ef003434123ecb3200111fb908202b86f42e8a480de3022db44",
+      "gpm_cmap/experiments/exp1_nav_pretrain.py": "f28390ffe7970787ab869d6ff6bf423c9af7c514f990d4e189036e121b2a7b8d",
+      "gpm_cmap/experiments/exp2_abstract_graph.py": "3475f97d74225dffe4fe4574e5df862b129f6a0665c687dd7439772736f1a8e3",
+      "gpm_cmap/experiments/exp2b_comparison.py": "6aa34b6eda46f7799dc755d3b3a9f104fa8a664fea381c6346d558c86300a1aa",
+      "gpm_cmap/experiments/exp3_ablation.py": "56816c807f1dfed605edcb3cc2cec2148b38bd21d36b9bd929a34e829e324e5c",
+      "gpm_cmap/experiments/exp4_visual.py": "08ea3cae1a69cea2da10e4dd700fea9cd9ff7108856594d1c71e0ddf2ec01331",
+      "gpm_cmap/experiments/exp5_abstract_pathint.py": "bae584a5c41d97bf3cd4e5de89c07e8eff3b6d599d31e92f19d09fc050fcdcf2",
+      "gpm_cmap/experiments/exp5_abstract_pathint_resume.py": "ce1c7add6989707b66571d6516aa0638ac2a1461d7eb9ab26e6be21bcba8458a",
+      "gpm_cmap/experiments/exp5_desat_diagnostic.py": "6c594539fe860594df3fcefc361c2569517b8910abcaf83f5310def2c15e40bd",
+      "gpm_cmap/experiments/exp5_hard_benchmark.py": "c9fcb182493cc913c89b728fee7eccce1d26bcb2ccf634601b29396bd3125618",
+      "gpm_cmap/experiments/exp5_recurrent_factorial.py": "0c7537000c0b2e737307a0c636b7c122ba83db352e8e2e44337ee2d3d36490b5",
+      "gpm_cmap/experiments/exp6_visual_concept.py": "817b999958837273ceacd5e70d75afaccd4926f72100dcdc93d7f86ae55353cb",
+      "gpm_cmap/experiments/exp7_adapter_rescue.py": "f7c1df6de070525fc3dfc34c00553a5cb2057dd9cf4ed37033c9e32e101e9ee9",
+      "gpm_cmap/experiments/exp8_symbolic_adapter.py": "6549ef2281a97a9f70c6b52a0b635d8c7d551b6d1084a259aba60e66165b054b",
+      "gpm_cmap/experiments/exp9_potent_null.py": "492a8bc6b8efaf3a94a29323ed029d931909fe2821021a59d2d8306eeb1460e4",
+      "gpm_cmap/experiments/exp_constraint_ablation.py": "6894f035d07abe8893959f79539e2d4ed4fecfd4c9b09f4ba6c62b91c67147a7",
+      "gpm_cmap/experiments/exp_toy_memory.py": "3c6fc6d37d700652900805552c169dba8acafbdf957bd003c3c9ae3f36ac75db",
+      "gpm_cmap/experiments/export_navigation_calibration.py": "b37f07af8a8b1451bdb59df0ec504ae14e3197ad73a473333cdf3845c0c746f4",
+      "gpm_cmap/experiments/export_source_reduced_splits.py": "0459c261dec32a0452afea6fa6b654c8ce31a1aba7f2b0f5f56b5904ff128e7d",
+      "gpm_cmap/experiments/pretrain_sequence_control.py": "607ce31b2d54f5fec59453f09c7eff4ec1b917b76983280978b6d59ca54ee8c6",
+      "gpm_cmap/experiments/visualize_all.py": "28d2d81025cf9e2436ab9a51e7f8b9ca86426ed06420f363fe934244576538e5",
+      "gpm_cmap/experiments/visualize_all_nature.py": "fad8442652000c2eef385964a328e27fae491a9e1bef882edb80077ce5b50f54",
+      "gpm_cmap/models/__init__.py": "c9815d493657888cfddf803da8eedd32fe5c689817455741c7087a130ba23e53",
+      "gpm_cmap/models/abstract_pathint.py": "d72da10ad6f246da506af83c6b9c0e3e379a1eb257038d6268804fdf7f9474aa",
+      "gpm_cmap/models/adapter_wrap.py": "e0e9a21f372e880838f162e66688893aa04f30531f2312efd6dd623cf0105c1a",
+      "gpm_cmap/models/baselines.py": "9a0d48e421785e8e59939ccfb5d32b383b423a67f244d079d32c4bda21195c1a",
+      "gpm_cmap/models/conjunctive.py": "f852b881789e7351d132372c15459c2ea7904aa5bdfd8edf4528fee455a07c86",
+      "gpm_cmap/models/content_encoder.py": "1088aae6127ef75dc2a8b1b97edc5cb183fe915cfe453671db073a21f56b7f6f",
+      "gpm_cmap/models/gpm_cmap.py": "0751c934af36a1c8be28842b124cab93de225e64d8c999b648b0ebb40f53d3aa",
+      "gpm_cmap/models/graph_positional.py": "4135f3d7b31cc2e09ec57debdffa5e4dc2eb8e4b040e648c600282180ba4728d",
+      "gpm_cmap/models/grid_rnn.py": "1debf4fd1856461f0afd45ae36723a66c5c54f7a2ca278fb42a59633c957c7c6",
+      "gpm_cmap/models/hebb_memory.py": "79fa6bb6a0fff2f55010bdae82458ce967c185d19df70a931d97f51873591a4f",
+      "gpm_cmap/models/inhibitory.py": "f045ccd659d15c37e25f7255d989fc997a95080d8d6d9737be043e2eed20c0f0",
+      "gpm_cmap/models/multiscale_periodic.py": "0273cec9b1aed8c60b1999399989791d212e0cad8caac7ee4119c5ce5eb2fea9",
+      "gpm_cmap/models/resonator_network.py": "074e603ac544b5c6828af5c5fa9fd7bb6c5cbf9683bd492995adcfe503572269",
+      "gpm_cmap/models/rhc_encoder.py": "553e7c7fb570a585a154992ab65ba9cd211e5ef64328cea0fd4655210cfdcef8",
+      "gpm_cmap/models/sequence_control_model.py": "5e82913a58add29e7259c29b666142feda2fff6c1e08fc4d86473e619dea003f",
+      "gpm_cmap/models/symbolic_controls.py": "9d87d38f4082bbb90affdc396a49b58815c40a1bd6543901943068fe87d9cd07",
+      "gpm_cmap/tasks/__init__.py": "71c544435d389f04c9b3d4b59f746e1d47a55468db8019515dfc337fbaf2c6ea",
+      "gpm_cmap/tasks/abstract_common.py": "5f111b51792a844f8fb298c2bfa2a97fa4eb9f4ca6547355ee785d40102a823c",
+      "gpm_cmap/tasks/abstract_pathint.py": "9cf707012e4a088264980549793ce1e34c3a1c592d7feb40cd2ccf78c9f26b2e",
+      "gpm_cmap/tasks/comparison_common.py": "2f70a3f36e3a9da5d2a47d94de1d08aecb6b6ed1b64eeb1d62499c5bf15d4a81",
+      "gpm_cmap/tasks/concept_space.py": "17a8e4be6e9c506a161b09bb86bbd3b491f01b867710aa35f194aaf942e8f1fb",
+      "gpm_cmap/tasks/family_tree.py": "8870f23a1ad40d71d733531a2ab81c83643bc4ed076824b1bf357318782ed9c6",
+      "gpm_cmap/tasks/few_shot_visual.py": "08a16ac5d48d4f17b28a5edcae4b26ffd0f4675d70cbdb809677536ad667a8c7",
+      "gpm_cmap/tasks/navigation.py": "6a8d5751f5178b1736a8f3d324edff65c36a67e06559524c8cd4da7d89386c12",
+      "gpm_cmap/tasks/rhc_visual.py": "673d4314b918c54cddd8c8291914b19db687257ee18964e8ac31e718f3103d4a",
+      "gpm_cmap/tasks/social_hierarchy.py": "d6bd16825e30fa57e7a93ae439ca3205aecfdfea8119fa3569d483e66cde4f8d",
+      "gpm_cmap/tasks/transitive.py": "aec1e14cc0e208c7ce7cc8226d7327602555cbbe102b88ab82b086649bd454bd",
+      "gpm_cmap/tasks/visual_concept.py": "5c4f11402a1c7facc7102e93ea641ce9039fa571fec1a212e30a4930507132cd",
+      "gpm_cmap/tests/__init__.py": "5b280167dfe875afefb89eeadf35d617dbdd5cdb7a274bc2d2eabfa3ba400221",
+      "gpm_cmap/tests/test_ctl01_matched_exp5_config.py": "48c08d1138a5e93c98beda38eae34d628617116c4e835ae98c70cd1e4cb2996e",
+      "gpm_cmap/tests/test_exp5_ctl01_integration.py": "32ede92a808c404aafa9ab0f0450c4cd27845414bffe0494e5b4e0b9285ca608",
+      "gpm_cmap/tests/test_exp8_ctl01_integration.py": "e70c163481f28a9e2eec754a7cf251df171447e84a9c7476bebaff80b2d69d84",
+      "gpm_cmap/tests/test_exp8_simple_controls.py": "f838fd33db4a7df61ca4169d5de79fcbe406c5288b7e0eb7bfaf18acf4e4e028",
+      "gpm_cmap/tests/test_sequence_control.py": "4ea10f39da0156a4ee0c86344e4db587472f1b1f90a4dd94a10195129f021c30",
+      "gpm_cmap/utils/__init__.py": "d9d0045672a134638412436afacf9c42b217d79964b26a131bdb1552424ee619",
+      "gpm_cmap/utils/checkpointing.py": "b89ed3612c5d4720cdfd5676bdb89f3487a7f85abfcd8654448c33384dc6c199",
+      "gpm_cmap/utils/config.py": "5f4dcfaa1694304365dcb360f9f4feae22a519380ce6747ccf5171c8b0b95c6a",
+      "gpm_cmap/utils/json_io.py": "381fae35ab2c7523b74885a608e5f9ba40c516c7b8afbb3c3de738487712a8bc",
+      "gpm_cmap/utils/logging_utils.py": "775d7ccccb37fee1a1ca1b59530bdc15e7e74ba0fc0a797c3f93b6c3fb87ea73",
+      "gpm_cmap/utils/metrics.py": "f4170d70fe2953ff5100dc1a225bb8a8451732d5d8a5cbad00c8301a2afe0c27",
+      "gpm_cmap/utils/runtime.py": "ceaf119bfa18a77d1f7a56ea3a826ca40bbc84cb7da0203f343d647892ac1146",
+      "gpm_cmap/utils/seed.py": "97aa00a66b66981601f4c8c0e08ea1c8a66caf3b6bd3eaac7e5889746ade4204",
+      "multinav/__init__.py": "b4a419f193c266296b7e90c78c2b87681e375c4e17a75e07784d10fd7fed7096",
+      "multinav/aggregate.py": "93c3a59707a55f8c4e539352b69fb649b93cec578806cf1a6135f7429fc6895b",
+      "multinav/bootstrap.py": "7585644f3065432dbd108138fd076a481aa0d8a5fdbc3f507e1087c0cd1bc5be",
+      "multinav/collect.py": "0ccff7c8f4ec8939aeb2a3b7201502912c8926b4ad00ff9ecb038ed2e2d32db4",
+      "multinav/common.py": "d46c84f034577fedc22d299c5cc11123e0788d9f4c35a8799704fcc3745a5b79",
+      "multinav/config.yaml": "4e1e6981593b1acca4908b8537429dd1ea7729d9337efe671986647f825a7729",
+      "multinav/plan.py": "6f48e245ff2681b4a2d169250f2141735b2a7d93f204ad74f39ceb19f819e314",
+      "multinav/plot.py": "0bf8856f1314adeadd2a92a58629afa3680065f7e6d6b98ef91ce3bf4cd66069",
+      "multinav/preflight.py": "cd3a37e843d3a925b3feedb1f270fc446ee44f43cffb820c554ba5e76ee7e8c4",
+      "multinav/run_source.py": "98480d8294ff9d83caa2527f84c31d336d17ce612b19bd2089580d9ead9142a7",
+      "multinav/stage.py": "99710f9853c8e2331be28a2be6e7b98c57f1cd36907b0f70ed93c13d3aa38072",
+      "multinav/stats.py": "b23a2485018a94cbabdd687a7b9610aba2ddecdc4920bc14a05b3d65345e61d7",
+      "multinav/submit.py": "05a0bc2db29cdb18f5a13c35769aa4aa4d17a53020ee7e8f65da401a6b7ba59c"
+    }
+  },
+  "source_pairs": [
+    {
+      "source_seed": 6101,
+      "control_seed": 7101,
+      "main_target_seeds": [
+        1000,
+        1001,
+        1002
+      ],
+      "hard_target_seeds": [
+        1030,
+        1031,
+        1032
+      ],
+      "factorial_target_seeds": [
+        1060,
+        1061,
+        1062
+      ]
+    },
+    {
+      "source_seed": 6102,
+      "control_seed": 7102,
+      "main_target_seeds": [
+        1100,
+        1101,
+        1102
+      ],
+      "hard_target_seeds": [
+        1130,
+        1131,
+        1132
+      ],
+      "factorial_target_seeds": [
+        1160,
+        1161,
+        1162
+      ]
+    },
+    {
+      "source_seed": 6103,
+      "control_seed": 7103,
+      "main_target_seeds": [
+        1200,
+        1201,
+        1202
+      ],
+      "hard_target_seeds": [
+        1230,
+        1231,
+        1232
+      ],
+      "factorial_target_seeds": [
+        1260,
+        1261,
+        1262
+      ]
+    },
+    {
+      "source_seed": 6104,
+      "control_seed": 7104,
+      "main_target_seeds": [
+        1300,
+        1301,
+        1302
+      ],
+      "hard_target_seeds": [
+        1330,
+        1331,
+        1332
+      ],
+      "factorial_target_seeds": [
+        1360,
+        1361,
+        1362
+      ]
+    },
+    {
+      "source_seed": 6105,
+      "control_seed": 7105,
+      "main_target_seeds": [
+        1400,
+        1401,
+        1402
+      ],
+      "hard_target_seeds": [
+        1430,
+        1431,
+        1432
+      ],
+      "factorial_target_seeds": [
+        1460,
+        1461,
+        1462
+      ]
+    },
+    {
+      "source_seed": 6106,
+      "control_seed": 7106,
+      "main_target_seeds": [
+        1500,
+        1501,
+        1502
+      ],
+      "hard_target_seeds": [
+        1530,
+        1531,
+        1532
+      ],
+      "factorial_target_seeds": [
+        1560,
+        1561,
+        1562
+      ]
+    },
+    {
+      "source_seed": 6107,
+      "control_seed": 7107,
+      "main_target_seeds": [
+        1600,
+        1601,
+        1602
+      ],
+      "hard_target_seeds": [
+        1630,
+        1631,
+        1632
+      ],
+      "factorial_target_seeds": [
+        1660,
+        1661,
+        1662
+      ]
+    },
+    {
+      "source_seed": 6108,
+      "control_seed": 7108,
+      "main_target_seeds": [
+        1700,
+        1701,
+        1702
+      ],
+      "hard_target_seeds": [
+        1730,
+        1731,
+        1732
+      ],
+      "factorial_target_seeds": [
+        1760,
+        1761,
+        1762
+      ]
+    },
+    {
+      "source_seed": 6109,
+      "control_seed": 7109,
+      "main_target_seeds": [
+        1800,
+        1801,
+        1802
+      ],
+      "hard_target_seeds": [
+        1830,
+        1831,
+        1832
+      ],
+      "factorial_target_seeds": [
+        1860,
+        1861,
+        1862
+      ]
+    },
+    {
+      "source_seed": 6110,
+      "control_seed": 7110,
+      "main_target_seeds": [
+        1900,
+        1901,
+        1902
+      ],
+      "hard_target_seeds": [
+        1930,
+        1931,
+        1932
+      ],
+      "factorial_target_seeds": [
+        1960,
+        1961,
+        1962
+      ]
+    }
+  ],
+  "figure_map": {
+    "Figure1": [
+      "navigation",
+      "source_lock",
+      "navigation_display"
+    ],
+    "Figure2": [
+      "exp5_navigation",
+      "exp5_ctl01"
+    ],
+    "Figure3": [
+      "exp5_mapping",
+      "exp5_test_transforms",
+      "adapter_rescue"
+    ],
+    "Figure4": [
+      "symbolic_adapter"
+    ],
+    "FigureA1": [
+      "topology_export",
+      "formal_topology"
+    ],
+    "FigureA2": [
+      "hard_benchmark"
+    ],
+    "FigureA3": [
+      "source_splits",
+      "source_reduced_v3",
+      "factorial_confirmatory",
+      "action_causality",
+      "path_invariance"
+    ],
+    "FigureA4": [
+      "sequence_control",
+      "control_qualification"
+    ]
+  },
+  "excluded_routes": [
+    "nav_smoke (formal cohort)",
+    "nav_512_ref",
+    "nav_512_gridtuned",
+    "nav_desaturation",
+    "exp2_abstract_graph",
+    "exp2b_comparison",
+    "exp3_ablation",
+    "constraint_ablation",
+    "exp4_visual",
+    "exp6_visual_concept",
+    "toy_memory",
+    "exp9_potent_null",
+    "adapter_symbolic_heldout_pairs",
+    "cross_graph",
+    "checkpoint_sweep",
+    "velocity_training_sweep",
+    "hard_pilot",
+    "factorial_screening",
+    "shared_manifold_v2",
+    "manifold_interventions"
+  ],
+  "workload": {
+    "source_trainings": 20,
+    "target_fits_per_source": {
+      "Exp5_main_6_arms": 18,
+      "Exp5_CTL_1_arm": 3,
+      "Exp5_mapping_2_new_arms": 6,
+      "Exp7_32_arms_transforms": 96,
+      "Exp8_38_arm_budget_cells": 114,
+      "hard_6_arms_x7_budgets": 126,
+      "factorial_8_cells_x7_budgets": 168
+    },
+    "total_target_fits_per_source": 531,
+    "total_target_fits": 5310,
+    "note": "Formal schedule; test-time transforms, recurrence ablations, topology and reduced-model fits are additional evaluations, not counted as target neural-network trainings."
+  },
+  "factorial_contrasts": [
+    {
+      "name": "navigation_full_frozen_vs_matched_random_full_frozen",
+      "left": "Ohh-navigation__Oih-navigation__Thh-frozen__Tih-frozen",
+      "right": "Ohh-matched_random__Oih-matched_random__Thh-frozen__Tih-frozen"
+    },
+    {
+      "name": "navigation_hh_effect_given_navigation_ih_frozen",
+      "left": "Ohh-navigation__Oih-navigation__Thh-frozen__Tih-frozen",
+      "right": "Ohh-matched_random__Oih-navigation__Thh-frozen__Tih-frozen"
+    },
+    {
+      "name": "navigation_ih_effect_given_navigation_hh_frozen",
+      "left": "Ohh-navigation__Oih-navigation__Thh-frozen__Tih-frozen",
+      "right": "Ohh-navigation__Oih-matched_random__Thh-frozen__Tih-frozen"
+    },
+    {
+      "name": "navigation_hh_effect_given_matched_random_ih_frozen",
+      "left": "Ohh-navigation__Oih-matched_random__Thh-frozen__Tih-frozen",
+      "right": "Ohh-matched_random__Oih-matched_random__Thh-frozen__Tih-frozen"
+    },
+    {
+      "name": "navigation_ih_effect_given_matched_random_hh_frozen",
+      "left": "Ohh-matched_random__Oih-navigation__Thh-frozen__Tih-frozen",
+      "right": "Ohh-matched_random__Oih-matched_random__Thh-frozen__Tih-frozen"
+    },
+    {
+      "name": "navigation_full_trainable_vs_matched_random_full_trainable",
+      "left": "Ohh-navigation__Oih-navigation__Thh-trainable__Tih-trainable",
+      "right": "Ohh-matched_random__Oih-matched_random__Thh-trainable__Tih-trainable"
+    },
+    {
+      "name": "recurrent_trainability_with_navigation_origin",
+      "left": "Ohh-navigation__Oih-navigation__Thh-trainable__Tih-frozen",
+      "right": "Ohh-navigation__Oih-navigation__Thh-frozen__Tih-frozen"
+    },
+    {
+      "name": "input_trainability_with_navigation_origin",
+      "left": "Ohh-navigation__Oih-navigation__Thh-frozen__Tih-trainable",
+      "right": "Ohh-navigation__Oih-navigation__Thh-frozen__Tih-frozen"
+    }
+  ],
+  "protocol_notes": [
+    "Navigation source is the highest sampling unit; paired CTL pretraining is part of each independent source block.",
+    "150-epoch/150000-update new cohort is not a numerical rerun of the archived 50-epoch source record.",
+    "No source is replaced after topology, transfer or qualification results are observed.",
+    "Behavioural hard/factorial tasks require source weights, not a successful torus reduction.",
+    "Source v3 and phase diagnostics remain conditional on an evaluable formal topology; report all planned sources in the denominator.",
+    "Original factorial code defines 8 comparisons, whereas manuscript Appendix A.2 states 6. This run explicitly locks 8 with multiplicity correction."
+  ],
+  "plan_sha256": "877b7206e8dd96a4a58e579dfa0e1e18004470543146768cd0d83dd38257530d"
+}

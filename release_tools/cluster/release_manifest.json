@@ -1,0 +1,191 @@
+{
+ "comment": "Paths are relative to the cluster project root (multinav_paper_v1). Each entry is derived from FIGURE_DATA_MAP.md. Alternative globs are tried in order; the dry run reports which one matched.",
+ "packages": {
+  "P1_pretrained_checkpoints": "Selected navigation (6101-6110) and delayed-reconstruction (7101-7110) checkpoints, weights only, with training histories. Levels 2 and 3.",
+  "P2_target_checkpoints": "Frozen-core target models (core omitted on disk; rebuilt from P1 and recorded seeds) for Figs. 6-7, S5-S8, S12. Level 2.",
+  "P3_source_level_results": "Source-, cell- and target-level result tables, split manifests and protocols for all formal experiments. Levels 1-2."
+ },
+ "exclude_names": [
+  "*.log",
+  "*.out",
+  "*.err",
+  "*.lsf",
+  "*.sh",
+  "core.*",
+  "*.tmp",
+  "*.lock",
+  "*.pyc"
+ ],
+ "exclude_dirs": [
+  "__pycache__",
+  "HPC_logs*",
+  "logs",
+  "tmp",
+  "_scratch",
+  "smoke*",
+  "figures",
+  "_legacy*"
+ ],
+ "entries": [
+  {
+   "name": "nav_pretrained",
+   "package": "P1_pretrained_checkpoints",
+   "mode": "slim_checkpoint",
+   "expect": 10,
+   "globs": [
+    "sources/nav_seed_61??/artifacts/navigation/best.pt"
+   ]
+  },
+  {
+   "name": "nav_pretrained_records",
+   "package": "P1_pretrained_checkpoints",
+   "mode": "copy",
+   "globs": [
+    "sources/nav_seed_61??/artifacts/navigation/history.json",
+    "sources/nav_seed_61??/artifacts/navigation/summary.json",
+    "sources/nav_seed_61??/source_identity.json",
+    "sources/nav_seed_61??/control_identity.json",
+    "sources/nav_seed_61??/control_qualification.json"
+   ]
+  },
+  {
+   "name": "dr_pretrained",
+   "package": "P1_pretrained_checkpoints",
+   "mode": "slim_checkpoint",
+   "expect": 10,
+   "globs": [
+    "sources/nav_seed_61??/artifacts/sequence_control/best_validation.pt"
+   ]
+  },
+  {
+   "name": "dr_pretrained_records",
+   "package": "P1_pretrained_checkpoints",
+   "mode": "copy",
+   "globs": [
+    "sources/nav_seed_61??/artifacts/sequence_control/training_history.json",
+    "sources/nav_seed_61??/artifacts/sequence_control/training_gate.json",
+    "sources/nav_seed_61??/artifacts/sequence_control/checkpoint_compatibility.json"
+   ]
+  },
+  {
+   "name": "phasef_scalar_models",
+   "package": "P2_target_checkpoints",
+   "mode": "target_checkpoint",
+   "expect": 150,
+   "globs": [
+    "rerun_best_validation/hard8x8_diagnostics/audit_v1/phaseF_fullscale_v1/source_*/target_*/group_*/checkpoints/navigation_trainable_scalar_gain/best_validation.pt",
+    "rerun_best_validation/hard8x8_diagnostics/audit_v1/phaseF_fullscale_v1/source_*/target_*/group_*/checkpoints/matched_random_trainable_scalar_gain/best_validation.pt",
+    "rerun_best_validation/hard8x8_diagnostics/audit_v1/phaseF_fullscale_v1/source_*/target_*/group_*/checkpoints/fresh_random_trainable_scalar_gain/best_validation.pt"
+   ]
+  },
+  {
+   "name": "e09a_scalar_models",
+   "package": "P2_target_checkpoints",
+   "mode": "target_checkpoint",
+   "expect": 60,
+   "globs": [
+    "rerun_best_validation/followups/mechanism_v1/E0_9a_extended_budget/source_*/target_*/group_*/checkpoints/*_trainable_scalar_gain/best_validation.pt"
+   ]
+  },
+  {
+   "name": "e6_rho_models",
+   "package": "P2_target_checkpoints",
+   "mode": "target_checkpoint",
+   "expect": 210,
+   "globs": [
+    "rerun_best_validation/followups/mechanism_v1/E6_rho_scan/source_*/target_*/rho_*/checkpoints/rho_core_trainable_scalar_gain/best_validation.pt"
+   ]
+  },
+  {
+   "name": "e6i_rescaling_models",
+   "package": "P2_target_checkpoints",
+   "mode": "target_checkpoint",
+   "expect": 60,
+   "globs": [
+    "rerun_best_validation/followups/mechanism_v1/E6_retention_intervention/source_*/target_*/arm_*/checkpoints/retention_intervention_trainable_scalar_gain/best_validation.pt"
+   ]
+  },
+  {
+   "name": "aggregate_tables",
+   "package": "P3_source_level_results",
+   "mode": "copy",
+   "max_mb": 200,
+   "globs": [
+    "rerun_best_validation/aggregate_full/*.csv",
+    "rerun_best_validation/aggregate_full/*.json"
+   ]
+  },
+  {
+   "name": "downstream_4x4_and_factorial_rows",
+   "package": "P3_source_level_results",
+   "mode": "copy",
+   "max_mb": 50,
+   "globs": [
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/*_rows.csv",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/*_rows.json",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/raw_per_seed.json",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/protocol_manifest.json",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/transfer_source_manifest.json",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/*learning_curves.csv",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/factorial_per_seed.csv",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/split_audits/*.json",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/*/config_used.yaml"
+   ]
+  },
+  {
+   "name": "phasef_tables",
+   "package": "P3_source_level_results",
+   "mode": "copy_tree_small",
+   "max_mb": 50,
+   "globs": [
+    "rerun_best_validation/hard8x8_diagnostics/audit_v1/phaseF_fullscale_v1"
+   ],
+   "suffixes": [
+    ".csv",
+    ".json",
+    ".md",
+    ".yaml"
+   ]
+  },
+  {
+   "name": "mechanism_tables",
+   "package": "P3_source_level_results",
+   "mode": "copy_tree_small",
+   "max_mb": 50,
+   "globs": [
+    "rerun_best_validation/followups/mechanism_v1"
+   ],
+   "suffixes": [
+    ".csv",
+    ".json",
+    ".md",
+    ".yaml"
+   ]
+  },
+  {
+   "name": "topology_summaries",
+   "package": "P3_source_level_results",
+   "mode": "copy",
+   "max_mb": 20,
+   "globs": [
+    "sources/nav_seed_61??/artifacts/torus_topology/*.json",
+    "rerun_best_validation/sources/nav_seed_61??/artifacts/torus_topology/*.json",
+    "sources/nav_seed_61??/topology_qualification.json",
+    "rerun_best_validation/sources/nav_seed_61??/topology_qualification.json"
+   ]
+  },
+  {
+   "name": "per_source_configs_and_states",
+   "package": "P3_source_level_results",
+   "mode": "copy",
+   "max_mb": 5,
+   "globs": [
+    "sources/nav_seed_61??/configs/*.yaml",
+    "sources/nav_seed_61??/state/*.json",
+    "sources/nav_seed_61??/artifacts/*/config_used.yaml",
+    "sources/nav_seed_61??/artifacts/*/config.yaml",
+    "sources/nav_seed_61??/source_status.json"
+   ]
+  }
+ ]
+}

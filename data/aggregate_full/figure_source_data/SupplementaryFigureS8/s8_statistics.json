@@ -1,0 +1,58 @@
+{
+  "panelB_extended_budget_contrasts": [
+    {
+      "ci_high": 0.0237666666666666,
+      "ci_low": 0.0056833333333333,
+      "contrast": "nav_minus_matched_scalar_id_seen_short",
+      "exact_p": 0.01171875,
+      "expectation": "positive if the Phase F advantage is asymptotic rather than a rate effect",
+      "family": "D1_primary",
+      "holm_p": 0.01171875,
+      "left_mean": 0.9928166666666666,
+      "mean_difference": 0.0139166666666666,
+      "n_positive": 8,
+      "n_sources": 10,
+      "right_mean": 0.9789
+    },
+    {
+      "ci_high": 0.5024666666666666,
+      "ci_low": 0.3660162499999999,
+      "contrast": "nav_minus_matched_scalar_seen_long",
+      "exact_p": 0.001953125,
+      "expectation": "positive if the Phase F advantage is asymptotic rather than a rate effect",
+      "family": "D1_generalization",
+      "holm_p": 0.005859375,
+      "left_mean": 0.9483166666666666,
+      "mean_difference": 0.4345666666666666,
+      "n_positive": 10,
+      "n_sources": 10,
+      "right_mean": 0.51375
+    }
+  ],
+  "panelC_log2_gstar_matched_minus_navigation_mean": 1.9,
+  "panelC_seen_long_envelope": {
+    "ci_high": 0.4821512499999999,
+    "ci_low": 0.3773250000000001,
+    "contrast": "P1_envelope_nav_minus_matched",
+    "exact_p": 0.001953125,
+    "mean_difference": 0.426675,
+    "n_negative": 0,
+    "n_positive": 10,
+    "n_sources": 10,
+    "split": "seen_long"
+  },
+  "panelD_additive_32000_seen_long": {
+    "baseline_accuracy": 0.9796666666666668,
+    "budget": 32000,
+    "ci_high": -0.01605,
+    "ci_low": -0.0469670833333333,
+    "contrast": "nav_scalar_minus_linear_accumulator_2d",
+    "exact_p": 0.00390625,
+    "mean_difference": -0.03135,
+    "n_positive": 1,
+    "n_sources": 10,
+    "recurrent_mean": 0.9483166666666668,
+    "split": "seen_long",
+    "targets": "84001 84002 84003"
+  }
+}

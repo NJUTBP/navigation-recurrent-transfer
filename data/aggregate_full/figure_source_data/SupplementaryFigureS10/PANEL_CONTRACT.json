@@ -1,0 +1,23 @@
+{
+  "must_not_claim": "R_ret_diff@Bstar mediates transfer",
+  "panels": {
+    "A": {
+      "file": "panelA_Rret_diff_working_points.csv",
+      "mark": "Bstar as preregistered primary; A as exploratory",
+      "plot": "source-level Nav-matched R_ret_diff difference at A/g3/g10/Bstar"
+    },
+    "B": {
+      "file": "panelB_primary_per_source_slopes.csv",
+      "plot": "10 per-source slopes for primary R_ret_diff@Bstar"
+    },
+    "C": {
+      "file": "panelC_expected_null_per_source_slopes.csv",
+      "plot": "10 per-source slopes for expected-null S_cons@Bstar"
+    },
+    "D": {
+      "file": "panelD_anchor_forest.csv",
+      "plot": "six anchor differences and confidence intervals around zero"
+    }
+  },
+  "question": "What do the preregistered source-measure and mediation tests actually support?"
+}

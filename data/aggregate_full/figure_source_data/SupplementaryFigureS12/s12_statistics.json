@@ -1,0 +1,46 @@
+{
+ "nav_impair": {
+  "delta_alpha_SS": -0.0076,
+  "delta_alpha_SL": -0.6413,
+  "retention_reference_states_range": [
+   0.7931,
+   0.7948
+  ],
+  "retention_task_states_range": [
+   0.436,
+   0.4738
+  ]
+ },
+ "rho01_rescue": {
+  "delta_alpha_SS": 0.0023,
+  "delta_alpha_SL": -0.1193,
+  "retention_reference_states_range": [
+   0.9274,
+   1.0267
+  ],
+  "retention_task_states_range": [
+   1.0472,
+   1.1277
+  ]
+ },
+ "rho0": {
+  "retention_reference_states_range": [
+   0.9874,
+   0.9895
+  ],
+  "retention_task_states_range": [
+   0.8899,
+   0.9365
+  ]
+ },
+ "rho0.1": {
+  "retention_reference_states_range": [
+   0.7449,
+   0.8247
+  ],
+  "retention_task_states_range": [
+   0.6982,
+   0.8242
+  ]
+ }
+}

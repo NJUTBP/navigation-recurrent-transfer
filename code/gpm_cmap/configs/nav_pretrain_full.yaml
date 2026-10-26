@@ -1,0 +1,108 @@
+# Full-scale config aligned more closely to the original reference training
+project_name: gpm_cmap
+seed: 186
+device: cuda
+output_dir: outputs/nav_pretrain_full
+
+data:
+  arena_size: 2.2
+  num_trajectories: 2000       # online train uses fresh batches; this mainly increases val coverage
+  seq_len: 20                  # reference default
+  dt: 0.02                     # reference default
+  speed_scale: 0.8168140899    # 0.13 * 2*pi, reference Rayleigh scale (m/s)
+  sigma_theta: 11.52           # reference angular velocity std (rad/s)
+  max_speed: 100.0             # effectively disable clipping (reference does not clip)
+  border_region: 0.03
+  boundary_mode: avoid
+  place_cells: 512
+  place_sigma: 0.20
+  use_dog: true
+  surround_scale: 4.0
+  surround_scale_mode: variance
+  batch_size: 200
+  online: true
+  steps_per_epoch: 1000
+
+model:
+  velocity_dim: 2
+  hidden_dim: 4096
+  activation: relu
+  nonnegative: true
+  cell_type: rnn
+  dropout: 0.0
+  use_bias: false
+  init_relu: false
+
+train:
+  epochs: 150
+  lr: 0.0001                   # reference default
+  weight_decay: 0.0
+  whh_weight_decay: 0.0001
+  grad_clip: 0.0                  # match reference: no gradient clipping
+  loss_type: ce
+  use_cosine_schedule: false
+
+analysis:
+  every_n_epochs: 1
+  grid_bins: 20                # reference-style ratemap resolution
+  max_units_to_plot: 16
+  grid_smooth_sigma: 0.0       # avoid early score inflation from smoothed maps
+  # [FIX-M8] Enable the independent Banino/Sorscher grid scorer and hidden
+  # diagnostics. These were NaN in the shipped summaries, so gridness rested
+  # on a single scorer with no cross-check and dead-unit collapse was
+  # undetectable.
+  include_google_ref_score: true
+  include_hidden_diagnostics: true
+  val_num_trajectories: 2000   # keep validation reasonably fast; use best_grid*.pt for selection
+  checkpoint_max_pi_err: 0.15  # slightly looser gate; useful while PI is still maturing
+  post_training_checkpoint: best_grid_balanced.pt
+  # Gardner et al. (2022)-style toroidal-manifold analysis.
+  # UMAP is used only for 3-D visualisation; topology is quantified on the
+  # fuzzy representation of six PCs. Increase n_shuffles to 1000 for final
+  # publication-grade inference (the reference paper used 1000).
+  torus:
+    enabled: true
+    # Dedicated long rollouts reduce contamination by 20-step resets and
+    # the place-code initialiser. These samples are generated only after training.
+    eval_num_trajectories: 64
+    eval_seq_len: 500
+    eval_batch_size: 16
+    n_pca: 6
+    pca_diagnostic_components: 15
+    # Match the paper's temporal sampling scales as closely as dt allows.
+    visual_sample_interval_s: 0.25
+    topology_sample_interval_s: 0.05
+    burn_in_steps: 50
+    min_step_displacement: 0.0005
+    grid_score_key: grid_score_conservative
+    grid_score_threshold: 0.3
+    spacing_tolerance: 0.25
+    orientation_tolerance_deg: 15.0
+    exclude_head_direction: true
+    head_direction_threshold: 0.3
+    min_module_units: 60
+    allow_underpowered_persistence: false
+    max_visual_points: 30000
+    umap_n_components: 3
+    umap_n_neighbors: 5000
+    umap_min_dist: 0.8
+    umap_metric: cosine
+    umap_init: spectral
+    max_active_points: 15000
+    n_landmarks: 1200
+    density_neighbors: 1500
+    persistence_neighbors: 800
+    density_omega: 1.0
+    activity_mode: auto
+    coeff: 47
+    decode_cocycles: true
+    # Optional expensive sensitivity analysis, e.g. [3, 4, 5, 6, 7, 8].
+    pca_sweep_dims: []
+    shuffle_within_trajectories: true
+    n_shuffles: 20
+    n_jobs: 16
+
+runtime:
+  cpu_num_threads: 4
+  allow_device_fallback: false
+  deterministic_algorithms: false

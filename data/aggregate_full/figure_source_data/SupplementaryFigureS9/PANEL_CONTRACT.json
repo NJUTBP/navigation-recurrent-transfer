@@ -1,0 +1,25 @@
+{
+  "panels": {
+    "A": {
+      "file": "panelA_state_maintenance.csv",
+      "plot": "hidden norm relative to step 1 across steps 1-12"
+    },
+    "B": {
+      "file": "panelB_recurrence_order_drops.csv",
+      "plot": "normalized drop for no recurrence and shuffled relation order"
+    },
+    "C": {
+      "file": "panelC_error_growth_by_length.csv",
+      "plot": "conditional error magnitude across L=6-12"
+    },
+    "D": {
+      "file": "panelD_delta_prediction.csv",
+      "plot": "predicted vs observed log2 gain shift with identity line"
+    },
+    "E": {
+      "file": "panelE_Hnav_autonomous_retention.csv",
+      "plot": "paired source-level H_nav autonomous retention"
+    }
+  },
+  "question": "Where do navigation and matched cores differ in multi-step recurrent dynamics?"
+}

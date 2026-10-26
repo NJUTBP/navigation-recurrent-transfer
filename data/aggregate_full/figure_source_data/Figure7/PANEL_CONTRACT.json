@@ -1,0 +1,60 @@
+{
+  "exclusions": [
+    "rho=0.9 from main dose panels",
+    "B navigation-separability",
+    "R_ret_diff mediator claim",
+    "formula-only schematic panel"
+  ],
+  "panels": {
+    "A": {
+      "file": "panelA_multistep_dynamics.csv",
+      "plot": "source-level Nav vs matched multi-step dynamics",
+      "primary_fields": [
+        "path_step",
+        "delta_rectified",
+        "hidden_norm_ratio_to_step1"
+      ]
+    },
+    "B": {
+      "file": "panelB_accuracy_dose.csv",
+      "plot": "rho dose, short vs long accuracy",
+      "rho": [
+        0.0,
+        0.05,
+        0.1,
+        0.2,
+        0.35,
+        0.5
+      ]
+    },
+    "C": {
+      "file": "panelC_retention_dose.csv",
+      "plot": "rho dose, autonomous retention",
+      "rho": [
+        0.0,
+        0.05,
+        0.1,
+        0.2,
+        0.35,
+        0.5
+      ]
+    },
+    "D": {
+      "file": "panelD_horizon_profile.csv",
+      "plot": "path length 1-12 for rho 0/.05/.1",
+      "rho": [
+        0.0,
+        0.05,
+        0.1
+      ]
+    },
+    "E": {
+      "files": [
+        "panelE_intervention_effects.csv",
+        "panelE_retention_targets.csv"
+      ],
+      "must_show_failed_rescue": true,
+      "plot": "impairment + failed rescue"
+    }
+  }
+}

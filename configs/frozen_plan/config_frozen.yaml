@@ -1,0 +1,56 @@
+schema: multinav_v1
+run_id: multinav_paper_v1
+output_root: outputs/multinav
+source_seeds:
+- 6101
+- 6102
+- 6103
+- 6104
+- 6105
+- 6106
+- 6107
+- 6108
+- 6109
+- 6110
+control_source_seeds:
+- 7101
+- 7102
+- 7103
+- 7104
+- 7105
+- 7106
+- 7107
+- 7108
+- 7109
+- 7110
+target_repeats: 3
+hard_target_repeats: 3
+factorial_target_repeats: 3
+target_seed_base: 1000
+checkpoint_policy: balanced_else_validation
+source_epochs: 150
+source_steps_per_epoch: 1000
+control_qualification_policy: retain_all_and_flag
+topology_shuffles: 1000
+pca_sweep_dims:
+- 3
+- 4
+- 5
+- 6
+- 7
+- 8
+threads: 8
+device: cuda
+deterministic_algorithms: false
+bootstrap_samples: 10000
+statistics_seed: 982451653
+profile: formal
+lsf:
+  queue: <LSF_QUEUE>
+  cores: 8
+  gpu: num=1
+  python: <PYTHON>
+  hosts: null
+  aggregate_queue: <LSF_QUEUE>
+  aggregate_gpu: null
+  walltime: null

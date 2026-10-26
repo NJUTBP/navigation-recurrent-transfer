@@ -1,0 +1,34 @@
+# trained weights and large data (distributed as data packages)
+sources/
+rerun_best_validation/
+outputs/
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.hdf5
+*.npz
+!data/aggregate_full/**/*.npz
+*.tar
+*.tar.gz
+*.zip
+!data/aggregate_full/figure_source_data/Figure2/rate_maps_top10_50x50.zip
+!data/aggregate_full/figure_source_data/Figure2/trajectory_candidates_20step.zip
+# caches and logs
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.log
+*.out
+*.err
+HPC_logs*/
+*.lsf
+# local and private files
+.env
+*.secret
+*.key
+.vscode/
+.idea/
+_local_plot_context.json
+.venv/
+*.partial

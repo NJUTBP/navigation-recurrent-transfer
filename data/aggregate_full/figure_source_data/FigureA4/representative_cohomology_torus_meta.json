@@ -1,0 +1,70 @@
+{
+  "H1_class_indices": [
+    18,
+    192
+  ],
+  "H1_top_lifetimes_landmark_exact": [
+    0.8243424594402313,
+    0.7030798494815826,
+    0.18658038973808289,
+    0.1733764111995697,
+    0.1703985333442688,
+    0.16493377089500427,
+    0.15914353728294373,
+    0.15611889958381653,
+    0.1559705138206482,
+    0.15578070282936096
+  ],
+  "analysis": "figureA4_cohomology_torus_v1",
+  "candidate_dir": "/fsb/home/wangwei/ww_liby/gpm_cmp/Grid-Prior/outputs/multinav/multinav_paper_v1/rerun_best_validation/sources/nav_seed_6101/artifacts/torus_topology/candidates/clusters_5",
+  "canonical_torus": {
+    "R": 2.0,
+    "r": 0.75
+  },
+  "coeff": 47,
+  "common_coordinate_threshold": 0.9825363621115685,
+  "decode_diagnostics": [
+    {
+      "n_edges": 13457,
+      "n_vertices": 500,
+      "residual_norm": 10.675982514237592
+    },
+    {
+      "n_edges": 13457,
+      "n_vertices": 500,
+      "residual_norm": 12.39059480996263
+    }
+  ],
+  "elapsed_seconds": 4.12590765953064,
+  "formal_candidate_euclidean_H1_top_lifetimes": [
+    0.8243424594402313,
+    0.7030797898769379,
+    0.18658038973808289,
+    0.1733764111995697,
+    0.1703985333442688
+  ],
+  "input_pca6_downsampled": "/fsb/home/wangwei/ww_liby/gpm_cmp/Grid-Prior/outputs/multinav/multinav_paper_v1/rerun_best_validation/sources/nav_seed_6101/artifacts/torus_topology/candidates/clusters_5/pca6_downsampled.npy",
+  "input_sha256": "6268f795484c55ae88a93a887a2b09e6863135112dbdc06460d71dba80cec61c",
+  "interpolation_k": 12,
+  "landmark_joint_finite_fraction": 1.0,
+  "landmark_selection": "deterministic Euclidean greedy farthest-point permutation, start index 0",
+  "lifetime_fraction": 0.99,
+  "metric": "euclidean",
+  "n_cohomology_landmarks": 500,
+  "n_points": 3000,
+  "note": "This artifact is a topology-derived visualization only. It does not change the frozen Sch\u00f8yen candidate, formal Euclidean topology decision, or FigureA3. Circular coordinates are identifiable up to sign, phase offset, permutation, and integral basis changes.",
+  "phase_confidence_mean": [
+    0.9727969240401615,
+    0.9623556725214236
+  ],
+  "phase_confidence_p05": [
+    0.9394845218422466,
+    0.9133871552144206
+  ],
+  "role": "visualization_only",
+  "selected_clusters": [
+    5
+  ],
+  "source_seed": 6101,
+  "status": "success"
+}

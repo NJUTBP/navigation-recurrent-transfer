@@ -1,0 +1,83 @@
+{
+  "asset": "SupplementaryFigureS8",
+  "audits": {
+    "n_sources": 10,
+    "panelB_rows": 20,
+    "panelD_lengths": 12
+  },
+  "canonical_snapshot_root": "mechanism_v1_snapshot",
+  "freeze_id": "mechanism_v1_figure_source_freeze_v3_20260921",
+  "inputs": {
+    "E01_contrasts": {
+      "bytes": 5781,
+      "path": "E0_1_nonrecurrent_baselines/baseline_contrasts.csv",
+      "sha256": "4fe151f01f316ab9b7990c955b2338d7be60d6264a2244b7bc1ab626efe7cac8"
+    },
+    "E01_horizon": {
+      "bytes": 2656,
+      "path": "E0_1_nonrecurrent_baselines/horizon_profile.csv",
+      "sha256": "e6d7d01c0f575db499b6f2c9607f930c80821a47ed56ea07432dad661088f33c"
+    },
+    "E09_contrasts": {
+      "bytes": 1328,
+      "path": "E0_9a_extended_budget/extended_contrasts.csv",
+      "sha256": "f96af779968d7ff8acedd153717f1437f1de6c32a3c845bf76fabb55b3451fce"
+    },
+    "E09_curves": {
+      "bytes": 2458280,
+      "path": "E0_9a_extended_budget/all_update_curves.csv",
+      "sha256": "675539c2a2af0794c0b9924d663a149ce70787b5ab4a5e1cce2e3209d15ab200"
+    },
+    "E09_metrics": {
+      "bytes": 226006,
+      "path": "E0_9a_extended_budget/all_metrics.csv",
+      "sha256": "8264323526d45d3919f68b03bd984134cc3d2e23de7b04835d406ac54620b35f"
+    },
+    "E5c_envelope": {
+      "bytes": 679,
+      "path": "E5c_gain_sweep/aggregate_posthoc/envelope_contrast.csv",
+      "sha256": "af17413e7d9046c51c9488cd46493376402bd1f532a0484a2dc677139e93bd0e"
+    },
+    "E5c_operating": {
+      "bytes": 42777,
+      "path": "E5c_gain_sweep/operating_curve.csv",
+      "sha256": "a6cbb60f2dd63931157ad8da122fdf4e680e81f2081592492b96d9662eafe4e6"
+    },
+    "E5c_optima": {
+      "bytes": 919,
+      "path": "E5c_gain_sweep/optima_by_source.csv",
+      "sha256": "6c3411115d4e8b054ec06c971d2f64ec4738c1537211f5c0341ac52a4d28f9b1"
+    }
+  },
+  "notes": [
+    "S8 has exactly four panels."
+  ],
+  "outputs": {
+    "PANEL_CONTRACT.json": {
+      "bytes": 887,
+      "sha256": "630d4ab37b0a52147f815ac2bcce8f739ef8db8934b415be60a4e62d3ff2314d"
+    },
+    "panelA_extended_learning_curves.csv": {
+      "bytes": 109974,
+      "sha256": "340766e7e128235e815531aab75ad495c0d87a5f172ca6294e37f53af1aea4f7"
+    },
+    "panelB_32k_source_differences.csv": {
+      "bytes": 1042,
+      "sha256": "e0c2e3c33a48d2a489e742cc74b1206eceebd5b90d104136c821b0b2bda4460f"
+    },
+    "panelC_gain_operating_curve.csv": {
+      "bytes": 5093,
+      "sha256": "a7397c1a71e53703c4388d319239e48328a91ae336a2df93ef57078a5debf381"
+    },
+    "panelD_additive_horizon.csv": {
+      "bytes": 571,
+      "sha256": "a554c54a81c6bdfb71fa3459cd6a9223b1377cf06afc9341ec20da0811b3c00f"
+    },
+    "s8_statistics.json": {
+      "bytes": 1827,
+      "sha256": "d5f14ca4579e9136a82aab7258b5d4f7efda7cf7dee65a60d6ddbd9369a0b5a8"
+    }
+  },
+  "schema_version": "mechanism_figure_source_freeze_v3",
+  "snapshot_sha256sums_sha256": "3c753cbb8e700f80da72275f7a0470f7fbefd4cb8830debbcc2feb4b2727f0e3"
+}

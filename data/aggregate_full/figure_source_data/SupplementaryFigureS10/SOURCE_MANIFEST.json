@@ -1,0 +1,94 @@
+{
+  "asset": "SupplementaryFigureS10",
+  "audits": {
+    "anchors": 6,
+    "anchors_all_zero": true,
+    "n_sources": 10,
+    "validation_all_ok": true
+  },
+  "canonical_snapshot_root": "mechanism_v1_snapshot",
+  "freeze_id": "mechanism_v1_figure_source_freeze_v3_20260921",
+  "inputs": {
+    "E234_core_contrasts": {
+      "bytes": 8212,
+      "path": "E234_source_measures/core_contrasts.csv",
+      "sha256": "c46697565392868bac2b21d836a2dd72ed9ec982f3fbf5f6fa2fff1741bde839"
+    },
+    "E234_horizon": {
+      "bytes": 131122,
+      "path": "E234_source_measures/all_horizon_summary.csv",
+      "sha256": "6969e0e1d6b5f30d57463773be6c50e85fe210e745221a9d6f5db1b5ac0ce1c4"
+    },
+    "E6_geometry": {
+      "bytes": 385302,
+      "path": "E6_rho_scan/all_geometry.csv",
+      "sha256": "6bab15a4b1672325b6dc1624e1dbf6579a32c60e710eac0804970ca13ae11dd4"
+    },
+    "E6_horizon": {
+      "bytes": 268970,
+      "path": "E6_rho_scan/all_horizon_summary.csv",
+      "sha256": "765d6b24ea39d7d9be71cbdd297a9a790320ce23788591903b0bbe8db3836290"
+    },
+    "E6_mediation": {
+      "bytes": 2534,
+      "path": "E6_rho_scan/mediation.csv",
+      "sha256": "c14f680125f7fb463ed2b8c2430af3ecc3a56cb8924434f7a6f206a42d91b280"
+    },
+    "E6_metrics": {
+      "bytes": 325913,
+      "path": "E6_rho_scan/all_metrics.csv",
+      "sha256": "ea039969e3c54ac778a5a86c70b2b72184b432d30fedf600db87805b708e589c"
+    },
+    "anchors": {
+      "bytes": 826,
+      "path": "verdicts_v1/anchors.csv",
+      "sha256": "763660f1b7fd6d7f1678810c81ad554bf670ba55569a587512a709f0e0ec6eb4"
+    },
+    "validation": {
+      "bytes": 960,
+      "path": "verdicts_v1/validation.csv",
+      "sha256": "582c68532d93ca60be27ba2528c64d17b843b8cef96fd56d7f9d7de2abaee26f"
+    },
+    "verdict_json": {
+      "bytes": 3829,
+      "path": "verdicts_v1/VERDICTS.json",
+      "sha256": "21ba0902f936b4cd15be23ebd48e5b66129853131e2cdd1442698393e50d197a"
+    },
+    "verdicts": {
+      "bytes": 893,
+      "path": "verdicts_v1/verdicts.csv",
+      "sha256": "8bcba3da74e6d0bff6d9c47f6ce413c9625a98a7c0f00b9cc45349743e7fa25a"
+    }
+  },
+  "notes": [
+    "Per-source slopes are deterministic summaries for visualization; inferential labels come only from frozen verdicts.csv."
+  ],
+  "outputs": {
+    "PANEL_CONTRACT.json": {
+      "bytes": 813,
+      "sha256": "e1d8dd9c5ea30ac054056a2dc4f8cd2d9f302ce6c5747a10759fef370d97e87b"
+    },
+    "panelA_Rret_diff_working_points.csv": {
+      "bytes": 2008,
+      "sha256": "46bf6e9cb0bbc606f25ae960cede1e5eb5d49cd44227e377b81965e68b679bbc"
+    },
+    "panelB_primary_per_source_slopes.csv": {
+      "bytes": 218,
+      "sha256": "9787a7da9a49426afceb55bbe7db7b6918e1b2689192778693e3d2df3106050e"
+    },
+    "panelC_expected_null_per_source_slopes.csv": {
+      "bytes": 223,
+      "sha256": "fb724b2e0d3897ca07b48080b945da4b870b9db43b34ebf728d3e4830d4b6ee6"
+    },
+    "panelD_anchor_forest.csv": {
+      "bytes": 657,
+      "sha256": "a803b6403ef1e9ec2c5836ef626e1b60b39bbce4095118847592b58e3708872f"
+    },
+    "s10_statistics.json": {
+      "bytes": 9867,
+      "sha256": "30cde16436ce3e44970a12bfae5a1f74c7645e3b30263e7d6cd973f76a1a2712"
+    }
+  },
+  "schema_version": "mechanism_figure_source_freeze_v3",
+  "snapshot_sha256sums_sha256": "3c753cbb8e700f80da72275f7a0470f7fbefd4cb8830debbcc2feb4b2727f0e3"
+}

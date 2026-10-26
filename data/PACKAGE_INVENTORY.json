@@ -1,0 +1,31 @@
+{
+  "schema": "nrt_data_packages_v1",
+  "license": "CC-BY-4.0",
+  "archives": [
+    {
+      "name": "P1_pretrained_checkpoints.tar",
+      "archive_bytes": 1520906240,
+      "files": 100,
+      "checkpoints": 20,
+      "uncompressed_bytes": 1520662273,
+      "sha256": "444fa3441d7bb3ee56504a28bad87e8fa5481764391d50f67d70212919b36518"
+    },
+    {
+      "name": "P2_target_checkpoints.tar",
+      "archive_bytes": 1019033600,
+      "files": 480,
+      "checkpoints": 480,
+      "uncompressed_bytes": 1016139520,
+      "sha256": "41c9842d99647ae2641e4f1ea1a9e1b896be47512f4b0b4308bb23222a0b6098"
+    },
+    {
+      "name": "P3_source_level_results.tar.gz",
+      "archive_bytes": 312662279,
+      "files": 11041,
+      "checkpoints": 0,
+      "uncompressed_bytes": 682190251,
+      "sha256": "5f520469498d8abe4f6db2eefb32d612b42a0da481582c3d78fd80175302a0e7"
+    }
+  ],
+  "checkpoint_selection_note": "See docs/DATA_PACKAGES.md for best-validation checkpoint selection and model indices."
+}

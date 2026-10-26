@@ -1,0 +1,33 @@
+{
+  "boundary": "Numerically suggestive only; do not state that navigation remains intact while transfer collapses.",
+  "convergence_ok": false,
+  "formal_verdict": "NO SUPPORT / UNDERCONVERGED",
+  "key_cells_best_in_last_eval": 60,
+  "key_cells_total": 60,
+  "low_rho_tests": [
+    {
+      "ci_high": 0.2125672312280723,
+      "ci_low": 0.1590505885150457,
+      "exact_p": 0.001953125,
+      "excess_transfer_drop": 0.1858142965375006,
+      "holm_p": 0.00390625,
+      "navigation_drop": 0.0846857034624993,
+      "positive_sources": 10,
+      "rho": 0.05,
+      "separable": true,
+      "transfer_drop": 0.2705
+    },
+    {
+      "ci_high": 0.2561661878181737,
+      "ci_low": 0.1780590181929937,
+      "exact_p": 0.001953125,
+      "excess_transfer_drop": 0.2217758490711517,
+      "holm_p": 0.00390625,
+      "navigation_drop": 0.1828408175955149,
+      "positive_sources": 10,
+      "rho": 0.1,
+      "separable": true,
+      "transfer_drop": 0.4046166666666666
+    }
+  ]
+}

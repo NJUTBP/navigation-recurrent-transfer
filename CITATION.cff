@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the article."
+title: "Navigation-trained recurrent organization facilitates relational learning: code and data"
+authors:
+  - family-names: Li
+    given-names: Boyuan
+  - family-names: Qin
+    given-names: Weiyue
+  - family-names: Wu
+    given-names: Renjie
+  - family-names: Wang
+    given-names: Wei
+  - family-names: Liu
+    given-names: Feng
+version: "1.0.0"
+license: MIT
+doi: 10.5281/zenodo.23660866
+repository-code: "https://github.com/NJUTBP/navigation-recurrent-transfer"
+# preferred-citation: add the article reference after publication

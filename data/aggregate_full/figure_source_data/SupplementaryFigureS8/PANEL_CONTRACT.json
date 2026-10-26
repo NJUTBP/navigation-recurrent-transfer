@@ -1,0 +1,27 @@
+{
+  "excluded_from_panels": [
+    "E1 interface magnitude/shape",
+    "separate gstar panel",
+    "action-count baseline unless caption needs context"
+  ],
+  "panels": {
+    "A": {
+      "file": "panelA_extended_learning_curves.csv",
+      "plot": "validation accuracy vs update, Nav vs matched scalar pair"
+    },
+    "B": {
+      "file": "panelB_32k_source_differences.csv",
+      "plot": "source-level Nav-matched differences for short and long at 32k"
+    },
+    "C": {
+      "annotations_from": "s8_statistics.json",
+      "file": "panelC_gain_operating_curve.csv",
+      "plot": "seen_long accuracy vs fixed gain"
+    },
+    "D": {
+      "file": "panelD_additive_horizon.csv",
+      "plot": "path-length curves: navigation, matched, 2-D linear accumulator"
+    }
+  },
+  "question": "Can optimization budget, gain calibration, or task impossibility explain the long-horizon gap?"
+}

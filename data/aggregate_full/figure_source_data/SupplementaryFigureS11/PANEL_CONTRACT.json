@@ -1,0 +1,18 @@
+{
+  "formal_status": "NO SUPPORT / UNDERCONVERGED",
+  "panels": {
+    "A": {
+      "file": "panelA_transfer_vs_navigation_competence.csv",
+      "plot": "transfer seen_long and refitted navigation competence vs rho"
+    },
+    "B": {
+      "file": "panelB_excess_transfer_drop.csv",
+      "plot": "source-level excess transfer drop at rho .05/.1"
+    },
+    "C": {
+      "file": "panelC_convergence_gate.csv",
+      "plot": "fraction best at final epoch vs preregistered <=25% criterion"
+    }
+  },
+  "question": "Does transfer degrade faster than recoverable navigation competence, and is the refit converged enough to support that claim?"
+}

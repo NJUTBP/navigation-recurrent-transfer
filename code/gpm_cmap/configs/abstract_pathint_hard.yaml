@@ -1,0 +1,101 @@
+# Stage I2: non-saturating hard abstract path-integration benchmark.
+# Every formal claim is conditional on the analyzed navigation source.
+project_name: gpm_cmap
+seed: 42
+device: cuda
+output_dir: outputs/runs/exp5_hard_001
+source_reduced_artifact: outputs/runs/source_reduced_v3_002/source_reduced_model_v3.pkl
+navigation_checkpoint: outputs/nav_pretrain_full/best_grid_balanced.pt
+matched_random_seed_offset: 70001
+
+pilot:
+  # Independent pilot seeds; never reuse these for confirmatory statistics.
+  target_seeds: [9101, 9102, 9103]
+  episode_budgets: [50, 200]
+  n_levels_candidates: [8, 12]
+  conditions: [navigation_frozen, matched_random_frozen, navigation_trainable, matched_random_trainable]
+
+confirmatory:
+  target_seeds: [101, 102, 103, 104, 105, 106, 107, 108, 109, 110]
+  episode_budgets: [10, 20, 50, 100, 200, 500, 1000]
+  n_levels: 8  # replace with the frozen pilot recommendation before formal execution
+  conditions:
+    - navigation_frozen
+    - matched_random_frozen
+    - navigation_trainable
+    - matched_random_trainable
+    - navigation_hh_only_frozen
+    - navigation_ih_only_frozen
+
+data:
+  task_name: social_hierarchy
+  n_levels: 8
+  train_path_length: [1, 5]
+  id_test_path_length: [1, 5]
+  long_test_path_length: [6, 12]
+  episode_budgets: [10, 20, 50, 100, 200, 500, 1000]
+  validation_episodes: 1000
+  id_test_episodes: 2000
+  long_test_episodes: 2000
+  composition_test_episodes: 2000
+  held_out_action_bigrams:
+    - [0, 2]  # +x then +y
+    - [1, 3]  # -x then -y
+    - [2, 1]  # +y then -x
+    - [3, 0]  # -y then +x
+  velocity_scale: 0.02
+  coord_scale: 0.02
+  batch_size: 128
+  num_workers: 0
+  seed_offsets:
+    train: 1001
+    validation: 2001
+    id_test: 3001
+    long_test: 4001
+    composition_test: 5001
+
+model:
+  hidden_dim: 4096
+  content_dim: 64
+  nonnegative: true
+  cell_type: rnn
+  use_bias: false
+  dropout: 0.0
+  periodic_scales: 0
+  use_position_head: false
+  start_init: embedding
+  coord_dim: 2
+
+train:
+  # Fixed across conditions and budgets. Test sets are evaluated only after
+  # validation checkpoint selection.
+  max_gradient_updates: 2000
+  minimum_updates: 500
+  eval_every_updates: 100
+  early_stopping_patience_evals: 10
+  lr: 0.001
+  weight_decay: 0.0
+  whh_weight_decay: 0.0001
+  grad_clip: 1.0
+  position_loss_weight: 0.0
+  calibration_bins: 15
+
+matched_random:
+  iterations: 8
+  singular_rank: 16
+  probe_count: 64
+  strict_matching_gate: true
+  tolerances:
+    hh_frobenius_relative: 0.000001
+    hh_spectral_radius_relative: 0.50
+    ih_frobenius_relative: 0.000001
+    preactivation_variance_relative: 0.50
+    relu_active_fraction_absolute: 0.10
+    hidden_norm_relative: 0.50
+    jacobian_frobenius_relative: 0.50
+    top_singular_rmse_relative: 0.50
+
+runtime:
+  cpu_num_threads: 1
+  allow_device_fallback: false
+  deterministic_algorithms: false

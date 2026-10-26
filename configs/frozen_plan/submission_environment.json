@@ -1,0 +1,18 @@
+{
+  "time_utc": "2026-09-10T12:49:47.698639+00:00",
+  "python": "<PYTHON>",
+  "python_version": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "platform": "Linux-3.10.0-1160.119.1.el7.x86_64-x86_64-with-glibc2.17",
+  "missing_modules": [],
+  "problems": [],
+  "passed": true,
+  "versions": {
+    "numpy": "2.2.6",
+    "torch": "2.5.1+cu121",
+    "scipy": "1.18.0",
+    "pandas": "2.3.3",
+    "matplotlib": "3.8.4"
+  },
+  "cuda_runtime": "12.1",
+  "cuda_available": false
+}

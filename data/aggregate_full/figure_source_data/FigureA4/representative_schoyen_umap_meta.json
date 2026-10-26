@@ -1,0 +1,21 @@
+{
+  "artifact": "/fsb/home/wangwei/ww_liby/gpm_cmp/Grid-Prior/outputs/multinav/multinav_paper_v1/rerun_best_validation/sources/nav_seed_6101/artifacts/torus_topology/torus_analysis_arrays.npz",
+  "artifact_fingerprint": "78513e77aa8aa018e87fdecc8519e797cdb82ebbb9ee9059eea2cc1309756b4b",
+  "base_seed": 0,
+  "color": "PCA6 component 1",
+  "downsampled_points": 3000,
+  "force_recompute_requested": true,
+  "n_restarts": 8,
+  "note": "Topology inference is unchanged and remains based on the frozen PCA6 persistent-homology analysis.",
+  "parameters": {
+    "base_seed": 0,
+    "init": "spectral",
+    "metric": "euclidean",
+    "min_dist": 0.8,
+    "n_components": 3,
+    "n_neighbors": 4000,
+    "n_restarts": 8
+  },
+  "selected_random_state": 2,
+  "visualization_only": true
+}

@@ -1,0 +1,15 @@
+{
+  "source_trainings": 20,
+  "target_fits_per_source": {
+    "Exp5_main_6_arms": 18,
+    "Exp5_CTL_1_arm": 3,
+    "Exp5_mapping_2_new_arms": 6,
+    "Exp7_32_arms_transforms": 96,
+    "Exp8_38_arm_budget_cells": 114,
+    "hard_6_arms_x7_budgets": 126,
+    "factorial_8_cells_x7_budgets": 168
+  },
+  "total_target_fits_per_source": 531,
+  "total_target_fits": 5310,
+  "note": "Formal schedule; test-time transforms, recurrence ablations, topology and reduced-model fits are additional evaluations, not counted as target neural-network trainings."
+}

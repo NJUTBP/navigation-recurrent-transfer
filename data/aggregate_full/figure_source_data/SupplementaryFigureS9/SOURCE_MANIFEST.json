@@ -1,0 +1,100 @@
+{
+  "asset": "SupplementaryFigureS9",
+  "audits": {
+    "A_rows": 240,
+    "B_rows": 40,
+    "C_rows": 140,
+    "D_rows": 10,
+    "E_rows": 20,
+    "n_sources": 10
+  },
+  "canonical_snapshot_root": "mechanism_v1_snapshot",
+  "freeze_id": "mechanism_v1_figure_source_freeze_v3_20260921",
+  "inputs": {
+    "E067_ablation_raw": {
+      "bytes": 602856,
+      "path": "E0_67_forward_diagnostics/all_ablation.csv",
+      "sha256": "c30e86624cc2353f954211d545eb13ed2ad010d427b3daea559d7f72cbb22811"
+    },
+    "E067_ablation_summary": {
+      "bytes": 12226,
+      "path": "E0_67_forward_diagnostics/ablation_normalized.csv",
+      "sha256": "9cf295247691b7444b9b63e14ff096d7260e177a7373e0dddf661e1db78bdc0c"
+    },
+    "E067_error_displacement": {
+      "bytes": 664594,
+      "path": "E0_67_forward_diagnostics/all_error_displacement.csv",
+      "sha256": "a00de1215eb82e5e4e7aab89f94b3473c0d7924e68f67edba14ae35a43cf64d0"
+    },
+    "E067_error_growth": {
+      "bytes": 25633,
+      "path": "E0_67_forward_diagnostics/aggregate_posthoc/error_growth_by_cell.csv",
+      "sha256": "1e53d18964089186fa27ac86ecc8b8699fa5225fcde286498e16d6deaed15946"
+    },
+    "E067_posthoc_contrasts": {
+      "bytes": 22098,
+      "path": "E0_67_forward_diagnostics/aggregate_posthoc/posthoc_contrasts.csv",
+      "sha256": "f8c856fe439139c60190fa5709843b677fd5a88740a53d815195ebfe153c32c7"
+    },
+    "E067_state": {
+      "bytes": 553211,
+      "path": "E0_67_forward_diagnostics/all_state_diagnostics.csv",
+      "sha256": "216c235b5ad3bbd62843b3069e1e9cca8192ad63465cc7722826f32bc9cd3c5a"
+    },
+    "E5b_prediction_source": {
+      "bytes": 1189,
+      "path": "E5b_delta_prediction/prediction_by_source.csv",
+      "sha256": "00b26f409fb117e6e1709e18ec75ab6c0e8d515d59e3dac95de3731174776594"
+    },
+    "E5b_prediction_tests": {
+      "bytes": 1822,
+      "path": "E5b_delta_prediction/prediction_tests.csv",
+      "sha256": "2387a7e5d39403237c40cd4a7cb64b339a6b29db5db53db22e5288ea9af99c28"
+    },
+    "E5b_retention": {
+      "bytes": 152314,
+      "path": "E5b_delta_prediction/all_retention.csv",
+      "sha256": "bfdf2e626a8d8f6de73118a631970d4f7db43668379306b16272c02efcefeecd"
+    },
+    "E5b_stationarity": {
+      "bytes": 1075,
+      "path": "E5b_delta_prediction/stationarity_contrasts.csv",
+      "sha256": "70b630ba764344069174daa9a3a4f414bf409561beec53abcc84c6d768768015"
+    }
+  },
+  "notes": [
+    "S9 contains five panels; no topology/torus analyses are duplicated here."
+  ],
+  "outputs": {
+    "PANEL_CONTRACT.json": {
+      "bytes": 791,
+      "sha256": "88e78fea4a8c842d6d41c23ecebf957af2fbc4e3b2e488a0291ce4721ab05d63"
+    },
+    "panelA_state_maintenance.csv": {
+      "bytes": 10865,
+      "sha256": "d032a9ada9e08f1120ff31433c09907eb44dae59731e74c202006c7b98ad3d7a"
+    },
+    "panelB_recurrence_order_drops.csv": {
+      "bytes": 2432,
+      "sha256": "25c4e8ffe2ff60313e302c41ce6b0de3ce140711a9a0ed3a7b0a38d8f9bede61"
+    },
+    "panelC_error_growth_by_length.csv": {
+      "bytes": 6358,
+      "sha256": "394ab1cf75e0309fe64e6d9b43171163dec180d417843f2478435c0fb8731d82"
+    },
+    "panelD_delta_prediction.csv": {
+      "bytes": 510,
+      "sha256": "464b3858a420404af567a50fbb4625acd66882bc8e05656472256bc71342af00"
+    },
+    "panelE_Hnav_autonomous_retention.csv": {
+      "bytes": 664,
+      "sha256": "920824204cd61ff05a606fe7c7fdf492c6ed82dafe54150a314079d5809212e7"
+    },
+    "s9_statistics.json": {
+      "bytes": 5112,
+      "sha256": "5523548451fa1b5078431ccda5fcd8a976caa78403e5eba1b10ca08f587558ea"
+    }
+  },
+  "schema_version": "mechanism_figure_source_freeze_v3",
+  "snapshot_sha256sums_sha256": "3c753cbb8e700f80da72275f7a0470f7fbefd4cb8830debbcc2feb4b2727f0e3"
+}

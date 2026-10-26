@@ -1,0 +1,6 @@
+criterion,status,n_planned,n_evaluable,n_confirmed_pass,confirmed_pass_fraction,binomial_low,binomial_high,interpretation
+ctl_qualified,active,10,10,10,1.0,0.6915028921812393,1.0,Confirmed pass out of all planned navigation sources; scientific non-evaluability remains explicit.
+is_torus_like,active,10,10,9,0.9,0.5549838829718047,0.9974714214555382,Confirmed pass out of all planned navigation sources; scientific non-evaluability remains explicit.
+schoyen_formal_topology_passed,active,10,10,10,1.0,0.6915028921812393,1.0,Confirmed pass out of all planned navigation sources; scientific non-evaluability remains explicit.
+source_exact_gate,active,10,10,0,0.0,0.0,0.3084971078187608,Confirmed pass out of all planned navigation sources; scientific non-evaluability remains explicit.
+source_fibre_gate,active,10,10,0,0.0,0.0,0.3084971078187608,Confirmed pass out of all planned navigation sources; scientific non-evaluability remains explicit.
