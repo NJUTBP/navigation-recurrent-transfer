@@ -72,8 +72,12 @@ def _paired_dots(ax, df, targets=None):
         for arm, value in targets.items():
             x0, x1 = POS[arm] - .30, POS[arm] + .55
             ax.plot([x0, x1], [value, value], color=PALETTE["black"], lw=.9, ls=(0, (2.2, 1.4)), zorder=7)
-            ax.annotate("target", xy=(x1, value), xytext=(2, 0), textcoords="offset points",
-                        ha="left", va="center", fontsize=FS_INPANEL - .3, color=PALETTE["neutral_dark"])
+            if arm == "nav_impair":
+                xy, offset, ha, va = ((x0 + x1) / 2, value), (0, -7), "center", "top"
+            else:
+                xy, offset, ha, va = (x1, value), (2, 0), "left", "center"
+            ax.annotate("target", xy=xy, xytext=offset, textcoords="offset points",
+                        ha=ha, va=va, fontsize=FS_INPANEL - .3, color=PALETTE["neutral_dark"])
     ax.set_xticks([POS[a] for a in POS], ["Before", "After", "Before", "After"])
     ax.set_xlim(-0.45, 4.25)
     ax.tick_params(axis="x", length=0, pad=2.5)
