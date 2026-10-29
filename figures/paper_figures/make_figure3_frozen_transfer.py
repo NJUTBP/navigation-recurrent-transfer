@@ -1,21 +1,11 @@
 #!/usr/bin/env python3
-"""Figure3 — aligned endpoint transfer and matched frozen-source controls.
+"""Figure 3: frozen-core transfer on the aligned 4 x 4 endpoint task.
 
-v2.1 presentation (data interface unchanged: same four CSV files, same columns,
-same output stem).  Concise axis labels, no in-panel result text (values are
-reported in the main text), no panel titles; significance brackets show
-asterisks derived from the frozen contrast table.
-
-v2.4 presentation: closed axes (x and y meet in one corner) in all three
-panels; the epoch axis of A runs to the last target epoch (100); C uses the
-0-1 accuracy scale so every paired difference lies inside the labelled range;
-A, B and C are separated by identical white space.
-
-v2.5 presentation: A draws the comparison curves as light solid lines (no dash
-patterns; markers keep the full colour); B prints each condition mean next to
-its summary symbol (same precision as the main text); C colours each paired
-difference A - B with the mix of the colours of A and B and uses B's marker
-(nature_style.difference_spec), and its axis reads "Δ test accuracy".
+Reads figure_source_data/Figure3 (training_curves, frozen_transfer, contrasts, paired_differences).
+a learning curves (comparison curves as light solid lines); b final test accuracy per condition
+with the condition means; c paired differences A - B, drawn in the mix of the colours of A and B
+with the marker of B (nature_style.difference_spec).  Significance brackets are derived from the
+stored contrast table.
 """
 from __future__ import annotations
 from pathlib import Path

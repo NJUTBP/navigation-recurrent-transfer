@@ -1,7 +1,7 @@
-"""Supplementary Figure S8: multi-step dynamical signatures and rejected one-step account.
+"""Supplementary Figure S8: multi-step dynamical signatures and the rejected one-step account.
 
-Presentation-only, four panels (A-D) as frozen.  Panel E of the historical
-layout stays retired; its source table is untouched.
+Reads figure_source_data/SupplementaryFigureS9 (panels a-d).  The table
+panelE_Hnav_autonomous_retention.csv in the same folder is not plotted.
 """
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ except ImportError:
         place_panel_labels, num,
     )
 
-# Source-data directory name is frozen by the v3 data contract; only manuscript numbering changed.
+# The source-data folder keeps its builder name; see figures/figure_numbering.py.
 DATA = figure_data("SupplementaryFigureS9")
 A = read_csv(DATA / "panelA_state_maintenance.csv")
 B = read_csv(DATA / "panelB_recurrence_order_drops.csv")
@@ -67,11 +67,10 @@ def panel_state_maintenance(ax):
                    label=label)
     reference_line(ax, 1.0)
     integer_axis(ax, lo=1, hi=12, step=2)             # as Figure 7A
-    ax.set_ylim(.40, 1.08)  # v3: lowest source trace is 0.455
+    ax.set_ylim(.40, 1.08)  # lowest source trace is 0.455
     ax.set_yticks([.45, .6, .75, .9, 1.05])
     ax.set_xlabel("Relation step $t$")
     ax.set_ylabel("Normalized hidden-state norm $n_t$")
-    # v2: panel title removed (content belongs in the caption): "State-norm retention"
     legend(ax, loc="lower left")
     style_axis(ax, max_y_ticks=5, max_x_ticks=5)
 
@@ -91,7 +90,6 @@ def panel_ablations(ax):
     ax.set_ylim(0, 1.16)
     ax.set_yticks([0, .3, .6, .9])
     ax.set_ylabel("Chance-normalized accuracy drop")
-    # v2: panel title removed (content belongs in the caption): "Recurrence and order sensitivity"
     # The upper right is empty in every rendering of this contrast; the legend
     # goes there instead of floating over the centre of the panel.
     legend(ax, loc="upper right", points=True, handles=_origin_handles())
@@ -112,7 +110,6 @@ def panel_error_growth(ax):
     ax.set_yticks([1, 2, 3])
     ax.set_xlabel("Path length $L_{\\mathrm{p}}$")
     ax.set_ylabel(r"Endpoint error $\bar{e}(L_{\mathrm{p}})$ (lattice steps)")
-    # v2: panel title removed (content belongs in the caption): "Error growth with path length"
     legend(ax, loc="upper left")
     style_axis(ax, max_y_ticks=5, max_x_ticks=7)
 
@@ -148,7 +145,6 @@ def panel_delta_prediction(ax):
                  f"exact $P$ = {stat['exact_p']:.6f}", loc="lower right")
     ax.set_xlabel("Predicted log$_2$ gain shift")
     ax.set_ylabel("Observed log$_2$ gain shift")
-    # v2: panel title removed (content belongs in the caption): r"Single-step $\delta$ prediction"
     style_axis(ax, max_y_ticks=5, max_x_ticks=5)
 
 

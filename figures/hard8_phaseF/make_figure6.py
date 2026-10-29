@@ -1,3 +1,4 @@
+"""Figure 6: extended 8 x 8 task (frozen-core transfer with a learned relation-input gain)."""
 from pathlib import Path
 import os
 import json
@@ -29,25 +30,24 @@ except ImportError:  # allow direct execution from hard8_phaseF/
         pair_lines, fmt_p, num, difference_spec, lighten,
     )
 
-# Data interface unchanged.
-# v2.4 presentation: closed axes (x and y meet in one corner) in all four panels;
-# A's y axis ends at a labelled tick above the largest source difference.
-# v2.5 presentation (notation follows the main text): A numbers the ten
-# navigation sources s = 1..10 (seeds 6101..6110 in order; Delta_s, Section 2.8)
-# and colours the Nav. - matched difference with the mix of the two colours
-# (matched marker), as every paired difference in Figures 3 and 5; B has no
-# "trained"/"extrapolation" labels (the dashed line marks the training range,
-# see caption); accuracy axes read "Test accuracy" / "Short-path test accuracy"
-# / "Long-path test accuracy"; path length L and fixed gain g carry their symbols.
-AGGREGATE = Path(os.environ.get('CTP_AGGREGATE_DIR', Path.cwd() / 'aggregate_full')).resolve()
-DATA = Path(os.environ.get('CTP_HARD8_FIGURE_DATA', AGGREGATE / 'figure_source_data' / 'FigureA5')).resolve()
-FOLLOW = Path(os.environ.get('CTP_HARD8_FOLLOWUP', AGGREGATE / 'hard8x8_phaseF_followup')).resolve()
-OUT = Path(os.environ.get('CTP_FIGURE_OUT', AGGREGATE / 'figures')).resolve()
-OUT.mkdir(parents=True, exist_ok=True)
+# Closed axes (x and y meet in one corner) in all four panels; the y axis of a ends at a
+# labelled tick above the largest source difference.  Panel a numbers the ten navigation
+# sources s = 1..10 (seeds 6101..6110 in order; Delta_s, Section 2.8) and colours the
+# Nav. - matched difference with the mix of the two colours (matched marker), as every
+# paired difference in Figures 3 and 5.  The dashed line in b marks the trained range of
+# path lengths.
+try:
+    from . import figure_paths
+except ImportError:  # direct execution from hard8_phaseF/
+    import figure_paths
+AGGREGATE = figure_paths.AGGREGATE
+DATA = figure_paths.PHASEF_FIGURE_DATA
+FOLLOW = figure_paths.PHASEF_TABLES
+OUT = figure_paths.OUT
 
 NAV = PALETTE['navigation']
-MATCHED = PALETTE['matched']      # v2: L* 55 (was neutral_dark, L* 38 = same grey as NAV)
-FRESH = PALETTE['fresh']          # v2: L* 75
+MATCHED = PALETTE['matched']      # L* 55, distinguishable from NAV in greyscale
+FRESH = PALETTE['fresh']          # L* 75
 BASELINE = PALETTE['relation']
 ROLE_OF = {'Navigation': 'navigation', 'Matched control': 'matched', 'Fresh-random control': 'fresh'}
 

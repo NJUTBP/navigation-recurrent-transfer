@@ -1,16 +1,9 @@
-"""Supplementary Figure S5: controls for extended 8 × 8 transfer.
+"""Supplementary Figure S5: controls for the extended 8 x 8 transfer task.
 
-Uses the frozen Phase-F source-data interface.
-
-v2.6: new panel E, test accuracy on held-out-composition paths versus path
-length L_p for the three core types (conventions as in Figure 6B; held-out
-compositions need at least two relations, so the curves begin at L_p = 2;
-symbols as in panel A, so E has no key of its own).
-v2.7: one three-column grid (A = B = C; the heatmap D spans the A-B width with
-its row labels from A's left edge and unrotated two-line column labels; E has
-exactly C's geometry).
-Layout: A-C share the top row; the condition heatmap D (row labels in the left
-margin) and E share the bottom row.
+Reads figure_source_data/FigureA5 and hard8x8_phaseF_followup.  Top row a-c; bottom row the
+condition heatmap d and e, test accuracy on held-out-composition paths versus path length L_p for
+the three core types (held-out compositions need at least two relations, so the curves start at
+L_p = 2).
 """
 from pathlib import Path
 import os
@@ -36,14 +29,17 @@ except ImportError:  # allow direct execution from hard8_phaseF/
     )
 
 # Data interface unchanged.
-AGGREGATE = Path(os.environ.get('CTP_AGGREGATE_DIR', Path.cwd() / 'aggregate_full')).resolve()
-DATA = Path(os.environ.get('CTP_HARD8_FIGURE_DATA', AGGREGATE / 'figure_source_data' / 'FigureA5')).resolve()
-FOLLOW = Path(os.environ.get('CTP_HARD8_FOLLOWUP', AGGREGATE / 'hard8x8_phaseF_followup')).resolve()
-OUT = Path(os.environ.get('CTP_FIGURE_OUT', AGGREGATE / 'figures')).resolve()
-OUT.mkdir(parents=True, exist_ok=True)
+try:
+    from . import figure_paths
+except ImportError:  # direct execution from hard8_phaseF/
+    import figure_paths
+AGGREGATE = figure_paths.AGGREGATE
+DATA = figure_paths.PHASEF_FIGURE_DATA
+FOLLOW = figure_paths.PHASEF_TABLES
+OUT = figure_paths.OUT
 
 NAV = PALETTE['navigation']
-# v2.5: same colours and dash patterns as Figure 6 (role registry).
+# Same colours and dash patterns as Figure 6 (role registry).
 MATCHED = PALETTE['matched']
 FRESH = PALETTE['fresh']
 BASELINE = PALETTE['relation']
@@ -127,7 +123,7 @@ def panel_matrix_primary(ax):
     x = np.arange(4)
     specs = [
         (PRIMARY_NAV, 'Navigation', NAV, 'o', -.09),
-        # v2.7: short names (as in the heatmap rows of D) keep the key clear of
+        # Short names (as in the heatmap rows of D) keep the key clear of
         # the fresh-random points at 'Seen long'.
         (PRIMARY_MATCH, 'Matched', MATCHED, 's', 0.0),
         (PRIMARY_FRESH, 'Fresh-random', FRESH, '^', .09),
@@ -159,7 +155,6 @@ def panel_matrix_primary(ax):
     ax.set_xticks(x, SLABEL)
     ax.set_ylim(0, 1.03)
     accuracy_axis(ax, label='Test accuracy')
-    # v2: panel title removed (content belongs in the caption): 'Composition × horizon performance'
     legend(ax, loc='lower left')
     style_axis(ax, max_y_ticks=5, max_x_ticks=4)
 
@@ -198,7 +193,6 @@ def panel_gain(ax, split='seen_long', title='Fixed relation-input gain modulates
     ax.set_ylim(0, 1.03)
     ax.set_xlabel('Fixed relation-input gain $g$')
     accuracy_axis(ax, label='Long-path test accuracy')
-    # v2: panel title removed (content belongs in the caption): title
     legend(ax, loc='lower right')
     style_axis(ax, max_y_ticks=5, max_x_ticks=3)
 
@@ -233,7 +227,6 @@ def panel_zeroing(ax):
     ax.set_xticks(x, SLABEL)
     ax.set_ylim(0, 1.03)
     accuracy_axis(ax, label='Test accuracy')
-    # v2: panel title removed (content belongs in the caption): 'Navigation transfer depends on relation input'
     handles = [
         Line2D([0], [0], marker='o', ls='none', ms=4.5, mfc=NAV, mec='white', mew=.4,
                label='Intact'),
@@ -269,7 +262,7 @@ def panel_heatmap(ax, cax):
     z = condmat.set_index('condition').loc[order]
     arr = z[['id_seen_short_accuracy', 'heldout_short_accuracy', 'seen_long_accuracy', 'heldout_long_accuracy']].to_numpy(float)
     im = ax.imshow(arr, aspect='auto', vmin=0, vmax=1, cmap=ACC_CMAP, interpolation='nearest')
-    # v2.7: two-line column labels without rotation, as on the x axes of A and C.
+    # Two-line column labels without rotation, as on the x axes of A and C.
     ax.set_xticks(range(4), SLABEL)
     ax.set_yticks(range(len(labels)), labels, fontsize=6.0)
     ax.tick_params(axis='x', labelsize=6.1, length=0, pad=3)
@@ -287,8 +280,7 @@ def panel_heatmap(ax, cax):
         ax.axhline(y, color='white', lw=1.3, alpha=.95)
     for spine in ax.spines.values():
         spine.set_visible(False)
-    # v2: panel title removed (content belongs in the caption): 'Performance across transfer conditions'
-    cb = ax.figure.colorbar(im, cax=cax, ticks=[0, .5, 1])   # v2.7: explicit colour-bar axes
+    cb = ax.figure.colorbar(im, cax=cax, ticks=[0, .5, 1])   # explicit colour-bar axes
     cb.set_label('Test accuracy', fontsize=6.3)
     cb.ax.tick_params(length=0, labelsize=6.0, pad=2)
     cb.outline.set_linewidth(.55)
@@ -358,7 +350,7 @@ def _align_bottom_row(fig, a, c, d, cax, e, gap_in, iterations=3):
 
 def make_s5():
     apply_publication_style()
-    # v2.7: one three-column grid. A, B and C are identical; the heatmap D (with
+    # One three-column grid. A, B and C are identical; the heatmap D (with
     # its colour bar) spans the A-B width and E has exactly C's geometry.
     fig = plt.figure(figsize=(7.0, 5.5))
     top = fig.add_gridspec(1, 3, left=.08, right=.985, top=.958, bottom=.655, wspace=.40)

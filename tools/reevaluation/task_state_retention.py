@@ -11,7 +11,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import nd2_common as nc  # noqa: E402
+import reevaluation_common as nc  # noqa: E402
 import dyn_math as dm    # noqa: E402
 
 SPECS = [('rho0', {'kind': 'e6', 'rho': 0.0}), ('rho0.1', {'kind': 'e6', 'rho': 0.1}),
@@ -19,12 +19,13 @@ SPECS = [('rho0', {'kind': 'e6', 'rho': 0.0}), ('rho0.1', {'kind': 'e6', 'rho': 
 
 
 def main():
-    import torch
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--out', type=Path, required=True)
     ap.add_argument('--sources', type=int, nargs='*', default=list(nc.SOURCES))
     ap.add_argument('--targets', type=int, nargs='*', default=list(nc.TARGETS_32K))
     a = ap.parse_args()
+    nc.require_released_packages()
+    torch = nc.import_torch()
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     fullscale, phasef = nc.load_phasef_modules()
     hist = fullscale.import_historical()

@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 
+import os
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
 
-ROOT = Path(
-    "<CLUSTER_PATH>"
-    "outputs/multinav/multinav_paper_v1"
-)
+ROOT = Path(os.environ.get("NRT_PROJECT_ROOT", Path(__file__).resolve().parents[3]))
 
 ARRAYS = (
     ROOT
@@ -16,12 +14,7 @@ ARRAYS = (
       "checkpoint_analysis/best_validation/nav_eval_arrays.npz"
 )
 
-OUT_DIR = (
-    ROOT
-    / "rerun_best_validation/aggregate_full/"
-      "figure_source_data/Figure2/"
-      "trajectory_candidates_20step"
-)
+OUT_DIR = ROOT / "outputs/source_data_builders/Figure2/trajectory_candidates_20step"
 
 N_EXPORT = 100
 EXPECTED_STEPS = 20

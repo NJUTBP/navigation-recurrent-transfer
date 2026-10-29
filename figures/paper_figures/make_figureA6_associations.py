@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FigureA6 — exploratory source-level grid-fraction / transfer associations."""
+"""Supplementary Figure S10 (builder FigureA6): exploratory source-level associations of grid-like unit fraction and transfer."""
 from __future__ import annotations
 from pathlib import Path
 import matplotlib
@@ -13,7 +13,7 @@ from .common import FigureContext, empty_panel, load_csv, manifest_for_figure, w
 from .nature_style import PALETTE, place_panel_labels, annotate, apply_publication_style, save_publication_figure, style_axis
 from .nature_style import FIG_WIDTH, difference_spec, role
 
-#: Every panel is a Nav. - DR difference: colour/marker follow the v2.5
+#: Every panel is a Nav. - DR difference: colour/marker follow the
 #: difference rule (mix of navigation and DR colours, DR marker), as in Fig. 3C.
 NAV_MINUS_DR = difference_spec(role("navigation"), role("dr"))
 SPECS = [
@@ -60,7 +60,7 @@ def build(ctx: FigureContext):
         rho, ps = stats.spearmanr(x, y)
         ax.scatter(x, y, s=18, marker=NAV_MINUS_DR["marker"], color=color, edgecolor="white", linewidth=.35, alpha=.88, zorder=3)
         _regression_with_ci(ax, x, y, color)
-        # v2: no panel title; the endpoint name becomes the first line of the y label.
+        # No panel title; the endpoint name becomes the first line of the y label.
         ax.set_xlabel(r"Grid-like unit fraction $f_{\mathrm{G}}$")
         ax.set_ylabel(f"{title}\n{yl}")
         r_lo, r_hi = np.tanh(np.arctanh(r) + np.array([-1.0, 1.0]) * 1.959964 / np.sqrt(len(x) - 3))  # Fisher 95% CI
@@ -80,7 +80,8 @@ def build(ctx: FigureContext):
     place_panel_labels(fig, [(ax, "ABC"[i]) for i, ax in enumerate(axs)])
 
     paths = save_publication_figure(fig, out / "FigureA6")
-    pd.DataFrame(stats_rows).to_csv(data / "association_statistics.csv", index=False)
+    # The recomputed statistics go to the output folder; the stored source table is not modified.
+    pd.DataFrame(stats_rows).to_csv(out / "FigureA6_association_statistics.csv", index=False)
     inputs = [data / "grid_transfer_associations.csv", data / "association_statistics.csv"]
     write_json(
         out / "manifests" / "FigureA6.json",

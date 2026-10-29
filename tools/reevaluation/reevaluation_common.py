@@ -1,24 +1,21 @@
-# Shared reconstruction and statistics helpers for re-evaluating the formal target models.
-# Origin: review-stage analysis package (common/nd2_common.py). Kept because it rebuilds the frozen-core
-# target checkpoints of Phase F, E0.9a, E6 and E6i (core omitted on disk, reconstructed from the navigation
-# checkpoint and the recorded seeds) and was checked against the stored test accuracies (Gate R).
 #!/usr/bin/env python3
-"""Shared infrastructure for the ND2 pre-emptive review package (B1, B3, B4, B5, B6).
+"""Shared helpers for re-evaluating the released frozen-core target models.
 
-Design rules (inherited from E0.9a / E6 of tools/mechanism_v1):
-  * nothing in the frozen Phase F, mechanism_v1 or code/ trees is modified; their
-    modules are imported read-only and their identity is asserted at import;
-  * every new output goes under OUTPUT_ROOT (a new sidecar directory);
-  * the Phase F protocol is derived at run time from the canonical PROTOCOL.json;
-    only explicitly listed keys change and ``training_examples`` (a seed
-    component of run_seed / loader_seed) never changes;
-  * frozen-core target checkpoints omit the recurrent core; cores are rebuilt
-    from origin + seed and every rebuilt model must pass Gate R (re-evaluated
-    test accuracy equals the stored metrics.csv value within GATE_R_TOLERANCE);
-  * the inferential unit is the navigation source (B1 draw k is paired with
-    source 6100+k); target splits are averaged within source before inference.
-Only numpy is imported at module level so that planning, status and collectors
-run without torch.
+The target checkpoints of Phase F, E0.9a, E6 and the rescaling experiment store only the relation
+interface and the readout (storage mode ``frozen_core_omitted_reconstruct_from_origin_and_seed``).
+The recurrent core is rebuilt from the navigation checkpoint (package P1) and the recorded seeds,
+the stored weights are loaded on top, and every rebuilt model must reproduce the test accuracies of
+the stored ``metrics.csv`` within GATE_R_TOLERANCE (Gate R).
+
+Conventions:
+  * the Phase F and mechanism modules are imported unmodified from tools/, and the location of
+    every imported module is checked;
+  * the Phase F protocol is derived at run time from the canonical PROTOCOL.json; only explicitly
+    listed keys change and ``training_examples`` (a component of run_seed / loader_seed) never
+    changes;
+  * the inferential unit is the navigation source; target splits are averaged within source;
+  * new outputs go below OUTPUT_ROOT (default ``<project>/outputs/reevaluation``).
+Only numpy is imported at module level, so path and statistics helpers work without PyTorch.
 """
 from __future__ import annotations
 
@@ -39,10 +36,9 @@ import numpy as np
 PACKAGE_NAME = 'reevaluation'
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROJECT_ROOT = str(Path(__file__).resolve().parents[2])
-PROJECT_ROOT = Path(os.environ.get('NRT_PROJECT_ROOT', os.environ.get('ND2_PROJECT_ROOT', DEFAULT_PROJECT_ROOT)))
-OUTPUT_ROOT = Path(os.environ.get(
-    'ND2_OUTPUT_ROOT', str(PROJECT_ROOT / 'outputs' / PACKAGE_NAME)))
-LOG_ROOT = Path(os.environ.get('ND2_LOG_ROOT', str(PROJECT_ROOT / 'outputs' / 'logs')))
+PROJECT_ROOT = Path(os.environ.get('NRT_PROJECT_ROOT', DEFAULT_PROJECT_ROOT))
+OUTPUT_ROOT = Path(os.environ.get('NRT_OUTPUT_ROOT', str(PROJECT_ROOT / 'outputs' / PACKAGE_NAME)))
+LOG_ROOT = Path(os.environ.get('NRT_LOG_ROOT', str(PROJECT_ROOT / 'outputs' / 'logs')))
 
 PHASEF_PACKAGE = PROJECT_ROOT / 'tools' / 'hard8x8_phaseF_fullscale_v1'
 PHASEF_SCRIPTS = PHASEF_PACKAGE / 'scripts'
@@ -657,3 +653,27 @@ def reference_rows(core: Mapping[str, Any]) -> list[dict[str, str]]:
     for key, value in core.get('reference_filter', {}).items():
         rows = [r for r in rows if r.get(key) == value]
     return rows
+
+
+# ---------------------------------------------------------------- run-time requirements
+def require_released_packages() -> None:
+    """Stop with an explanation unless the data packages are extracted below PROJECT_ROOT."""
+    missing = []
+    if not nav_checkpoint(SOURCES[0]).is_file():
+        missing.append('P1_pretrained_checkpoints.tar (creates sources/)')
+    if not RERUN_ROOT.is_dir():
+        missing.append('P2_target_checkpoints.tar and P3_source_level_results.tar.gz (create rerun_best_validation/)')
+    if missing:
+        raise SystemExit(
+            f'Re-evaluation needs the released data packages extracted into {PROJECT_ROOT} '
+            '(or NRT_PROJECT_ROOT set to a folder that contains code/, tools/ and the extracted packages). '
+            'Missing: ' + '; '.join(missing) + '. See docs/DATA_PACKAGES.md.')
+
+
+def import_torch():
+    try:
+        import torch
+    except ImportError as exc:
+        raise SystemExit('PyTorch is required: install requirements-model-checks.txt '
+                         '(choose the CPU or CUDA build of torch for your hardware).') from exc
+    return torch

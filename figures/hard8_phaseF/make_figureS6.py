@@ -1,6 +1,6 @@
-"""Supplementary Figure S6: optimization and split diagnostics for the extended 8 × 8 assay.
+"""Supplementary Figure S6: optimization and split diagnostics for the extended 8 x 8 task.
 
-Uses the frozen Phase-F source-data interface.
+Reads figure_source_data/FigureA5 and hard8x8_phaseF_followup.
 """
 from pathlib import Path
 import os
@@ -27,14 +27,17 @@ except ImportError:  # allow direct execution from hard8_phaseF/
     )
 
 # Data interface unchanged.
-AGGREGATE = Path(os.environ.get('CTP_AGGREGATE_DIR', Path.cwd() / 'aggregate_full')).resolve()
-DATA = Path(os.environ.get('CTP_HARD8_FIGURE_DATA', AGGREGATE / 'figure_source_data' / 'FigureA5')).resolve()
-FOLLOW = Path(os.environ.get('CTP_HARD8_FOLLOWUP', AGGREGATE / 'hard8x8_phaseF_followup')).resolve()
-OUT = Path(os.environ.get('CTP_FIGURE_OUT', AGGREGATE / 'figures')).resolve()
-OUT.mkdir(parents=True, exist_ok=True)
+try:
+    from . import figure_paths
+except ImportError:  # direct execution from hard8_phaseF/
+    import figure_paths
+AGGREGATE = figure_paths.AGGREGATE
+DATA = figure_paths.PHASEF_FIGURE_DATA
+FOLLOW = figure_paths.PHASEF_TABLES
+OUT = figure_paths.OUT
 
 NAV = PALETTE['navigation']
-# v2.5: same colours as Figure 6 (role registry).
+# Same colours as Figure 6 (role registry).
 MATCHED = PALETTE['matched']
 FRESH = PALETTE['fresh']
 BASELINE = PALETTE['relation']
@@ -95,7 +98,7 @@ def curve_by_update(condition):
 
 
 def panel_learning(ax):
-    # v2.5: training curves as in Figures 3A/5A -- navigation full colour,
+    # Training curves as in Figures 3A/5A -- navigation full colour,
     # comparison conditions light solid lines; role markers carry identity.
     for cond, label, rname in [
         (PRIMARY_NAV, 'Navigation', 'navigation'),
@@ -117,7 +120,6 @@ def panel_learning(ax):
     ax.set_xticks([0, 2500, 5000, 7500])
     ax.set_xlabel('Gradient updates')
     ax.set_ylabel('Validation accuracy')
-    # v2: panel title removed (content belongs in the caption): 'Scalar-interface learning curves'
     legend(ax, loc='center right')
     style_axis(ax, max_y_ticks=5, max_x_ticks=4)
 
@@ -156,7 +158,6 @@ def panel_bestupdate(ax):
     ax.set_xlim(0, 8200)
     ax.set_xticks([0, 2500, 5000, 7500])
     ax.set_xlabel('Selected checkpoint (update)')
-    # v2: panel title removed (content belongs in the caption): 'Checkpoint selection across transfer conditions'
     style_axis(ax, max_y_ticks=9, max_x_ticks=4)
 
 
@@ -184,7 +185,6 @@ def panel_baseline(ax):
     ax.set_xticks(x, SLABEL)
     ax.set_ylim(0, .20)
     ax.set_ylabel('Test accuracy')
-    # v2: panel title removed (content belongs in the caption): 'Shortcut baseline exceeds nominal chance on short paths'
     style_axis(ax, max_y_ticks=5, max_x_ticks=4)
 
 
@@ -239,7 +239,6 @@ def panel_lengths(ax):
     ax.set_ylim(0, .48)
     ax.set_xlabel('Path length $L_{\\mathrm{p}}$')
     ax.set_ylabel('Proportion of split')
-    # v2: panel title removed (content belongs in the caption): 'Train and test horizon distributions'
     legend(ax, loc='upper right')
     style_axis(ax, max_y_ticks=5, max_x_ticks=12)
 

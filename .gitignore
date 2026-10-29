@@ -18,6 +18,7 @@ outputs/
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
+.pytest_cache/
 *.log
 *.out
 *.err

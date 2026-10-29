@@ -1,7 +1,7 @@
-"""Supplementary Figure S7: optimization, gain, and additive-solution controls.
+"""Supplementary Figure S7: optimization, gain and additive-solution controls.
 
-Presentation-only.  Panels, tables and terminology follow
-legacy frozen source-data contract ``SupplementaryFigureS8/PANEL_CONTRACT.json`` and ``s8_statistics.json``.
+Reads figure_source_data/SupplementaryFigureS8 (panel tables, PANEL_CONTRACT.json,
+s8_statistics.json); nothing is recomputed.
 """
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ except ImportError:
         categorical_xlim, place_panel_labels, num, FS_INPANEL, MS_MEAN,
     )
 
-# Source-data directory name is frozen by the v3 data contract; only manuscript numbering changed.
+# The source-data folder keeps its builder name; see figures/figure_numbering.py.
 DATA = figure_data("SupplementaryFigureS8")
 A = read_csv(DATA / "panelA_extended_learning_curves.csv")
 B = read_csv(DATA / "panelB_32k_source_differences.csv")
@@ -45,7 +45,7 @@ try:
 except ImportError:
     from nature_style import role, line_kw, accuracy_axis, integer_axis, difference_spec
 
-#: Paired difference Nav. - matched (v2.5 rule: mixed colour, matched marker).
+#: Paired difference Nav. - matched (difference rule: mixed colour, matched marker).
 NAV_MINUS_MATCHED = difference_spec(role("navigation"), role("matched"))
 
 ORIGIN = [
@@ -62,7 +62,7 @@ def panel_learning(ax):
     n_updates = A["update"].nunique()
     every = max(1, int(round(n_updates / 14)))
     for origin, label, color, marker in ORIGIN:
-        # v2.5: matched-control training curve as a light solid line (Figs 3A/5A).
+        # Matched-control training curve as a light solid line (Figs 3A/5A).
         mean_curve(ax, A[A.origin == origin], "update", "validation_accuracy",
                    spec=role("navigation" if origin == "navigation" else "matched"),
                    label=label, markevery=every, light=origin != "navigation")
@@ -70,7 +70,6 @@ def panel_learning(ax):
     ax.set_xticks([0, 8000, 16000, 24000, 32000])
     accuracy_axis(ax, label="Validation accuracy")
     ax.set_xlabel("Gradient updates")
-    # v2: panel title removed (content belongs in the caption): "Extended-budget learning"
     legend(ax, loc="lower right")
     style_axis(ax, max_y_ticks=5, max_x_ticks=5)
 
@@ -92,7 +91,6 @@ def panel_final_differences(ax):
     ax.set_ylim(-.06, .66)
     ax.set_yticks([0, .2, .4, .6])
     ax.set_ylabel("Δ test accuracy\n(Nav. − matched)")
-    # v2: panel title removed (content belongs in the caption): "Residual long-horizon gap"
     style_axis(ax, max_y_ticks=5, max_x_ticks=2)
 
 
@@ -110,7 +108,6 @@ def panel_gain(ax):
     ax.set_xlim(.8, 320)
     accuracy_axis(ax, label="Long-path test accuracy")
     ax.set_xlabel("Fixed relation-input gain $g$")
-    # v2: panel title removed (content belongs in the caption): "Fixed-gain calibration"
     env = STATS["panelC_seen_long_envelope"]
     shift = STATS["panelC_log2_gstar_matched_minus_navigation_mean"]
     annotate(ax, f"best-gain gap = {num(env['mean_difference'], '{:.3f}')}\n"
@@ -121,7 +118,7 @@ def panel_gain(ax):
 
 def panel_additive(ax):
     """D: an explicit additive solution against both cores."""
-    # v2.5: role styles shared with Figures 5A/6B (2D accumulator = purple plus).
+    # Role styles shared with Figures 5A/6B (2D accumulator = purple plus).
     specs = [
         ("linear_accumulator_2d_accuracy", "2D accumulator", role("accumulator"), 2),
         ("matched_accuracy", "Matched control", role("matched"), 3),
@@ -133,7 +130,6 @@ def panel_additive(ax):
     ax.axvline(5.5, color=MID, lw=.8, ls=(0, (3, 2)), zorder=0)
     accuracy_axis(ax, label="Test accuracy")
     integer_axis(ax, lo=1, hi=12, step=2, label="Path length $L_{\\mathrm{p}}$")
-    # v2: panel title removed (content belongs in the caption): "Additive accumulator baseline"
     # Ordered as drawn, so the legend keys match the visual stacking.
     handles, labels = ax.get_legend_handles_labels()
     order = [labels.index(n) for n in ["Navigation", "Matched control", "2D accumulator"]]

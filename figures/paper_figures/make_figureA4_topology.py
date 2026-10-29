@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FigureA4 — Euclidean Schøyen automatic torus topology."""
+"""Supplementary Figure S3 (builder FigureA4): torus-like topology of the navigation cores (Euclidean Schøyen analysis)."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -124,11 +124,8 @@ def _schoyen_visual_embedding(ctx: FigureContext, data_dir: Path):
 
     fingerprint = _artifact_fingerprint(artifact)
 
-    # Visualization cache contract.  The v7 cache was keyed only by the input
-    # artifact and could therefore silently reuse a cache created with a
-    # different number of restarts.  Keep the visualization parameters in the
-    # cache key and allow an explicit forced recomputation on an LSF compute
-    # node.
+    # Visualization cache contract: the cache key includes the visualization
+    # parameters; FIGA4_FORCE_RECOMPUTE=1 forces a recomputation.
     n_restarts = max(1, int(os.environ.get("FIGA4_UMAP_RESTARTS", "8")))
     base_seed = int(os.environ.get("FIGA4_UMAP_BASE_SEED", "0"))
     force_recompute = str(os.environ.get("FIGA4_FORCE_RECOMPUTE", "0")).strip().lower() in {"1", "true", "yes", "on"}
@@ -320,9 +317,9 @@ def _camera_config(data_dir: Path):
 def _equal_cube_limits(frame: pd.DataFrame, pad: float = 0.04):
     """Equal-scale 3-D limits that contain every displayed point.
 
-    The previous renderer hard-coded +/-0.65 on all axes. That clips part of
-    the current selected UMAP3 point cloud and can make a closed manifold look
-    artificially open.
+    The limits enclose the whole selected UMAP3 point cloud; fixed limits (for
+    example +/-0.65 on all axes) would clip part of it and could make a closed
+    manifold look artificially open.
     """
     xyz = frame[["umap1", "umap2", "umap3"]].to_numpy(float)
     xyz = xyz[np.all(np.isfinite(xyz), axis=1)]
@@ -564,7 +561,7 @@ def build(ctx: FigureContext):
             colors = [PALETTE["navigation"] if p else PALETTE["neutral_mid"] for p in passed]
             ax_a.bar(x, vals, color=colors, alpha=.92, width=.72, linewidth=0)
             reference_line(ax_a, thr)
-            # v2.5: sources numbered s = 1..10 in seed order (as in Figure 6A).
+            # Sources numbered s = 1..10 in seed order (as in Figure 6A).
             labels = [str(i + 1) for i in range(len(z))]
             ax_a.set_xticks(x, labels)
             ax_a.set_xlabel("Navigation source $s$")
@@ -574,7 +571,6 @@ def build(ctx: FigureContext):
             # every source; typeset like every other in-panel statistic.
             #annotate(ax_a, f"Criterion met: {int(np.sum(passed))}/{len(z)}",
                      #loc="upper center")
-    # v2: panel title removed (content belongs in the caption): "Torus-like criterion across sources"
 
     # B — representative Euclidean persistence only.
     if metrics.empty or not {"metric", "arm", "x", "value"}.issubset(metrics.columns):
@@ -608,7 +604,6 @@ def build(ctx: FigureContext):
             ax_b.set_xticks(ranks[::step])
         legend(ax_b, loc="upper right", ncol=1)
         style_axis(ax_b, max_y_ticks=4, max_x_ticks=5)
-    # v2: panel title removed; the source id stays visible in the panel.
     rep_s = sorted(int(p["source_seed"]) for p in ctx.source_pairs).index(int(ctx.representative_source)) + 1
     ax_b.text(0.5, 0.98, f"source $s$ = {rep_s}", transform=ax_b.transAxes, ha="center", va="top", fontsize=6.3)
 
@@ -685,7 +680,6 @@ def build(ctx: FigureContext):
         ax_d.set_xlabel("Candidate ensemble")
         ax_d.set_ylabel("Minimum Euclidean persistence-gap ratio")
         style_axis(ax_d, max_y_ticks=4)
-    # v2: panel title removed (content belongs in the caption): "Representative candidate ensembles"
 
     # A, B and D are flush with their own panels; C is a 3-D group whose slot has
     # no tick labels, so it inherits panel A's letter position.

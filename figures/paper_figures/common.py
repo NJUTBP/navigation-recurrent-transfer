@@ -441,7 +441,7 @@ def manifest_for_figure(context: FigureContext, figure: str, script: Path, input
         "checkpoint_policy": context.final_checkpoint_policy,
         "style_contract": {
             "backend": "Python/matplotlib",
-            "final_width_in": 6.85,  # v2: 174 mm (FIG_WIDTH in nature_style.py)
+            "final_width_in": 6.85,  # 174 mm (FIG_WIDTH in nature_style.py)
             "editable_svg_text": True,
             "png_dpi": 600,
         },

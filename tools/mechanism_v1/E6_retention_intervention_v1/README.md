@@ -1,14 +1,21 @@
-# E6 autonomous-retention intervention v1
+# E6 rescaling intervention
 
-Post-E6 preregistered bidirectional intervention derived from C1.
+Bidirectional manipulation of autonomous retention by rescaling the recurrent matrix of the E6 cores:
 
-- nav_impair: E6 rho=0 core, W_hh multiplied by c=0.8032013898784912.
-- rho01_rescue: E6 rho=0.1 core, W_hh multiplied by 1/c=1.245017765907104.
+- `nav_impair`: the E6 ρ = 0 core with W_rec multiplied by c = 0.8032013898784912;
+- `rho01_rescue`: the E6 ρ = 0.1 core with W_rec multiplied by 1/c = 1.245017765907104;
 - W_in is unchanged.
-- 10 sources x 3 targets x 2 arms = 60 training cells.
-- Training/evaluation is identical to E6/E0.9a: frozen core, learned scalar gain, 32000 updates.
-- Existing E6 rho=0 and rho=0.1 cells are paired baselines and are not rerun.
 
-The registered interpretation is in ANALYSIS_PLAN_retention_intervention.md. Do not tune c after observing results.
+c is the C1 ratio of the retention at ρ = 0.1 to that at ρ = 0 (`E6_autonomous_retention_v1`) and the only magnitude tested. For positive c and bias-free ReLU dynamics, the autonomous retention on any fixed state set scales exactly by c, so the intervention moves the ρ = 0 core to the retention of ρ = 0.1 and back.
 
-This experiment requires a GPU-capable queue for practical runtime. The shipped LSF keeps the project's historical queue `<LSF_QUEUE>`; if that queue is unavailable, change only the submission queue when an authorized GPU queue is known. Do not run the 60 full training cells on a CPU-only queue.
+Training and evaluation are those of E6 and E0.9a: frozen core, learned scalar gain, 32,000 updates, identical dataset manifests, run and loader seeds and evaluation splits; 10 sources × 3 targets × 2 arms = 60 training cells. The completed E6 ρ = 0 and ρ = 0.1 cells are the paired baselines and are not rerun.
+
+`collect_intervention.py` evaluates the two co-primary paired tests on `seen_long` (impairment: rescaled ρ = 0 minus ρ = 0, predicted negative; rescue: rescaled ρ = 0.1 minus ρ = 0.1, predicted positive) with the same contrasts on `heldout_long`, and reports bidirectional support only if both co-primary tests are supported.
+
+```bash
+python tools/mechanism_v1/E6_retention_intervention_v1/scripts/run_intervention.py --preflight
+python tools/mechanism_v1/E6_retention_intervention_v1/scripts/run_intervention.py --source-seed 6101 --target-seed 84001 --arm nav_impair
+python tools/mechanism_v1/E6_retention_intervention_v1/scripts/collect_intervention.py
+```
+
+A GPU is needed for practical run times. Output: `rerun_best_validation/followups/mechanism_v1/E6_retention_intervention/`. P2 contains the 60 trained models (`reevaluate_models.py --family e6i`). `scripts/export_figureS12_source_data.py` writes the Supplementary Fig. S12 tables from these outputs and the task-state retention table of `tools/reevaluation/task_state_retention.py`. Figures: 7e, S12.

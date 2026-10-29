@@ -13,7 +13,7 @@ from pathlib import Path
 import sys
 
 PUBLIC_DIRS = ('checkpoints', 'code', 'configs', 'data', 'docs', 'extensions', 'figures',
-               'lsf_best_validation', 'release_tools', 'tools', 'topology', '.github')
+               'lsf_best_validation', 'release_tools', 'tests', 'tools', 'topology', '.github')
 SKIP_PARTS = {'__pycache__', '.git', '.pytest_cache', '.ipynb_checkpoints'}
 MANIFEST = 'data/RELEASE_FILES.json'
 FIGURE_ARCHIVES = {

@@ -1,37 +1,24 @@
-# Step 6：E2、E3、E4 源侧指标 v1
+# E2–E4 — source-side measures of the cores
 
-## 做什么
+For every (source, target) cell, the navigation core and the matched core of that target are measured on the navigation state set H_nav (see `E5b_delta_prediction_v1`).
 
-对每个 (source, target) cell，在 H_nav 上测 Nav 核与该 target 的 matched 核。
-
-| 指标 | 含义 |
+| Measure | Definition |
 |---|---|
-| E2：S_opp、S_orth、S_cons、r_eff | 单步位移几何，在中心化位移上计算，附随机方向零分布的 z |
-| E3：C_comm、C_inv | 两步组合的可交换性与逆元一致性，参照为 F²(h, 0) |
-| E4：R²(L)、R_ret、R_ret_diff | 岭回归只在 L ≤ 5 拟合，L = 6 至 12 为外推 |
-| E4 辅助：O(L)、c(t, 12)、信号与范数、激活比例 | 顺序依赖、逐步贡献谱 |
+| E2: S_opp, S_orth, S_cons, r_eff | one-step displacement geometry on centred displacements, with z scores against a random-direction null |
+| E3: C_comm, C_inv | commutativity and inverse consistency of two-step compositions, relative to F²(h, 0) |
+| E4: R²(L), R_ret, R_ret_diff | ridge regression of the net displacement fitted on L ≤ 5 only (L = 6–12 is extrapolation); R_ret = R²(12)/R²(5) from h_L, R_ret_diff the same from h_L − F^L(h0, 0) |
+| auxiliary | O(L), c(t, 12), signal and norm, active fraction |
 
-工作点每个核 6 个：A（g = 1）、g3、g10、B8（Phase F 学到的增益）、B32（E0.9a 学到的增益，仅 84001 至 84003）、Bstar（与 E0.4 下游第 1 步 δ 匹配的增益）。全部都算，哪个是主工作点由 ANALYSIS_PLAN.md 规定。
+Working points per core: A (g = 1), g3, g10, B8 (learned gain of Phase F), B32 (learned gain of E0.9a, targets 84001–84003) and Bstar (the gain at which the one-step δ on H_nav equals the first-step δ of the downstream model from E0.4). All are computed; the primary measure is set by the constants `PRIMARY_METRIC = 'R_ret_diff'` and `PRIMARY_WORKING_POINT = 'Bstar'` of the collectors, and the tests are evaluated by `verdicts_v1`.
 
-## 依赖
+Dependencies (checked in the preflight): `E5b_delta_prediction_v1/scripts/delta_common.py`, the Phase F package, the Phase F and E0.9a output trees, and `E0_67_forward_diagnostics/aggregate/all_state_diagnostics.csv`.
 
-E5b′ 包的 delta_common.py、Phase F 包、Phase F 与 E0.9a 的输出树、E0_67 的 aggregate/all_state_diagnostics.csv。preflight 逐项检查。
+Run-time checks: the permutation and signs of the matched core are rebuilt from its recorded seed and flip fraction and must reproduce the matched weights exactly; the hand-unrolled navigation trajectory must agree with the navigation model's own forward pass (relative difference ≤ 1e−4).
 
-## 运行
-
-```
-bash lsf/submit_absolute.sh --smoke     # 单个 cell，写入 _smoke
-bash lsf/check_status_absolute.sh       # 看到 smoke cell: PASS 再继续
-bash lsf/submit_absolute.sh             # 50 个 cell 的阵列，结束后自动汇总
+```bash
+python tools/mechanism_v1/E234_source_measures_v1/scripts/run_source_measures.py --preflight
+python tools/mechanism_v1/E234_source_measures_v1/scripts/run_source_measures.py --source-seed 6101 --target-seed 84001
+python tools/mechanism_v1/E234_source_measures_v1/scripts/collect_source_measures.py
 ```
 
-每个 cell 只做前向与岭回归，单卡几分钟。
-
-## 输出
-
-`rerun_best_validation/followups/mechanism_v1/E234_source_measures/`，每个 cell 一个目录，汇总在 `aggregate/`，结论表是 `SOURCE_MEASURES_RESULT.md`。
-
-## 两条运行时强制校验
-
-1. matched 核的置换与符号由其记录的 seed 与比例重建，必须逐位复现 matched 权重，否则报错退出。
-2. Nav 核手工展开的轨迹必须与导航模型自身前向一致（相对差 ≤ 1e−4）。
+50 cells (forward passes and ridge regressions, a few minutes each on one GPU). Output: `rerun_best_validation/followups/mechanism_v1/E234_source_measures/` (`aggregate/SOURCE_MEASURES_RESULT.md`). `scripts/source_measures.py` is also used by E6. Figure: S11.

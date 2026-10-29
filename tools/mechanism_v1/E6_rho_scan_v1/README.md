@@ -1,35 +1,25 @@
-# E6：符号混合 ρ 扫描 v1
+# E6 — signed-mixing ρ series
 
-## 做什么
+Cores are transformed as W′ = Q W Qᵀ and W_in′ = Q W_in with Q = D P (permutation P, sign matrix D). All linear invariants are preserved; only the rectification geometry changes. For every (source, target, ρ) a transfer model with learned scalar gain is trained exactly as in E0.9a (32,000 updates, same seeds and minibatch order); afterwards the downstream state profile and the source measures E2–E4 (working points A, g3, g10, B and Bstar) are measured on the same core.
 
-用 Q = D P 构造 ρ 核，W′ = Q W Qᵀ，W_in′ = Q W_in。全部线性不变量保持，只改变 ReLU 整流几何。每个 (source, target, ρ) 训练一个学习标量增益的 8×8 迁移模型，训练完全沿用 E0.9a（32000 步、同一种子与小批次顺序）。训练后在同一个核上测下游状态剖面，以及 E2、E3、E4（工作点 A、g3、g10、B、Bstar）。
+ρ ∈ {0, 0.05, 0.1, 0.2, 0.35, 0.5}, plus ρ = 0.9 as a symmetry check: 10 sources × 3 targets (84001–84003) × 7 levels = 210 cells.
 
-ρ 取 0、0.05、0.1、0.2、0.35、0.5，另加 0.9 作对称性自检。10 个 source × 3 个 target × 7 档，共 210 个 cell。
+## Constructor
 
-## 构造器
+`scripts/rho_core.py`, `signed_similarity_core`. All ρ of one seed share one permutation and one unit order. For ρ ≤ 0.5 the first round(ρ H) units of that order are sign-flipped, so the flip sets are nested; for ρ > 0.5 the exact complement of the 1 − ρ set is flipped, so D_{1−ρ} = −D_ρ holds exactly. (The Phase F constructor `_signed_similarity_candidate` always flips at least one unit and cannot express ρ = 0.) Before any submission the preflight checks the algebraic anchors on the real navigation weights: no flips at ρ = 0, W unchanged and W_in negated at ρ = 1, every level equivalent to its complement, nested flip sets, unchanged Frobenius norms.
 
-rho_core.py 的 signed_similarity_core。原函数 _signed_similarity_candidate 不动（它最少翻转 1 个单元，表达不了 ρ = 0）。同一 seed 下所有 ρ 共用一个置换与一个单元次序。ρ ≤ 0.5 翻转次序的前 round(ρH) 个，翻转集随 ρ 嵌套。ρ > 0.5 翻转 1 − ρ 那一档的精确补集，因此 D_{1−ρ} = −D_ρ 严格成立。
+## Anchors
 
-## 运行（必须按顺序）
+Pipeline checks, not hypothesis tests: ρ = 0 against navigation in E0.9a (same source, target and budget; a pure permutation only relabels units) and ρ = 0.9 against ρ = 0.1 (equivalent networks). Their paired differences on `id_seen_short`, `seen_long` and `heldout_long` must have 95 % intervals containing 0; the evaluation is in `verdicts_v1`.
 
+## Usage
+
+```bash
+python tools/mechanism_v1/E6_rho_scan_v1/scripts/run_rho_scan.py --preflight
+python tools/mechanism_v1/E6_rho_scan_v1/scripts/run_rho_scan.py --source-seed 6101 --target-seed 84001 --rho 0.1
+python tools/mechanism_v1/E6_rho_scan_v1/scripts/collect_rho_scan.py
 ```
-bash lsf/submit_absolute.sh --smoke      # ρ = 0，6101/84001，完整 32000 步
-bash lsf/check_status_absolute.sh        # 打印 ρ = 0 与同一 cell 的 Nav 准确率对比
-bash lsf/submit_absolute.sh --anchors    # ρ = 0、0.1、0.9，共 90 个
-bash lsf/check_status_absolute.sh        # 看锚点表
-bash lsf/submit_absolute.sh --rest       # 其余 4 档，共 120 个
-```
 
-每一阶段结束后自动运行汇总。每次提交前 preflight 用真实导航权重复核构造器的全部代数锚点，不通过就拒绝提交。
+Recommended order: one ρ = 0 cell, then the anchor levels (ρ = 0, 0.1, 0.9), then the remaining levels.
 
-## 输出
-
-`rerun_best_validation/followups/mechanism_v1/E6_rho_scan/`，目录层级为 source、target、rho_千分值（如 rho_0100）。结论表是 `aggregate/RHO_SCAN_RESULT.md`。
-
-## 依赖
-
-E0.9a 包的 extended_common.py（协议与 GainTrace），本包同批部署的 E234 包（源侧指标），E5b′ 包的 delta_common.py。
-
-## 未实现
-
-逐档重学导航读出的可分离性对照。
+Output: `rerun_best_validation/followups/mechanism_v1/E6_rho_scan/source_<s>/target_<t>/rho_<thousandths>/` (for example `rho_0100`) and `aggregate/RHO_SCAN_RESULT.md`. Dependencies: `extended_common.py` (E0.9a), `source_measures.py` (E234), `delta_common.py` (E5b′). P2 contains the 210 trained models (`reevaluate_models.py --family e6`). Figures: 7b, 7c; tests in `verdicts_v1` (S11).

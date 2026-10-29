@@ -1,37 +1,16 @@
 #!/usr/bin/env python3
-"""Figure2 — navigation source learning and validation-best representations.
+"""Figure 2: navigation pretraining and the representations of the selected checkpoints.
 
-v2 presentation.  Data interface unchanged: the same Figure2 source-data
-folder (navigation_history.csv, representative_trajectory.csv,
-rate_map_rank_{2..5}_2500.csv) plus the already-frozen
-representative_grid_scores.csv from the same folder; same output stem.
-
-Layout: A path-integration error and B grid-like fraction over training (all
-sources, mean +/- SEM, validation-best checkpoints marked); D the grid-score
-distribution of every unit of the representative source (the G > 0.3
-criterion is drawn only if it reproduces f_G of navigation_history.csv);
-C the representative decoded trajectory in the top-right panel, preserving its
-natural shape, with per-step decoding error and a 10-cm scale bar; E the units
-ranked 2 through 5: rate maps and spatial autocorrelograms.
-
-v2.4 presentation: closed axes (x and y meet in one corner); A/B epoch axis
-1-256 so that all 150 epochs and every validation-best checkpoint lie inside
-the labelled range; D x axis -0.5 to 1.5 (every unit inside) and a broken y
-axis (same counts-per-inch in both segments) so the G = 0.3-1.0 tail is
-legible next to the near-zero spike; C marks all 20 time steps of the rollout.
-
-v2.5 presentation (notation follows the main text): A y axis = the symbol
-eps_pos; B shows the symbol f_G on the 0-1 scale (no comma, no %); D uses a
-compact count label and no redundant x-axis title.  E: spatial
-autocorrelograms on the top row (G, shown above each column, is computed from
-them) and rate maps below; no row titles (given in the caption); colour bars
-without tick marks; an x/y coordinate glyph at the left of each row gives
-orientation and physical scale.  C retains the trajectory annotations.
-
-v2.6 data provenance: the representative rollout is selected from the frozen
-``trajectory_candidates_20step/trajectory_candidates_summary.csv`` table by
-minimum mean decoding error (with final error and trajectory id as deterministic
-tie-breakers).  The builder no longer relies on a hand-entered trajectory id.
+Reads figure_source_data/Figure2 (navigation_history.csv, the 20-step trajectory candidates,
+rate_map_rank_{2..5}_2500.csv and representative_grid_scores.csv).  Panels: a path-integration
+error eps_pos and b grid-like unit fraction f_G over training (all sources, mean +/- SEM,
+validation-best checkpoints marked); c the representative decoded trajectory with per-step
+decoding error and a 10-cm scale bar; d the grid-score distribution of every unit of the
+representative source on a broken y axis (the G > 0.3 criterion is drawn only if it reproduces f_G
+of navigation_history.csv); e the units ranked 2-5: spatial autocorrelograms (top, with G) and rate
+maps (bottom).  The representative rollout is the candidate with the lowest mean decoding error in
+trajectory_candidates_20step/trajectory_candidates_summary.csv (final error and trajectory id break
+ties).
 """
 from __future__ import annotations
 from pathlib import Path
@@ -76,7 +55,7 @@ RANK_COLORS = ["#1D4580", "#2E5FA8", "#5B84C4", "#8FA9D6"]
 
 
 def _smooth_rate_map_for_display(mat: np.ndarray, sigma_bins: float = _RATE_MAP_DISPLAY_SIGMA_BINS) -> np.ndarray:
-    """NaN-aware Gaussian smoothing for Panel E visualization (unchanged from v1)."""
+    """NaN-aware Gaussian smoothing for Panel E visualization."""
     arr = np.asarray(mat, dtype=float)
     if sigma_bins <= 0:
         return arr

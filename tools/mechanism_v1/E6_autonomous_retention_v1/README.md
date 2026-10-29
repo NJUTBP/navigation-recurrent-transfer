@@ -1,53 +1,19 @@
-# C1: E6 source-side autonomous retention
+# C1 — autonomous retention of the ρ cores
 
-## Purpose
+Measures the autonomous recurrent retention of all 210 E6 ρ cores without training:
 
-Measure autonomous recurrent retention for all 210 E6 rho cores without retraining anything.  This is a post-E6 exploratory follow-up and does not alter the frozen `ANALYSIS_PLAN.md`.
+    κ = ‖ReLU(W_ρ h)‖ / ‖h‖
 
-Primary quantity:
+on the held-out navigation state set H_nav of E5b′ (4,096 states after burn-in). The states are aligned by the E6 permutation P only; the sign matrix D is the perturbation and is not applied to the state set. Consequently ρ = 0.1 and ρ = 0.9, which share the same recurrent matrix and differ only in input sign, have identical retention. This differs from the trajectory-based measures of E234, where each transformed core is driven from Q h0 and the two levels can differ although their downstream networks are equivalent.
 
-`||ReLU(W_rho h)|| / ||h||`
+The analysis is exploratory. Its ρ = 0.1 / ρ = 0 retention ratio defines the rescaling factor c of `E6_retention_intervention_v1`.
 
-on the same held-out navigation H_nav state set used by E5b' (4096 sampled states after burn-in).  To obey the N7 invariance requirement discovered after E6, states are aligned by the E6 permutation P only.  The sign matrix D is the perturbation and is not applied to the state set.  Therefore rho=0.1 and rho=0.9, which share the same recurrent matrix and differ only in input sign, must have identical primary retention.
-
-## Why this differs from Step 6 H_nav
-
-Step 6 let each transformed core run navigation input from Q h0.  That was correct for its own source-task probe, but E6 later showed such trajectory-derived source measures can differ between rho=0.1 and rho=0.9 even though their downstream networks are equivalent.  C1 specifically asks for a core-retention dose curve that can be used to set the later W->cW intervention, so the primary measure must be input-sign invariant.
-
-## Compute organization
-
-The scientific coverage is still 210 cores (10 sources x 3 E6 targets x 7 rho values), but the job array has only 30 jobs.  One job handles all seven rho values for one (source,target) pair so the navigation H_nav state set is generated only once.
-
-The LSF resource request intentionally follows the already validated Step 6 pure-forward job: queue `<LSF_QUEUE>`, one host, one GPU.  There is no training in C1; the GPU is only for the 4096-dimensional recurrent forward products.
-
-## Run
-
-From the project root after deployment:
+The scientific coverage is 210 cores (10 sources × 3 targets × 7 ρ levels); one job handles the seven levels of a (source, target) pair so that H_nav is generated once (30 jobs). The GPU is used only for the 4096-dimensional forward products.
 
 ```bash
-ROOT=<PROJECT_ROOT>
-C1=$ROOT/tools/mechanism_v1/E6_autonomous_retention_v1/lsf
-
-bash $C1/submit_absolute.sh --smoke
-bash $C1/check_status_absolute.sh
-# Only continue if smoke prints PASS and both anchor deviations are tiny.
-
-bash $C1/submit_absolute.sh --all
-bash $C1/check_status_absolute.sh
+python tools/mechanism_v1/E6_autonomous_retention_v1/scripts/run_retention.py --preflight
+python tools/mechanism_v1/E6_autonomous_retention_v1/scripts/run_retention.py --source-seed 6101 --target-seed 84001
+python tools/mechanism_v1/E6_autonomous_retention_v1/scripts/collect_retention.py
 ```
 
-## Outputs
-
-Sidecar only:
-
-`rerun_best_validation/followups/mechanism_v1/E6_autonomous_retention/`
-
-Key aggregate files:
-
-- `all_retention.csv`: 210 core measurements
-- `source_level_retention.csv`: targets averaged within source
-- `rho_curve.csv`: retention and E6 seen_long dose curves
-- `rho0_contrasts.csv`: exploratory paired source contrasts and retention ratios
-- `RETENTION_RESULT.md/json`: anchors, curve, and the rho=0.1 / rho=0 source-side retention ratio for designing the later W->cW preregistration
-
-No file under E6, E5b', `aggregate_full`, or historical LSF directories is modified.
+Output: `rerun_best_validation/followups/mechanism_v1/E6_autonomous_retention/` with `all_retention.csv` (210 cores), `source_level_retention.csv` (targets averaged within source), `rho_curve.csv` (retention and E6 `seen_long` dose curves), `rho0_contrasts.csv` (exploratory paired source contrasts and retention ratios) and `RETENTION_RESULT.md/json`. Figure: 7d.

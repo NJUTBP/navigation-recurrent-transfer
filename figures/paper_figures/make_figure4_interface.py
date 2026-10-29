@@ -1,19 +1,11 @@
 #!/usr/bin/env python3
-"""Figure4 — fixed-interface perturbations and learned adapter rescue.
+"""Figure 4: relation-input transformations and the learned relation-input adapter.
 
-v2.1 presentation (data interface unchanged: test_transforms.csv, adapter.csv,
-adapter_contrasts.csv, adapter_paired_differences.csv; same output stem).
-Concise axis labels; no in-panel significance annotations (reported in the main text);
-B and C share the ten perturbation rows (alternating bands).
-
-v2.4 presentation: closed axes (x and y meet in one corner) in all panels,
-including the categorical axis of A and the row axes of B and C; the gain axis
-of C starts below 0 so the zero-gain rows stay clear of the y axis.
-
-v2.5 presentation: terms follow the main text -- A "original" (not "intact");
-B legend states what is learned or fixed (the relation-input adapter A); C is
-the paired difference "Δ test accuracy (A learned − fixed)" -- "gain" is
-reserved for the relation-input gain g of Figures 6-7.
+Reads figure_source_data/Figure4 (test_transforms, adapter, adapter_contrasts,
+adapter_paired_differences).  a test accuracy with original and transformed relation inputs; b and c
+share the ten perturbation rows: b accuracy with the adapter learned or fixed, c the paired
+difference "Delta test accuracy (A learned - fixed)".  "Gain" is reserved for the relation-input
+gain g of Figures 6-7.
 """
 from __future__ import annotations
 from pathlib import Path

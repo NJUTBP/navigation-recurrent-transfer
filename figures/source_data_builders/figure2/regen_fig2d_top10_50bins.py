@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 
+import os
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
 
-ROOT = Path(
-    "<CLUSTER_PATH>"
-    "outputs/multinav/multinav_paper_v1"
-)
+ROOT = Path(os.environ.get("NRT_PROJECT_ROOT", Path(__file__).resolve().parents[3]))
 
 NAV_ARRAYS = (
     ROOT
@@ -16,15 +14,11 @@ NAV_ARRAYS = (
       "checkpoint_analysis/best_validation/nav_eval_arrays.npz"
 )
 
-FIG2_DIR = (
-    ROOT
-    / "rerun_best_validation/aggregate_full/"
-      "figure_source_data/Figure2"
-)
+FIG2_DIR = ROOT / "data/aggregate_full/figure_source_data/Figure2"
 
 GRID_SCORES = FIG2_DIR / "representative_grid_scores.csv"
 
-OUT_DIR = FIG2_DIR / "rate_maps_top10_50x50"
+OUT_DIR = ROOT / "outputs/source_data_builders/Figure2/rate_maps_top10_50x50"
 
 BINS = 50
 ARENA_SIZE = 2.2

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FigureA3 — topology, reduced-dynamics and path-invariance diagnostics (current SI S2)."""
+"""Supplementary Figure S2 (builder FigureA3): topology, reduced-dynamics and path-invariance diagnostics."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -109,7 +109,7 @@ REDUCED_GROUPS = [
 
 
 def _reduced_panel(ax, frame):
-    """B: reduced-model criteria grouped by model (v3: grouped rows + brackets, as in C)."""
+    """B: reduced-model criteria grouped by model (grouped rows + brackets, as in C)."""
     if frame.empty:
         empty_panel(ax); return []
     z = frame[frame.metric == "log2_margin"].copy()
@@ -200,7 +200,7 @@ def _path_panel(ax, path):
     ax.set_ylim(min(y_positions) - .7, max(y_positions) + .7)
     ax.set_xlabel("Observed / predefined upper limit")
     style_axis(ax, max_x_ticks=4)
-    ax.set_xticks([1, 2, 4, 6])  # v3: label the pass/fail limit at 1
+    ax.set_xticks([1, 2, 4, 6])  # label the pass/fail limit at 1
     groups = []
     for arm in group_order:
         ys = [y for y, (a, _m) in zip(y_positions, rows) if a == arm]
@@ -230,7 +230,6 @@ def build(ctx: FigureContext):
 
     z = formal[formal.metric == "log2_margin"] if not formal.empty else formal
     _margin_panel(ax_a, z)
-    # v2: panel title removed (content belongs in the caption): "Euclidean torus-like criterion"
     #if not qual.empty:
        # n = int(pd.Series(qual.schoyen_formal_topology_passed).astype(str).str.lower().eq("true").sum()) if "schoyen_formal_topology_passed" in qual else 0
        # annotate(ax_a, f"Criterion met: {n}/{ctx.n_sources}", loc="lower right")
@@ -238,14 +237,12 @@ def build(ctx: FigureContext):
     reduced_groups = _reduced_panel(ax_b, reduced)
     if reduced_groups:
         group_brackets(ax_b, reduced_groups)
-    # v2: panel title removed (content belongs in the caption): "Reduced-dynamics criteria"
     #if not qual.empty:
       #  exact = int(pd.Series(qual.source_exact_gate).astype(str).str.lower().eq("true").sum()) if "source_exact_gate" in qual else 0
        # fibre = int(pd.Series(qual.source_fibre_gate).astype(str).str.lower().eq("true").sum()) if "source_fibre_gate" in qual else 0
         # annotate(ax_b, f"Exact 2D: {exact}/{ctx.n_sources}\nBase + residual: {fibre}/{ctx.n_sources}", loc="center left")
 
     path_groups = _path_panel(ax_c, path)
-    # v2: panel title removed (content belongs in the caption): "Path-invariance criteria"
     if path_groups:
         group_brackets(ax_c, path_groups)
 

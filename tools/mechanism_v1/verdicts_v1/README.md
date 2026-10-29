@@ -1,11 +1,20 @@
-# mechanism_v1 判定 v1
+# Verdicts of the prespecified E2–E4 and E6 tests
 
-按 ANALYSIS_PLAN.md（含 2026-09-20 修订 1）逐条机械判定 E2、E3、E4、E6 的预注册检验，并统一做 Holm。只读两个 collector 的 aggregate 与 E0.9a 的 aggregate/all_metrics.csv，不训练、不前向。
+`scripts/compute_verdicts.py` applies the prespecified tests of the source-measure (E234) and ρ-series (E6) analyses to the tables written by their collectors and Holm-corrects the secondary family. It reads the aggregates of both collectors and the E0.9a `aggregate/all_metrics.csv`; no training and no forward passes. The rules are listed in its module docstring:
 
-| 输出 | 内容 |
+- anchors: two anchors × (`id_seen_short`, `seen_long`, `heldout_long`), six paired differences whose 95 % intervals must all contain 0;
+- main effect: mean per-source slope of `seen_long` on ρ < 0 with exact p < 0.05;
+- primary inference: within-source slope of `seen_long` on R_ret_diff at working point Bstar; supported if the slope is positive, the permutation p < 0.05 and the interval's lower bound > 0 (read only when the anchors pass);
+- secondary family S1a–S5 with Holm correction (expected-null tests S2 and S3 are judged as consistent or contrary to the expectation).
+
+| Output | Content |
 |---|---|
-| VERDICTS.md、VERDICTS.json | 锚点、主效应、主推断、S1a 至 S5 与 Holm 调整后的判定 |
-| validation.csv | 用独立代码从逐 cell 表重算 12 个量，与 collector 相差超过 1e−9 即中止 |
-| exploratory_*.csv | 探索性表，不参与任何判定 |
+| `VERDICTS.md`, `VERDICTS.json` | anchors, main effect, primary inference, S1a–S5 with Holm-adjusted verdicts |
+| `validation.csv` | quantities recomputed from the per-cell tables with separate code; a difference above 1e−9 from the collectors stops the run |
+| `exploratory_*.csv` | exploratory tables, not used for any verdict |
 
-运行：`bash lsf/submit_absolute.sh`，结束后 `bash lsf/check_status_absolute.sh`。输出目录已完成则跳过，非空但未完成则报错退出。
+```bash
+python tools/mechanism_v1/verdicts_v1/scripts/compute_verdicts.py
+```
+
+Defaults read the P3 layout below `rerun_best_validation/followups/mechanism_v1/` (`--step6`, `--e6`, `--e09a-metrics`, `--out`). A completed output folder is skipped; a non-empty incomplete one stops the run. Figures: 7 and S11 (statistics).

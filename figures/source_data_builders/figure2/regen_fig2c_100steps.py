@@ -2,6 +2,7 @@
 from __future__ import print_function
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -11,13 +12,8 @@ import torch
 from torch.utils.data import DataLoader
 
 
-PROJECT = Path("<CLUSTER_PATH>")
-CODE_DIR = PROJECT / "outputs/multinav/multinav_paper_v1/code"
-
-RUN_ROOT = (
-    PROJECT
-    / "outputs/multinav/multinav_paper_v1"
-)
+RUN_ROOT = Path(os.environ.get("NRT_PROJECT_ROOT", Path(__file__).resolve().parents[3]))
+CODE_DIR = RUN_ROOT / "code"
 
 SOURCE_SEED = 6101
 
@@ -30,14 +26,11 @@ NAV_DIR = (
 
 ANALYSIS_DIR = NAV_DIR / "checkpoint_analysis/best_validation"
 
-FIG2_DIR = (
-    RUN_ROOT
-    / "rerun_best_validation/aggregate_full/"
-      "figure_source_data/Figure2"
-)
+FIG2_DIR = RUN_ROOT / "data/aggregate_full/figure_source_data/Figure2"
+OUT_DIR = RUN_ROOT / "outputs/source_data_builders/Figure2"
 
 OLD_CSV = FIG2_DIR / "representative_trajectory.csv"
-OUT_CSV = FIG2_DIR / "representative_trajectory_100.csv"
+OUT_CSV = OUT_DIR / "representative_trajectory_100.csv"
 
 SEQ_LEN = 100
 
@@ -266,6 +259,7 @@ def main():
                 "trajectory."
             )
 
+    OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(OUT_CSV, index=False)
 

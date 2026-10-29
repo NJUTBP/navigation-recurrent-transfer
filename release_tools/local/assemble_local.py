@@ -4,15 +4,15 @@
 Only the folders and files that the current plotting builders read are copied (see FIGURE_DATA_MAP.md).
 The source folder is read only. Large files are reported so that they can be moved to the data archive.
 
-  python release_tools/local/assemble_local.py --fig-all "E:\\FIG_ALL" --repo .
-  python release_tools/local/assemble_local.py --fig-all "E:\\FIG_ALL" --repo . --render
+  python release_tools/local/assemble_local.py --fig-all <working-figure-folder> --repo .
+  python release_tools/local/assemble_local.py --fig-all <working-figure-folder> --repo . --render
 """
 import argparse, shutil, subprocess, sys
 from pathlib import Path
 
 SOURCE_DATA_DIRS = ['Figure2', 'Figure3', 'Figure4', 'Figure5', 'Figure7', 'FigureA1', 'FigureA2', 'FigureA3', 'FigureA4',
                     'FigureA5', 'FigureA6', 'SupplementaryFigureS8', 'SupplementaryFigureS9', 'SupplementaryFigureS10',
-                    'SupplementaryFigureS11']
+                    'SupplementaryFigureS11', 'SupplementaryFigureS12']
 SOURCE_DATA_FILES = ['SOURCE_DATA_MANIFEST.json', 'MECHANISM_FIGURE_SOURCE_FREEZE.json']
 PHASEF_FILES = ['all_dataset_audit.csv', 'all_per_length.csv', 'all_update_curves.csv', 'condition_performance_matrix.csv',
                 'primary_generalization_contrasts.csv', 'secondary_id_contrasts.csv', 'source_level_baselines.csv',
@@ -23,7 +23,7 @@ GITHUB_FILE_LIMIT_MB = 50
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
-    ap.add_argument('--fig-all', type=Path, required=True, help='folder that contains aggregate_full (e.g. E:\\FIG_ALL)')
+    ap.add_argument('--fig-all', type=Path, required=True, help='folder that contains aggregate_full')
     ap.add_argument('--repo', type=Path, default=Path('.'))
     ap.add_argument('--render', action='store_true', help='redraw all figures afterwards')
     a = ap.parse_args()

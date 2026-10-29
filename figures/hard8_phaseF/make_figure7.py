@@ -1,30 +1,13 @@
-"""Final mechanism Figure 7 from formally frozen source-data.
+"""Figure 7: recurrent perturbation and rescaling.
 
-Presentation-only.  Panel identity, panel-to-table assignment, terminology and
-every plotted number follow ``Figure7/PANEL_CONTRACT.json`` and the frozen
-``figure7_statistics.json`` exactly as before.
-
-v2: no panel titles; path-length / step axes labelled 1, 3, ..., 11 with minor
-ticks; accuracy axes start below 0; short/long splits and the three rho doses
-are ~20 L* apart (greyscale safe) with distinct markers and dashes; D has
-direct end-of-line labels.  v2.1: no in-panel result numbers (reported in the
-main text); E shows short- and long-path effects of both retention interventions.
-v2.4: closed axes (x and y meet in one corner) in all panels; every axis
-contains all plotted values -- A now shows the full per-source traces (up to
-2.1; previously clipped at 1.48), C uses the 0-1 scale of B, E's labelled
-range reaches -0.8; A, B and C are separated by identical white space.
-v2.5 (notation follows the main text): A = relative rectified input drive
-delta_t over relation step t (Eq. 10); B/D y axes "Test accuracy"; C = autonomous
-retention kappa-bar (thick line = mean over sources, kappa-bar(rho)); "Perturbation
-fraction rho" without comma; D starts at 0.12 (data >= 0.16) and has no
-"trained"/"extrapolation" labels; E names the two arms as in Section 2.6
-(impairment: c W_rec(0) of the rho = 0 core; rescue: W_rec(0.10)/c) and its y
-axis is Delta alpha_q, the difference from the corresponding unmanipulated
-baseline.
-v2.8: the v2.5 layout is kept unchanged; only the panel letters follow the order
-of citation in Section 3.6: top row A, B, D (D = autonomous retention
-<kappa>(rho), sharing the dose axis of B); bottom row C (path-length profile)
-and E.  Path length is written L_p and retention <kappa>, as in the main text.
+Reads figure_source_data/Figure7 (panel tables, PANEL_CONTRACT.json and figure7_statistics.json);
+nothing is recomputed.  Panels: a relative rectified input drive delta_t over relation step t
+(Eq. 10); b test accuracy versus perturbation fraction rho; c path-length profile at rho = 0, 0.05
+and 0.10; d autonomous retention <kappa>(rho), sharing the dose axis of b; e effects of the two
+rescaling arms (impairment c W_rec(0) of the rho = 0 core, rescue W_rec(0.10)/c) as Delta alpha_q
+relative to the unmanipulated baseline.  The panel letters follow the order of citation; the table
+files keep the earlier letters (panelC_retention_dose.csv is drawn as d, panelD_horizon_profile.csv
+as c).
 """
 from __future__ import annotations
 
@@ -237,7 +220,7 @@ def make_figure7():
     # Identical white space between A, B and D (ink to ink).
     equalize_column_gaps(fig, [a, b, c])
     fig.align_ylabels([a, d])
-    # v2.8: letters follow the order of citation (C = profile, D = retention).
+    # Letters follow the order of citation (C = profile, D = retention).
     place_panel_labels(fig, [(a, "A"), (b, "B"), (c, "D"), (d, "C"), (e, "E")])
     return save_publication_figure(fig, OUT / "Figure7")
 

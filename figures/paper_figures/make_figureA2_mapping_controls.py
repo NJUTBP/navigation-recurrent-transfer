@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FigureA2 — relation-label and endpoint-mapping controls."""
+"""Supplementary Figure S4 (builder FigureA2): relation-label and endpoint-mapping controls."""
 from __future__ import annotations
 from pathlib import Path
 import matplotlib
@@ -37,11 +37,10 @@ def build(ctx: FigureContext):
     specs = [s for s in specs if s[0] in present]
     plot_named_source_points(a, mapping, specs, reference=1/16, ylabel="Test accuracy (trainable core)", paired_lines=True)
     accuracy_axis(a, label="Test accuracy (trainable core)")   # shared 0-1 scale
-    # v2: panel title removed (content belongs in the caption): "Relation/endpoint mapping controls"
 
     avail = set(paired.contrast.astype(str)) if not paired.empty and "contrast" in paired else set()
     pspecs = [
-        # v2.5 difference rule: colour of A - B = mix of A and B, marker of B.
+        # Difference rule: colour of A - B = mix of A and B, marker of B.
         ("aligned__minus__shuffled", "Aligned − shuffled",
          mix_colors(PALETTE["navigation"], PALETTE["relation"]), "D"),
         ("aligned__minus__mismatched_target", "Aligned − mismatched",
@@ -60,7 +59,6 @@ def build(ctx: FigureContext):
         xlim=(-0.03, 1.00),
         shade_positive=False,
     )
-    # v2: panel title removed (content belongs in the caption): "Within-source aligned advantage"
 
     place_panel_labels(fig, [(a, "A"), (b, "B")])
 

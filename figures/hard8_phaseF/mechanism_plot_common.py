@@ -1,4 +1,4 @@
-"""Shared presentation layer for mechanism Figure 7 and Supplementary Figures S7-S10.
+"""Shared presentation layer for Figure 7 and Supplementary Figures S7, S8, S9, S11 and S12.
 
 These builders are presentation-only.  They read exclusively from the formally
 frozen tables under ``aggregate_full/figure_source_data`` and never touch the
@@ -44,20 +44,23 @@ except ImportError:
     )
 
 
-AGGREGATE = Path(os.environ.get("CTP_AGGREGATE_DIR", Path.cwd() / "aggregate_full")).resolve()
-SOURCE_ROOT = (AGGREGATE / "figure_source_data").resolve()
-OUT = Path(os.environ.get("CTP_FIGURE_OUT", AGGREGATE / "figures")).resolve()
-OUT.mkdir(parents=True, exist_ok=True)
+try:
+    from . import figure_paths
+except ImportError:  # direct execution from hard8_phaseF/
+    import figure_paths
+AGGREGATE = figure_paths.AGGREGATE
+SOURCE_ROOT = figure_paths.SOURCE_ROOT
+OUT = figure_paths.OUT
 
 NAV = PALETTE["navigation"]
-MATCHED = PALETTE["matched"]   # v2: L* 55; the old neutral_dark (L* 38) printed as the same grey as NAV
+MATCHED = PALETTE["matched"]   # L* 55, distinguishable from NAV in greyscale
 REL = PALETTE["relation"]
 REC = PALETTE["recurrent"]
 NEG = PALETTE["negative"]
 POS = PALETTE["positive"]
 MID = PALETTE["neutral_mid"]
 LIGHT = PALETTE["neutral_light"]
-# v2: short vs long path splits and the three rho doses are separated in
+# Short vs long path splits and the three rho doses are separated in
 # lightness (~20 L* apart) as well as in hue, marker and dash pattern.
 SHORT = "#6C98D4"   # L* 62, light blue
 LONG = "#A8403A"    # L* 42, brick
@@ -145,7 +148,7 @@ def mean_curve(ax, df: pd.DataFrame, x: str, y: str, *, color: str | None = None
     if band and len(xv) > 1:
         ax.fill_between(xv, mean - sem, mean + sem, color=color,
                         alpha=BAND_ALPHA, lw=0, zorder=zorder - 1)
-    # light=True: comparison training curve drawn as a light solid line (v2.5).
+    # light=True: comparison training curve drawn as a light solid line.
     kw_fn = light_line_kw if light else line_kw
     ax.plot(xv, mean, **kw_fn(spec, ms=ms, markevery=markevery, label=label, zorder=zorder))
     return q

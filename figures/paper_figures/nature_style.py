@@ -1,48 +1,22 @@
-"""Shared publication plotting utilities for the final MultiNav manuscript.
+"""Shared publication style of the figure builders.
 
-Revision v2 (presentation only)
--------------------------------
-The style targets Neuron / Cell Press double-column artwork (174 mm wide, text
-6-8 pt at print size) and also fits eLife and PLOS Computational Biology
-(<= 7.5 in wide).  Compared with v1 it changes *presentation only*:
+Figures are drawn at the double-column width of 174 mm with 6-8 pt text.  Every condition has one
+colour, one marker and one line style, and colour, lightness, marker shape, fill and dash pattern
+are redundant cues, so the figures remain readable in greyscale.  The module provides
 
-* no in-panel titles -- what a title used to say now lives in the axis label,
-  a legend, a direct line label or the figure caption;
-* larger markers and a stricter "one condition = one colour + one marker +
-  one line style" contract, so every figure stays readable when printed in
-  black and white (colour, lightness, marker shape, fill and dash pattern are
-  redundant cues);
-* "range-frame" axes: spines are offset outward and trimmed to the first/last
-  major tick, so points at 0 or at the ceiling never sit on an axis line;
-* shared helpers for accuracy / path-length axes, significance brackets,
-  direct end-of-line labels and t-based estimation densities.
+* axis frames: closed_frame (main figures; the x and y axes meet in one corner and values at 0 are
+  kept off the frame by the axis limits) and range_frame (spines offset and trimmed to the first
+  and last major tick);
+* helpers for accuracy and path-length axes, significance brackets, direct end-of-line labels,
+  t-based estimation densities, equal white space between the panels of a row
+  (equalize_column_gaps) and broken axes (axis_break_marks);
+* light_line_kw / light_legend_handle for comparison curves (light solid lines, markers in the full
+  condition colour) and mix_colors / difference_spec: a paired difference A - B is drawn in the
+  equal sRGB mix of the colours of A and B with the marker of B;
+* lighten and halo (white outline for in-panel numbers).
 
-Revision v2.4 (presentation only, main Figures 2-7)
----------------------------------------------------
-* closed axes: :func:`closed_frame` replaces the range frame in the main
-  figures.  The x and y axes always meet in one corner point and run over the
-  full axis limits.  Values that sit at 0 are kept off the frame by starting
-  the limit at a small negative value, never by offsetting a spine;
-* axis limits always contain every plotted value, and the outermost labelled
-  ticks enclose the data wherever that costs little space;
-* :func:`equalize_column_gaps` gives the panels of one row identical white
-  space (measured ink to ink); :func:`axis_break_marks` draws the "//" marks
-  of a broken axis.
-:func:`range_frame` is unchanged, so the supplementary figures look as before.
-
-Revision v2.5 (presentation only, main Figures 2-7)
----------------------------------------------------
-* :func:`light_line_kw` / :func:`light_legend_handle`: comparison curves are
-  drawn as light solid lines (dash patterns removed); markers keep the full
-  condition colour, so marker shape and fill carry the identity.
-* :func:`mix_colors` / :func:`difference_spec`: a paired difference A - B is
-  drawn in the equal sRGB mix of the colours of A and B, with the marker of
-  the comparator B, so the same contrast looks identical in every figure.
-* :func:`lighten` and :func:`halo` (white outline for in-panel numbers).
-
-Nothing in this module reads data, changes an aggregation rule, a statistical
-estimate or a checkpoint policy.  Every public name of v1 is kept so the
-existing builders continue to import it unchanged.
+Nothing in this module reads data or changes an aggregation rule, a statistical estimate or a
+checkpoint policy.
 """
 from __future__ import annotations
 
@@ -68,7 +42,7 @@ MM = 1.0 / 25.4
 FIG_WIDTH = 174 * MM
 
 # ---------------------------------------------------------------------------
-# Colour contract.  Keys of v1 are preserved; values were re-tuned so that the
+# Colour contract.  Values are chosen so that the
 # conditions sharing a panel are separated in CIE L* (lightness) as well as in
 # hue.  L* values are noted for the black-and-white check.
 # ---------------------------------------------------------------------------
@@ -134,8 +108,8 @@ SWARM_SIZE = 20         # scatter size (pt^2) of one source (was 13-15)
 SWARM_ALPHA = 0.55
 
 PANEL_LABEL_SIZE = 9.5
-# v2.9: Nonlinear Dynamics (Springer) denotes figure parts by lowercase letters
-# (a, b, c); set to "upper" to restore A, B, C.
+# Nonlinear Dynamics (Springer) labels figure parts with lowercase letters
+# (a, b, c); set to "upper" for A, B, C.
 PANEL_LETTER_CASE = "lower"
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FigureA1 — delayed-reconstruction control pretraining and selected-delay error."""
+"""Supplementary Figure S1 (builder FigureA1): delayed-reconstruction pretraining and the error at the selected delay."""
 from __future__ import annotations
 from pathlib import Path
 import matplotlib
@@ -74,7 +74,7 @@ def build(ctx: FigureContext):
         )
         if len(aux):
             a.plot(
-                # v2.5: comparison curve = light solid line (no dashes).
+                # Comparison curve = light solid line (no dashes).
                 aux[:, 0], aux[:, 1], color=lighten(PALETTE["neutral_dark"]),
                 lw=1.0, ls="-", label=r"$\tau$ = 1–9 (mean)",
             )
@@ -98,7 +98,6 @@ def build(ctx: FigureContext):
             borderaxespad=.25,
         )
         style_axis(a)
-    # v2: panel title removed (content belongs in the caption): "Delayed-reconstruction learning"
 
     d = control[control.metric == "selected_delay_nmse"] if not control.empty else control
     if d.empty:
@@ -127,7 +126,6 @@ def build(ctx: FigureContext):
         b.set_xlabel(r"Reconstruction delay $\tau$ (steps)")
         b.set_ylabel("Validation NMSE")
         style_axis(b, max_x_ticks=5)
-    # v2: panel title removed (content belongs in the caption): "Delay profile at selected checkpoint"
 
     place_panel_labels(fig, [(a, "A"), (b, "B")])
 

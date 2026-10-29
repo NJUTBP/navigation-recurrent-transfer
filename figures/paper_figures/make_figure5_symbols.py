@@ -1,25 +1,11 @@
 #!/usr/bin/env python3
-"""Figure5 — arbitrary relation symbols, finite-budget learning, and recurrence use.
+"""Figure 5: arbitrary relation symbols, finite-budget learning and recurrence use.
 
-v2.1 presentation (data interface unchanged: symbolic.csv, contrasts.csv,
-paired_differences.csv and recurrence.csv with the same columns; same output).
-
-Layout: A learning curves | B over C, two independent compact forest panels
-(each with its own row names) | D recurrence ablation as a vertical paired dot
-plot.  Every comparator keeps the colour + marker of its curve in A.  No
-in-panel significance annotations; statistical results are reported in the main text.
-
-v2.4 presentation: closed axes (x and y meet in one corner) in all panels;
-the difference axes of B and C end at labelled ticks that enclose every
-source-level difference (B -0.4 to 0.8, C -0.1 to 0.1).
-
-v2.5 presentation: A draws the comparison curves as light solid lines (as in
-Figure 3A) and its x axis reads "Target training trials"; B/C rows are named
-"Nav. − comparator" and coloured with the mix of the two conditions' colours
-(comparator marker), exactly as the same contrasts in Figure 3C; B's axis is
-"Δ test accuracy" and C's is ΔAUC_10:200 (main-text notation); the caption
-specifies that B is evaluated at 1,000 trials;
-D's y axis is "Test accuracy" and its key uses bold upright W_rec.
+Reads figure_source_data/Figure5 (symbolic, contrasts, paired_differences, recurrence).  a learning
+curves over target training trials (comparison curves as light solid lines); b and c paired
+differences "Nav. - comparator" at 1,000 trials (b, Delta test accuracy) and as Delta AUC_10:200 (c),
+coloured like the same contrasts in Figure 3c; d recurrence ablation as a paired dot plot.  Every
+comparator keeps the colour and marker of its curve in a.
 """
 from __future__ import annotations
 
@@ -175,7 +161,7 @@ def build(ctx: FigureContext):
     W, H = FIG_WIDTH, 2.65
     fig = plt.figure(figsize=(W, H))
     add = lambda x, y, w, h: fig.add_axes([x / W, y / H, w / W, h / H])   # inches -> fraction
-    # v2.5: B/C row names are "Nav. − comparator", so A, B/C and D are a
+    # B/C row names are "Nav. − comparator", so A, B/C and D are a
     # little narrower to keep the figure at FIG_WIDTH.
     ax_a = add(0.45, 0.40, 1.62, 2.07)
     ax_b = add(3.20, 1.73, 1.10, 0.74)     # B over C: two independent panels

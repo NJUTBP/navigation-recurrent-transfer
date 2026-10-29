@@ -29,6 +29,9 @@ def equal_cube_limits(frame: pd.DataFrame, pad: float = 0.04):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--aggregate", type=Path, required=True, help="Path to aggregate_full")
+    ap.add_argument("--out", type=Path,
+                    default=Path(__file__).resolve().parents[2] / "outputs" / "figures" / "figureA4C_view.json",
+                    help="file for the chosen view; pass it to the redraw with FIGA4_C_VIEW_FILE")
     ap.add_argument("--elev", type=float, default=None)
     ap.add_argument("--azim", type=float, default=None)
     ap.add_argument("--point-size", type=float, default=5.0)
@@ -43,7 +46,7 @@ def main():
     aggregate = args.aggregate.expanduser().resolve()
     data_dir = aggregate / "figure_source_data" / "FigureA4"
     csv_path = data_dir / "representative_schoyen_umap3.csv"
-    view_path = data_dir / "figureA4C_view.json"
+    view_path = args.out.expanduser().resolve()
 
     if not csv_path.exists():
         raise SystemExit(f"Missing: {csv_path}")
@@ -129,10 +132,12 @@ def main():
                 "Camera choice only; embedding and topology statistics are unchanged."
             ),
         }
+        view_path.parent.mkdir(parents=True, exist_ok=True)
         view_path.write_text(
             json.dumps(payload, indent=2) + "\n", encoding="utf-8"
         )
         print(f"[saved] {view_path}")
+        print(f"[use] FIGA4_C_VIEW_FILE={view_path} python figures/redraw_all_figures.py --figures SupplementaryFigureS3")
         print(f"[camera] {camera_text()}")
         refresh_status()
 

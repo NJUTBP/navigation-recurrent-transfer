@@ -21,7 +21,10 @@ import numpy as np
 import pandas as pd
 import yaml
 
-from .common import FigureContext, load_csv, make_context, read_json, sha256, write_json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # figures/
+from paper_figures.common import FigureContext, load_csv, make_context, read_json, sha256, write_json  # noqa: E402
 
 
 def _write(frame: pd.DataFrame, path: Path) -> Path:

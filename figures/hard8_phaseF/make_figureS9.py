@@ -1,7 +1,7 @@
-"""Supplementary Figure S9: prespecified source-measure and mediation boundaries.
+"""Supplementary Figure S11 (builder SupplementaryFigureS9): prespecified source-measure analyses.
 
-Presentation-only.  Panels, tables and terminology follow
-legacy frozen source-data contract ``SupplementaryFigureS10/PANEL_CONTRACT.json`` and ``s10_statistics.json``.
+Reads figure_source_data/SupplementaryFigureS10 (panel tables, PANEL_CONTRACT.json,
+s10_statistics.json); nothing is recomputed.
 """
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ except ImportError:
         group_brackets, num, sci, FS_INPANEL, FS_TICK_DENSE,
     )
 
-# Source-data directory name is frozen by the v3 data contract; only manuscript numbering changed.
+# The source-data folder keeps its builder name; see figures/figure_numbering.py.
 DATA = figure_data("SupplementaryFigureS10")
 A = read_csv(DATA / "panelA_Rret_diff_working_points.csv")
 B = read_csv(DATA / "panelB_primary_per_source_slopes.csv")
@@ -69,7 +69,6 @@ def panel_working_points(ax):
     ax.set_ylim(-.30, .40)
     ax.set_yticks([-.2, 0, .2, .4])
     ax.set_ylabel(r"$\Delta R_{\mathrm{ret}}^{\mathrm{diff}}$ (Nav. − matched)")
-    # v2: panel title removed (content belongs in the caption): "Working-point dependence"
     style_axis(ax, max_y_ticks=5, max_x_ticks=4)
 
 
@@ -109,7 +108,6 @@ def panel_primary_slopes(ax):
                       f"permutation $P \\leq$ {sci(v['p'])}"),
         ylim=(-.9, 8.6), yticks=[0, 2, 4, 6],
     )
-    # v2: panel title removed (content belongs in the caption): "Prespecified primary slope"
 
 
 def panel_null_slopes(ax):
@@ -122,7 +120,6 @@ def panel_null_slopes(ax):
                       f"Holm $P$ = {v['holm_p']:.4f}"),
         ylim=(-35, 15.5), yticks=[-30, -20, -10, 0],
     )
-    # v2: panel title removed (content belongs in the caption): "Expected-null slope"
 
 
 def panel_anchors(ax):
@@ -163,7 +160,6 @@ def panel_anchors(ax):
     ax.set_xlim(-.038, .060)
     ax.set_xticks([-.02, 0, .02, .04])
     ax.set_xlabel("Δ test accuracy")
-    # v2: panel title removed (content belongs in the caption): "Implementation anchors"
 
     style_axis(ax, max_y_ticks=6, max_x_ticks=5)
     # Group brackets live outside the data area, in the tick-label column.

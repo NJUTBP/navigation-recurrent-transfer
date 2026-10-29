@@ -1,7 +1,7 @@
-"""Supplementary Figure S10: navigation-interface separability with convergence boundary.
+"""Supplementary Figure S9 (builder SupplementaryFigureS10): refitting of the navigation-specific mappings.
 
-Presentation-only.  Panel B keeps the frozen means and confidence intervals from
-``s11_statistics.json``; nothing is recomputed here.
+Reads figure_source_data/SupplementaryFigureS11.  Panel b shows the stored means and confidence
+intervals of s11_statistics.json; nothing is recomputed.
 """
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ except ImportError:
         deterministic_jitter_safe, MS_SUMMARY, MS_SMALL, SWARM_SIZE,
     )
 
-# Source-data directory name is frozen by the v3 data contract; only manuscript numbering changed.
+# The source-data folder keeps its builder name; see figures/figure_numbering.py.
 DATA = figure_data("SupplementaryFigureS11")
 A = read_csv(DATA / "panelA_transfer_vs_navigation_competence.csv")
 B = read_csv(DATA / "panelB_excess_transfer_drop.csv")
@@ -52,7 +52,7 @@ except ImportError:
     from mechanism_plot_common import LONG
 
 #: Long-path transfer accuracy styled as in Figure 7B; the excess drop
-#: (transfer drop - navigation drop) follows the v2.5 difference rule.
+#: (transfer drop - navigation drop) follows the difference rule.
 LONG_SPEC = dict(color=LONG, marker="s", ls=DASH["dash"], filled=True, lw=LINEWIDTH, ms_scale=0.92)
 EXCESS_SPEC = difference_spec(LONG_SPEC, role("navigation"))
 
@@ -69,7 +69,6 @@ def panel_performance(ax):
     ax.set_xticks(RHO_TICKS, RHO_TICKLABELS)
     accuracy_axis(ax, label="Performance")
     ax.set_xlabel(RHO_LABEL)
-    # v2: panel title removed (content belongs in the caption): "Transfer and navigation performance"
     legend(ax, loc="lower left")
     style_axis(ax, max_y_ticks=5, max_x_ticks=5)
 
@@ -94,7 +93,6 @@ def panel_excess(ax):
     ax.set_yticks([0, .1, .2, .3])
     ax.set_xlabel(RHO_LABEL)
     ax.set_ylabel("Excess transfer drop\n(transfer − navigation)")
-    # v2: panel title removed (content belongs in the caption): "Excess transfer drop"
     #annotate(ax, "10/10 sources > 0\nat both doses", loc="upper left")
     style_axis(ax, max_y_ticks=5, max_x_ticks=2)
 
@@ -114,7 +112,6 @@ def panel_convergence(ax):
     ax.set_yticks([0, .3, .6, .9])
     ax.set_xlabel(RHO_LABEL)
     ax.set_ylabel("Fraction best in final window")
-    # v2: panel title removed (content belongs in the caption): "Navigation refit convergence"
     # The band between the observed line and the limit is empty by construction,
     # so the verdict and the key both sit there instead of over the data.
     #annotate(ax, "formal verdict:\n" + STATS["formal_verdict"], loc="center left",

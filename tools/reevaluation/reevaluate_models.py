@@ -12,7 +12,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import nd2_common as nc  # noqa: E402
+import reevaluation_common as nc  # noqa: E402
 
 
 def specs(family):
@@ -31,12 +31,13 @@ def specs(family):
 
 
 def main():
-    import torch
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--family', required=True, choices=['phasef', 'e09a', 'e6', 'e6i'])
     ap.add_argument('--out', type=Path, required=True)
     ap.add_argument('--limit', type=int, default=0, help='evaluate only the first N models (smoke test)')
     a = ap.parse_args()
+    nc.require_released_packages()
+    torch = nc.import_torch()
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     fullscale, phasef = nc.load_phasef_modules()
     hist = fullscale.import_historical()

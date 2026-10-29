@@ -1,23 +1,30 @@
 #!/usr/bin/env python3
-"""Freeze final Phase-F harder-8x8 plotting data into aggregate_full.
+"""Copy the Phase F (extended 8 x 8) aggregate tables into an aggregate directory used for plotting.
 
-This is a light file-management step only. It does not rerun training, aggregation,
-or statistics. It preserves the previous FigureA5 source-data directory as a legacy
-backup, then replaces FigureA5 plotting inputs with the frozen Phase-F tables.
+Writes
+  <aggregate>/hard8x8_phaseF_followup/      the complete Phase F aggregate (read by Figs. 6, S5, S6)
+  <aggregate>/figure_source_data/FigureA5/  the tables drawn in Figure 6 and Supplementary Figures
+                                            S5-S6, with PHASEF_FIGURE_SOURCE_MANIFEST.json (checksums)
+Only files are copied: no training, aggregation or statistics.  The released figure data in
+data/aggregate_full already contain these tables; use this script after rerunning Phase F, with a
+new aggregate directory as target.
+
+    python tools/FigureA5_PhaseF_workflow_v1/freeze_phaseF_figureA5_into_aggregate.py --aggregate outputs/aggregate_full
 """
 from __future__ import annotations
-import os
 
+import argparse
 import hashlib
 import json
-from pathlib import Path
+import os
 import shutil
 from datetime import datetime, timezone
+from pathlib import Path
 
-RUN = Path(os.environ.get('NRT_PROJECT_ROOT', str(Path(__file__).resolve().parents[2])))
-RERUN = RUN / "rerun_best_validation"
-PHASEF = RERUN / "hard8x8_diagnostics" / "audit_v1" / "phaseF_fullscale_v1" / "aggregate"
-AGG_LINK = RERUN / "aggregate_full"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(os.environ.get('NRT_PROJECT_ROOT', str(REPOSITORY_ROOT)))
+PHASEF = (PROJECT_ROOT / "rerun_best_validation" / "hard8x8_diagnostics" / "audit_v1"
+          / "phaseF_fullscale_v1" / "aggregate")
 
 SELECTED = [
     "condition_performance_matrix.csv",
@@ -44,38 +51,43 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def is_within(path: Path, parent: Path) -> bool:
+    try:
+        path.relative_to(parent)
+    except ValueError:
+        return False
+    return True
+
+
 def main() -> int:
-    if not PHASEF.is_dir():
-        raise FileNotFoundError(f"Missing Phase-F aggregate: {PHASEF}")
-    readiness = json.loads((PHASEF / "READINESS.json").read_text())
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--aggregate", type=Path, required=True, help="target aggregate directory (created if missing)")
+    ap.add_argument("--phasef-aggregate", type=Path, default=PHASEF, help=f"Phase F aggregate (default: {PHASEF})")
+    args = ap.parse_args()
+    phasef = args.phasef_aggregate.resolve()
+    agg = args.aggregate.resolve()
+    if is_within(agg, (REPOSITORY_ROOT / "data").resolve()):
+        raise SystemExit(f"{agg} lies inside the released figure data; choose a new aggregate directory")
+    if not phasef.is_dir():
+        raise FileNotFoundError(f"Missing Phase-F aggregate: {phasef}")
+    readiness = json.loads((phasef / "READINESS.json").read_text())
     if not bool(readiness.get("ready")):
         raise RuntimeError(f"Phase F is not ready: {readiness}")
+    agg.mkdir(parents=True, exist_ok=True)
 
-    agg = AGG_LINK.resolve()
-    if not agg.is_dir():
-        raise FileNotFoundError(f"aggregate_full does not resolve to a directory: {AGG_LINK} -> {agg}")
-
-    # Store the complete final follow-up aggregate inside aggregate_full so the
-    # user's normal 'download aggregate_full and redraw locally' workflow is self-contained.
     frozen_root = agg / "hard8x8_phaseF_followup"
     if frozen_root.exists():
         shutil.rmtree(frozen_root)
-    shutil.copytree(PHASEF, frozen_root)
+    shutil.copytree(phasef, frozen_root)
 
-    source_root = agg / "figure_source_data"
-    source_root.mkdir(parents=True, exist_ok=True)
-    fig = source_root / "FigureA5"
-    legacy = source_root / "FigureA5_legacy_pre_phaseF"
-
-    if fig.exists() and not legacy.exists():
-        shutil.copytree(fig, legacy)
+    fig = agg / "figure_source_data" / "FigureA5"
     if fig.exists():
         shutil.rmtree(fig)
     fig.mkdir(parents=True)
 
     hashes = {}
     for name in SELECTED:
-        src = PHASEF / name
+        src = phasef / name
         if not src.is_file():
             raise FileNotFoundError(f"Required Phase-F table missing: {src}")
         dst = fig / name
@@ -85,7 +97,7 @@ def main() -> int:
     manifest = {
         "figure": "FigureA5",
         "source_stage": "phaseF_fullscale_v1",
-        "source_path": str(PHASEF),
+        "source_path": str(phasef),
         "aggregate_full_resolved": str(agg),
         "frozen_followup_copy": str(frozen_root),
         "created_utc": datetime.now(timezone.utc).isoformat(),
@@ -98,11 +110,8 @@ def main() -> int:
     (fig / "PHASEF_FIGURE_SOURCE_MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
     print("SUCCESS")
-    print(f"aggregate_full resolves to: {agg}")
-    print(f"Phase-F final aggregate copied to: {frozen_root}")
-    print(f"FigureA5 source data frozen at: {fig}")
-    if legacy.exists():
-        print(f"Legacy FigureA5 source data retained at: {legacy}")
+    print(f"Phase-F aggregate copied to: {frozen_root}")
+    print(f"FigureA5 source data written to: {fig}")
     return 0
 
 
