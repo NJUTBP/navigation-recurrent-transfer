@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""Build the small public code ZIP from a verified release-file manifest.
+"""Build the small public code ZIP from working files tracked by Git.
 
   python release_tools/local/package_code.py --repo . --out ../code_release.zip
 """
 import argparse
-import hashlib
 import json
 from pathlib import Path
 import subprocess
-import sys
 import zipfile
 
 
@@ -18,11 +16,9 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     repo = args.repo.resolve()
-    subprocess.run([sys.executable, str(repo / 'release_tools/local/verify_release.py'),
-                    '--repo', str(repo)], check=True)
-    manifest_path = repo / 'data/RELEASE_FILES.json'
-    manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
-    names = sorted([record['path'] for record in manifest['files']] + ['data/RELEASE_FILES.json'])
+    tracked = subprocess.check_output(['git', '-C', str(repo), 'ls-files', '-z'])
+    names = sorted(name for name in tracked.decode('utf-8').split('\0')
+                   if name and (repo / name).is_file())
     out = args.out.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     partial = out.with_name(out.name + '.partial')
@@ -34,12 +30,7 @@ def main():
         if bad:
             raise RuntimeError(f'ZIP integrity check failed: {bad}')
     partial.replace(out)
-    h = hashlib.sha256()
-    with out.open('rb') as stream:
-        for block in iter(lambda: stream.read(8 << 20), b''):
-            h.update(block)
-    print(json.dumps({'zip': str(out), 'files': len(names), 'bytes': out.stat().st_size,
-                      'sha256': h.hexdigest()}, indent=2))
+    print(json.dumps({'zip': str(out), 'files': len(names), 'bytes': out.stat().st_size}, indent=2))
 
 
 if __name__ == '__main__':

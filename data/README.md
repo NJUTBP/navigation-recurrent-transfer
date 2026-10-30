@@ -6,7 +6,6 @@
 - `source_level_results/mechanism_v1/E6_task_state_retention.csv` — one-step retention on task states (input of Supplementary Fig. S12c).
 - `source_level_results/checkpoint_provenance/` — indices of the 20 released pretrained checkpoints and the 480 target checkpoints; the checkpoint-selection convention is explained in `docs/DATA_PACKAGES.md`.
 - `PACKAGE_INVENTORY.json`, `PACKAGE_SHA256SUMS.txt` — contents and checksums of the data packages P1–P3.
-- `RELEASE_FILES.json` — size and SHA-256 of every file of this repository release; check with `python release_tools/local/verify_release.py --repo .`.
 
 Large result tables, trained weights and the complete source-level results are in the data packages (`docs/DATA_PACKAGES.md`). The redraw and export tools do not write into this folder.
 

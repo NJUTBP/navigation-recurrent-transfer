@@ -52,9 +52,9 @@ All released results use, for every navigation source, the checkpoint with the l
 - Mechanistic analyses: the decision rules in the collectors' module docstrings and in `tools/mechanism_v1/verdicts_v1/scripts/compute_verdicts.py`.
 - Topology: `topology/schoyen_formal_figureA3_patch_v1/PROTOCOL_FIGUREA3_SCHOYEN_FORMAL.md`.
 
-## Tests and release verification
+## Tests
 
-`python -m pytest` (repository root) runs the contract tests: figure numbering and source data, seed blocks of the plan, the checkpoint layout of the data packages, statistics stored with the figure data, and the Phase F protocol, seeds, splits and model wrappers (the last group needs PyTorch and is skipped without it). `python release_tools/local/verify_release.py --repo .` checks every public file against `data/RELEASE_FILES.json` (size, SHA-256, Python syntax); `--packages /path/to/packages` also checks the three archives.
+`python -m pytest` (repository root) runs the contract tests: figure numbering and source data, seed blocks of the plan, the checkpoint layout of the data packages, statistics stored with the figure data, and the Phase F protocol, seeds, splits and model wrappers (the last group needs PyTorch and is skipped without it).
 
 ## Software environment
 

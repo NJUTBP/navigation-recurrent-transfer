@@ -33,3 +33,4 @@ HPC_logs*/
 _local_plot_context.json
 .venv/
 *.partial
+/data/RELEASE_FILES.json

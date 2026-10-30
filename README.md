@@ -37,7 +37,6 @@ Several folder names keep the identifiers under which the experiments were run, 
 conda create -n nrt python=3.11
 conda activate nrt
 pip install -r requirements-figures.txt
-python release_tools/local/verify_release.py --repo .
 ```
 
 Use Python 3.11 for the pinned figure environment. To rebuild and re-evaluate target models, first install the CPU or CUDA build of PyTorch 2.7.0 appropriate for your hardware, then `requirements-model-checks.txt`. Training and topology analyses were run on Linux with Python 3.12; that environment is recorded in `requirements.txt` (it includes `ripser` and `umap-learn`). The tests run with `pip install pytest` and `python -m pytest` from the repository root; tests that need PyTorch are skipped when it is not installed. See [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) for environments and coverage.
@@ -65,7 +64,7 @@ On Windows, use a short repository path and the helper that checks checksums and
 python release_tools/local/extract_packages.py --packages /path/to/packages --repo .
 ```
 
-Archive checksums are in `data/PACKAGE_SHA256SUMS.txt` (`verify_release.py --packages /path/to/packages` checks them). The released weights cover 20 pretrained networks and 480 target checkpoints; model indices and the checkpoint-selection convention are described in [docs/DATA_PACKAGES.md](docs/DATA_PACKAGES.md). If the packages are extracted elsewhere, set `NRT_PROJECT_ROOT` to a folder that contains `code/`, `tools/`, `sources/` and `rerun_best_validation/`.
+Archive checksums are in `data/PACKAGE_SHA256SUMS.txt`. The released weights cover 20 pretrained networks and 480 target checkpoints; model indices and the checkpoint-selection convention are described in [docs/DATA_PACKAGES.md](docs/DATA_PACKAGES.md). If the packages are extracted elsewhere, set `NRT_PROJECT_ROOT` to a folder that contains `code/`, `tools/`, `sources/` and `rerun_best_validation/`.
 
 ## Reproducing the figures
 
