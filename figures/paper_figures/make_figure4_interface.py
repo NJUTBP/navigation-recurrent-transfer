@@ -4,7 +4,7 @@
 Reads figure_source_data/Figure4 (test_transforms, adapter, adapter_contrasts,
 adapter_paired_differences).  a test accuracy with original and transformed relation inputs; b and c
 share the ten perturbation rows: b accuracy with the adapter learned or fixed, c the paired
-difference "Delta test accuracy (A learned - fixed)".  "Gain" is reserved for the relation-input
+difference in test accuracy (A learned - fixed).  "Gain" is reserved for the relation-input
 gain g of Figures 6-7.
 """
 from __future__ import annotations
@@ -40,9 +40,9 @@ ARM_STYLE = {
 
 def _tf_label(x, *, two_line=False):
     text = {
-        "none": "original", "rotate90": "rot 90°", "scale2x": "scale ×2",
-        "signflip": "sign reversal", "rot30": "rot 30°", "rot90": "rot 90°",
-        "rot135": "rot 135°", "rot270": "rot 270°", "shear0.5": "shear 0.5",
+        "none": "original", "rotate90": "rotation 90°", "scale2x": "scale ×2",
+        "signflip": "sign reversal", "rot30": "rotation 30°", "rot90": "rotation 90°",
+        "rot135": "rotation 135°", "rot270": "rotation 270°", "shear0.5": "shear 0.5",
         "aniso2_0.5": "aniso ×(2, 0.5)", "scale0.5x": "scale ×0.5",
         "scale4x": "scale ×4",
     }.get(str(x), str(x).replace("_", " "))
@@ -149,7 +149,7 @@ def _gain_panel(ax, paired, contrasts, tfs):
     # line, clear of the y axis.
     ax.set_xlim(-0.025, 0.31)
     ax.set_xticks([0, 0.1, 0.2, 0.3])
-    ax.set_xlabel(r"Δ test accuracy ($\mathbf{A}$ learned − fixed)")
+    ax.set_xlabel(r"$\Delta\mathrm{Acc}_{\mathrm{test}}$ ($\mathbf{A}$ learned − fixed)")
     closed_frame(ax)
 
 
@@ -170,7 +170,8 @@ def build(ctx: FigureContext):
     _fixed_interface_panel(ax_a, tests)
     tfs = _adapter_panel(ax_b, adapter)
     _gain_panel(ax_c, paired, contrasts, tfs or PREFERRED_ADAPTER)
-    place_panel_labels(fig, [(ax_a, "A"), (ax_b, "B"), (ax_c, "C")])
+    place_panel_labels(fig, [(ax_a, "A"), (ax_b, "B", {"dx_pt": 3.0}),
+                             (ax_c, "C", {"dx_pt": -3.0})])
 
     paths = save_publication_figure(fig, out / "Figure4")
     inputs = [data / "test_transforms.csv", data / "adapter.csv",
@@ -183,7 +184,7 @@ def build(ctx: FigureContext):
                 "Categorical transforms are shown as dot plots, never joined across transformations.",
                 "A: no relearning; points = sources, thin lines pair each source's random and navigation cores within a transformation; large symbols = mean +/- 95% t-CI; dashed line = chance.",
                 "B/C share the same ten perturbations (the intact baseline is in A); alternating bands mark rows.",
-                "C: within-source differences, adapter A learned minus A fixed to the identity (axis 'Δ test accuracy'; 'gain' is reserved for the relation-input gain g); mean and 95% CI from adapter_contrasts.csv; significance results are reported in the main text.",
+                "C: within-source differences, adapter A learned minus A fixed to the identity ('gain' is reserved for the relation-input gain g); mean and 95% CI from adapter_contrasts.csv; significance results are reported in the main text.",
                 "Layout: closed axes in all panels; C's gain axis starts at -0.025 so zero-gain rows stay clear of the y axis.",
             ],
         ),

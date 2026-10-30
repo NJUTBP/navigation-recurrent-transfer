@@ -90,7 +90,7 @@ def panel_final_differences(ax):
     ax.set_xticks(x, [label for _s, label in order])
     ax.set_ylim(-.06, .66)
     ax.set_yticks([0, .2, .4, .6])
-    ax.set_ylabel("Δ test accuracy\n(Nav. − matched)")
+    ax.set_ylabel(r"$\Delta\mathrm{Acc}_{\mathrm{test}}$" + "\n(Nav. − matched)")
     style_axis(ax, max_y_ticks=5, max_x_ticks=2)
 
 
@@ -150,7 +150,11 @@ def make_s7():
     panel_additive(axs[3])
     fig.align_ylabels([axs[0], axs[2]])
     fig.align_ylabels([axs[1], axs[3]])
-    place_panel_labels(fig, list(zip(axs, "ABCD")))
+    # Keep the panel-letter anchors independent of the mathematical label height.
+    place_panel_labels(fig, [(axs[0], "A"),
+                             (axs[1], "B", {"x_fig": 0.5481264367816092}),
+                             (axs[2], "C"),
+                             (axs[3], "D", {"x_fig": 0.5481264367816092})])
     return save_publication_figure(fig, OUT / "SupplementaryFigureS7")
 
 

@@ -47,7 +47,7 @@ OUT = figure_paths.OUT
 
 NAV = PALETTE['navigation']
 MATCHED = PALETTE['matched']      # L* 55, distinguishable from NAV in greyscale
-FRESH = PALETTE['fresh']          # L* 75
+FRESH = PALETTE['fresh']          # L* 47 (final revision)
 BASELINE = PALETTE['relation']
 ROLE_OF = {'Navigation': 'navigation', 'Matched control': 'matched', 'Fresh-random control': 'fresh'}
 
@@ -227,11 +227,10 @@ def panel_gain(ax, split='id_seen_short', title=None):
         ax.plot(arr[:, 0], arr[:, 1], **kw)
         handles.append(legend_handle(spec, label))
     ax.set_xscale('log')
-    ax.set_xticks(gains, ['1', '3', '10'])
+    ax.set_xticks(gains, [f'$g$ = {v}' for v in gains])   # final revision: g in the tick labels
     ax.minorticks_off()
     ax.set_xlim(.74, 13.5)
     accuracy_axis(ax, label='Seen-short test accuracy' if split == 'id_seen_short' else 'Long-path test accuracy')
-    ax.set_xlabel('Fixed relation-input gain $g$')
     legend(ax, loc='lower right', handles=handles[::-1], bbox_to_anchor=(1.0, 0.02))
     closed_frame(ax)
 
@@ -242,8 +241,8 @@ def panel_transfer_regime(ax):
     x = np.arange(3.)
     for i, origin in enumerate(origins):
         spec = role(ROLE_OF[origin])
-        if origin == 'Fresh-random control':
-            spec = dict(spec, color='#9EA3A8')    # a touch darker so light markers keep their edge
+        # (final revision: the panel-specific lighter-grey override was removed; the darker
+        #  palette colour of the fresh-random core is used as in b)
         pair = paired_source_frame(SCALAR[origin], FULL[origin], 'seen_long')
         left, right = i - .17, i + .17
         a = pair.left.to_numpy(float)

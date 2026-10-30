@@ -35,12 +35,15 @@ P_COLUMN = "p_sign_flip_holm"
 #: Mean labels in B use the precision of the main text (0.9985, 0.2810, 0.1899).
 MEAN_LABEL_FMT = "{:.4f}"
 
+INPUT_ONLY_COLOR = "#4E9A55"   # L* 57
 CURVE_STYLE = {
     #"transfer_finetune": (role("navigation_dark"), r"Nav. $W_{in}$ + $W_{rec}$"),
     #"transfer_input_only": (role("input"), r"Nav. $W_{in}$ only"),
     #"transfer_recurrent_only": (role("recurrent"), r"Nav. $W_{rec}$ only"),
     "transfer_finetune": (role("navigation_dark"), r"Nav. $\mathbf{W}_{\mathrm{in}}$ + $\mathbf{W}_{\mathrm{rec}}$"),
-    "transfer_input_only": (role("input"), r"Nav. $\mathbf{W}_{\mathrm{in}}$ only"),
+    # Final revision: green instead of the light teal "input" tint, so that the three
+    # navigation-initialised arms differ in hue (navy / teal / green), not only in lightness.
+    "transfer_input_only": (role("input", color=INPUT_ONLY_COLOR), r"Nav. $\mathbf{W}_{\mathrm{in}}$ only"),
     "transfer_recurrent_only": (role("recurrent"), r"Nav. $\mathbf{W}_{\mathrm{rec}}$ only"),
     
     
@@ -164,7 +167,7 @@ def _panel_differences(ax, contrasts, paired):
     ax.set_ylim(-0.55, n - 0.45)
     # Same 0-1 scale as the accuracies in A and B; starts below 0 so the zero
     # reference line stays clear of the y axis.
-    accuracy_axis(ax, which="x", label="Δ test accuracy")
+    accuracy_axis(ax, which="x", label=r"$\Delta\mathrm{Acc}_{\mathrm{test}}$")
     closed_frame(ax)
 
 

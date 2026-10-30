@@ -54,9 +54,9 @@ PALETTE = {
     "relation": "#7B5EA7",         # L* 46  relation / coordinate-remapping accent
     "relation_dark": "#5F4A84",    # L* 36
     "relation_light": "#A58FCB",   # L* 62
-    "random": "#8D9296",           # L* 60  random recurrent controls
+    "random": "#6B7075",           # L* 47  random recurrent controls (final revision; was #8D9296, L* 60)
     "matched": "#80858A",          # L* 55  matched random control (Phase F / mechanism)
-    "fresh": "#B4B8BC",            # L* 75  fresh-random control
+    "fresh": "#6B7075",            # L* 47  fresh-random control: same untrained distribution as 'random' (final revision; was #B4B8BC, L* 75)
     "input": "#6FA8B8",            # L* 66  input-path / W_in manipulations
     "recurrent": "#3F7486",        # L* 46  core / W_rec manipulations
     "full": "#1D4580",
@@ -240,7 +240,7 @@ def difference_spec(minuend: dict, subtrahend: dict, **overrides) -> dict:
 
 
 #: How far the connecting line of a comparison curve is lightened toward white.
-LIGHT_LINE_AMOUNT = 0.45
+LIGHT_LINE_AMOUNT = 0.20   # final revision; was 0.45 (comparison curves read too faint in print)
 
 
 def light_line_kw(spec: dict, *, ms: float | None = None, markevery=None, label=None,

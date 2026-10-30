@@ -188,10 +188,10 @@ def panel_gain(ax, split='seen_long', title='Fixed relation-input gain modulates
             capsize=CAPSIZE, elinewidth=ERROR_LINEWIDTH, zorder=4,
         )
     ax.set_xscale('log')
-    ax.set_xticks(gains, ['1', '3', '10'])
+    ax.set_xticks(gains, [f'$g$ = {v}' for v in gains])   # final revision: as Figure 6c
     ax.set_xlim(.82, 12.2)
     ax.set_ylim(0, 1.03)
-    ax.set_xlabel('Fixed relation-input gain $g$')
+    ax.set_xlabel('Fixed relation-input gain')
     accuracy_axis(ax, label='Long-path test accuracy')
     legend(ax, loc='lower right')
     style_axis(ax, max_y_ticks=5, max_x_ticks=3)

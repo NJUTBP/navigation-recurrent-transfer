@@ -6,7 +6,7 @@ rate_map_rank_{2..5}_2500.csv and representative_grid_scores.csv).  Panels: a pa
 error eps_pos and b grid-like unit fraction f_G over training (all sources, mean +/- SEM,
 validation-best checkpoints marked); c the representative decoded trajectory with per-step
 decoding error and a 10-cm scale bar; d the grid-score distribution of every unit of the
-representative source on a broken y axis (the G > 0.3 criterion is drawn only if it reproduces f_G
+representative source on a broken y axis (the S_G > 0.3 criterion is drawn only if it reproduces f_G
 of navigation_history.csv); e the units ranked 2-5: spatial autocorrelograms (top, with G) and rate
 maps (bottom).  The representative rollout is the candidate with the lowest mean decoding error in
 trajectory_candidates_20step/trajectory_candidates_summary.csv (final error and trajectory id break
@@ -248,7 +248,7 @@ def _grid_score_panel(ax, ax_top, scores: pd.DataFrame, hist: pd.DataFrame, rep_
     ax.set_yticks(np.arange(0, low_top + 1e-9, step))
     # The histogram remains a grid-score distribution, but the advisor asked
     # to remove the redundant x-axis title and use the compact count label.
-    ax.set_xlabel("Grid score")
+    ax.set_xlabel(r"Grid score $S_{\mathrm{G}}$")
     ax.set_ylabel("Counts")
     if broken:
         ax_top.set_ylim(high_bottom, high_top)
@@ -457,7 +457,7 @@ def build(ctx: FigureContext):
         _bare_image_axis(ax)
         top_ax = sac_ax if sac_ax is not None else ax
         g = float(frame.grid_score.iloc[0])
-        top_ax.text(0.5, 1.03, f"$G$ = {g:.2f}", transform=top_ax.transAxes, ha="center",
+        top_ax.text(0.5, 1.03, rf"$S_{{\mathrm{{G}}}}$ = {g:.2f}", transform=top_ax.transAxes, ha="center",
                     va="bottom", fontsize=FS_MIN)
         if sac_ax is not None:
             sac = _spatial_autocorrelogram(mat)
@@ -532,7 +532,7 @@ def build(ctx: FigureContext):
             notes=[
                 "Figure1 is an external author-drawn model schematic.",
                 "A, B: grey = individual navigation sources, blue = mean +/- SEM; hollow points mark minimum-validation-loss checkpoints used by all transfer analyses. A: position-decoding error eps_pos on a logarithmic axis. B: grid-like unit fraction f_G as a fraction (0-1). The log2 epoch axis runs from just below epoch 1 to 256 so that all 150 epochs lie inside the labelled range.",
-                f"D: grid scores of all units of source {rep_seed} at its validation-best checkpoint (representative_grid_scores.csv). The dashed G = {GRID_THRESHOLD} criterion (blue bars = grid-like units) is drawn only when the fraction of units above it reproduces f_G of navigation_history.csv (|diff| < 0.002). The y axis is broken when the near-zero bin exceeds twice the second-tallest bin; both segments use the same counts per inch.",
+                f"D: grid scores of all units of source {rep_seed} at its validation-best checkpoint (representative_grid_scores.csv). The dashed S_G = {GRID_THRESHOLD} criterion (blue bars = grid-like units) is drawn only when the fraction of units above it reproduces f_G of navigation_history.csv (|diff| < 0.002). The y axis is broken when the near-zero bin exceeds twice the second-tallest bin; both segments use the same counts per inch.",
                 f"C: true (grey) and decoded (blue) positions of the lowest-mean-error member of the frozen validation-trajectory candidate table (trajectory id {trajectory_selection['trajectory_id']}, {trajectory_selection['n_candidates']} candidates, {trajectory_selection['n_steps']} steps); the decoder output is held over consecutive steps, so coincident decoded markers overlap exactly; filled circle = start (step 1), open circle = end; thin grey segments join simultaneous true/decoded positions; scale bar 10 cm.",
                 "E: units ranked 2 through 5; top row = spatial autocorrelograms (G above each column), bottom row = rate maps; the coordinate glyph at the left of each row shows x/y (rate map, 0.5 m arms) and lag dx/dy (autocorrelogram, 1 m arms), assuming the 50 x 50 maps tile the 2.2 m arena. Rate maps use NaN-aware Gaussian smoothing (sigma = 0.75 bin) for display only. Autocorrelograms follow the map-level procedure of Savelli et al. (2017, doi:10.7554/eLife.21354): 5x5 Gaussian smoothing with variance 2 bins^2, at least 5 finite bins per smoothing window, Pearson correlation with overlap >= 100 bins, full lag range without circular cropping, colour scale [-1, 1]. Input zeros are treated as observed values; occupancy masks are unavailable. Displayed grid scores are the frozen values and are not recomputed.",
             ],
