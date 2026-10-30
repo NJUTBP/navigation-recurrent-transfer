@@ -154,7 +154,7 @@ def panel_replication(ax):
     col = spec['color']
     reference_line(ax, 0)
     ax.plot([-0.4, len(seeds) - 0.6], [row.mean_difference] * 2, color=col, lw=LINEWIDTH_SECONDARY,
-            ls=(0, (4, 2)), zorder=2)
+            ls=':', zorder=2)
     ax.scatter(x, vals, zorder=4, s=34 * spec['ms_scale'] ** 2, marker=spec['marker'], facecolor=col,
                edgecolor='white', linewidth=0.6)
     # Mean and its 95 % CI (frozen ci95_low / ci95_high) beyond the last source.

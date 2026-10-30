@@ -1858,8 +1858,8 @@
     },
     {
       "path": "figures/hard8_phaseF/make_figure6.py",
-      "bytes": 13337,
-      "sha256": "922c42e19ed436e93261cc84ea3b8a31ecd14f44d5055b8ac0ce2effa1912fc0"
+      "bytes": 13329,
+      "sha256": "8463a3055c33b0fa98f50312cbf1855f452a5891555d81f8ba6be45c946772bd"
     },
     {
       "path": "figures/hard8_phaseF/make_figure7.py",
