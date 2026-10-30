@@ -149,7 +149,7 @@ def _gain_panel(ax, paired, contrasts, tfs):
     # line, clear of the y axis.
     ax.set_xlim(-0.025, 0.31)
     ax.set_xticks([0, 0.1, 0.2, 0.3])
-    ax.set_xlabel(r"$\Delta\mathrm{Acc}_{\mathrm{test}}$ ($\mathbf{A}$ learned − fixed)")
+    ax.set_xlabel("Test accuracy difference\n" + r"($\mathbf{A}$ learned − fixed)")
     closed_frame(ax)
 
 

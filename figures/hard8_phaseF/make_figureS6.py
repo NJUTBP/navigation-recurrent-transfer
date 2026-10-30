@@ -203,9 +203,10 @@ def panel_lengths(ax):
         ys /= ys.sum()
         return xs, ys
 
+    # Split identity is independent of the matched-control condition colour.
     specs = [
         ('train_8000', 'Train', NAV, 'o', '-'),
-        ('id_seen_short', 'Seen short', MATCHED, 's', '-'),
+        ('id_seen_short', 'Seen short', '#80858A', 's', '-'),
         ('heldout_short', 'Held-out short', BASELINE, 'D', '--'),
     ]
     xs_seen, ys_seen = distribution('seen_long')

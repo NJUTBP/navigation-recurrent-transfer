@@ -167,7 +167,7 @@ def _panel_differences(ax, contrasts, paired):
     ax.set_ylim(-0.55, n - 0.45)
     # Same 0-1 scale as the accuracies in A and B; starts below 0 so the zero
     # reference line stays clear of the y axis.
-    accuracy_axis(ax, which="x", label=r"$\Delta\mathrm{Acc}_{\mathrm{test}}$")
+    accuracy_axis(ax, which="x", label="Test accuracy difference")
     closed_frame(ax)
 
 

@@ -55,7 +55,7 @@ def build(ctx: FigureContext):
                 pspecs.append((c, name, PALETTE["navigation"]))
     plot_paired_named(
         b, paired, pspecs,
-        xlabel=r"$\Delta\mathrm{Acc}_{\mathrm{test}}$",
+        xlabel="Test accuracy difference",
         xlim=(-0.03, 1.00),
         shade_positive=False,
     )

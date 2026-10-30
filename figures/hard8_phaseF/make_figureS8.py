@@ -128,7 +128,7 @@ def panel_delta_prediction(ax):
     # in text.
     xbar, ybar = float(np.mean(x)), float(np.mean(y))
     ax.annotate("", xy=(xbar, ybar), xytext=(xbar, xbar),
-                arrowprops=dict(arrowstyle="<->", lw=.7, color=MATCHED,
+                arrowprops=dict(arrowstyle="<->", lw=.7, color="#80858A",
                                 shrinkA=0, shrinkB=0), zorder=2)
     stat = STATS["panelD_prediction_test"]
 
@@ -140,7 +140,7 @@ def panel_delta_prediction(ax):
     ax.set_xticks([-4, -2, 0, 2])
     ax.set_yticks([-4, -2, 0, 2])
     ax.text(hi - .35, hi - .35, "identity", ha="right", va="bottom",
-            rotation=45, rotation_mode="anchor", fontsize=5.8, color=MATCHED)
+            rotation=45, rotation_mode="anchor", fontsize=5.8, color="#80858A")
     annotate(ax, f"mean error = {num(stat['mean_error_log2'])} log$_2$\n"
                  f"exact $P$ = {stat['exact_p']:.6f}", loc="lower right")
     ax.set_xlabel("Predicted log$_2$ gain shift")

@@ -53,7 +53,7 @@ SOURCE_ROOT = figure_paths.SOURCE_ROOT
 OUT = figure_paths.OUT
 
 NAV = PALETTE["navigation"]
-MATCHED = PALETTE["matched"]   # L* 55, distinguishable from NAV in greyscale
+MATCHED = PALETTE["matched"]   # matched-control condition colour
 REL = PALETTE["relation"]
 REC = PALETTE["recurrent"]
 NEG = PALETTE["negative"]

@@ -1858,8 +1858,8 @@
     },
     {
       "path": "figures/hard8_phaseF/make_figure6.py",
-      "bytes": 13329,
-      "sha256": "8463a3055c33b0fa98f50312cbf1855f452a5891555d81f8ba6be45c946772bd"
+      "bytes": 13443,
+      "sha256": "cf582ef8c60a030783796b916fbc423e2329b5f98a4fe1716bc9deb6c71ebc51"
     },
     {
       "path": "figures/hard8_phaseF/make_figure7.py",
@@ -1883,33 +1883,33 @@
     },
     {
       "path": "figures/hard8_phaseF/make_figureS6.py",
-      "bytes": 10238,
-      "sha256": "a26d25fb4015a8e7b9a15a6fbd85476cd34df1061106d25b98cff4720d11cdee"
+      "bytes": 10317,
+      "sha256": "4daef370dfb81e29ee5a900aabae621ff442021092cf63810305100f7a7d3b8c"
     },
     {
       "path": "figures/hard8_phaseF/make_figureS7.py",
-      "bytes": 7538,
-      "sha256": "fc0b805f268ace627ac2874bf1f56747a7ac7eacd7430077264a15f82f601848"
+      "bytes": 7512,
+      "sha256": "5019a0fe41a7b279a5bb893674bc230cd4728ec83b37a44896633f884d5ccfd6"
     },
     {
       "path": "figures/hard8_phaseF/make_figureS8.py",
-      "bytes": 6911,
-      "sha256": "438ddaa0a9abfa5d57778af5275101c3bd3fc6c7cab3310d1646f809f8c1ea4c"
+      "bytes": 6915,
+      "sha256": "5272c1cfb252842687a862fce06cb1db529943c87b8a5189616b20d5103de292"
     },
     {
       "path": "figures/hard8_phaseF/make_figureS9.py",
-      "bytes": 7910,
-      "sha256": "5d45f5ab67e3f8afce8a04f9279572c3169dcefb36be9b88dd77d9264c5d3de0"
+      "bytes": 7897,
+      "sha256": "389f790ac9d11960d78de51ec9219cf2f8b765d5ea39114f34f897155c5aa15b"
     },
     {
       "path": "figures/hard8_phaseF/mechanism_plot_common.py",
-      "bytes": 8430,
-      "sha256": "74a0878c89f77de2c4a905500cdc6a3683aac3d3ee29f09782e859e2175b8572"
+      "bytes": 8418,
+      "sha256": "c433a449ce161dff2a519a3addb3de49bb158651ce26623c7b4bd8fef75aedfd"
     },
     {
       "path": "figures/hard8_phaseF/nature_style.py",
-      "bytes": 47232,
-      "sha256": "9df11c1e54b5af6e053e046f114c05635930aec970fbc3c4d9c00cbe028b0b95"
+      "bytes": 47243,
+      "sha256": "ff1fdff0d365779b0bf5a4a2b7a9ed3470878465f9fcebe60c4eb70887bfcd93"
     },
     {
       "path": "figures/paper_figures/__init__.py",
@@ -1933,18 +1933,18 @@
     },
     {
       "path": "figures/paper_figures/make_figure3_frozen_transfer.py",
-      "bytes": 11054,
-      "sha256": "7a76ec517f5bf30185cf164b2cf1517fb96bf8bbaab0a6dcbf5a67716666c028"
+      "bytes": 11041,
+      "sha256": "4b8e586dddb43e15104ee3d95c0407fb68c099cd6906a33ce9dbd5c2142667bf"
     },
     {
       "path": "figures/paper_figures/make_figure4_interface.py",
-      "bytes": 8869,
-      "sha256": "24e023f71be723445d4ff0b7942691731e314558d4e704ab8897ad20ee13a9a0"
+      "bytes": 8863,
+      "sha256": "65e16dc14f34a28c08f72f6df3486d8d6c85f48343838a7459def455719570d9"
     },
     {
       "path": "figures/paper_figures/make_figure5_symbols.py",
-      "bytes": 9856,
-      "sha256": "ed1f42e3624abc8b06bd256e21154db7e7dbd5286e39f7b40e3a0e87ea4bb5fe"
+      "bytes": 9843,
+      "sha256": "891a22913d3c59e8dd9a7a7d98a40c63bf0d56443d1df97932b337150dc5a76e"
     },
     {
       "path": "figures/paper_figures/make_figureA1_control.py",
@@ -1953,8 +1953,8 @@
     },
     {
       "path": "figures/paper_figures/make_figureA2_mapping_controls.py",
-      "bytes": 3247,
-      "sha256": "70521ab788709a361fe619b52c68725799f60746f2640b879c8faeb1c40bfa70"
+      "bytes": 3234,
+      "sha256": "d9d3325372fd0a46e59a5bb19d986fa38cbd4ca37f53f6baea08b0848c4cb4a0"
     },
     {
       "path": "figures/paper_figures/make_figureA3_mechanism.py",
@@ -1968,13 +1968,13 @@
     },
     {
       "path": "figures/paper_figures/make_figureA6_associations.py",
-      "bytes": 5606,
-      "sha256": "38babf5ebe0340956138cf8b025bc8d0c989bb0c9e84e906cb57e147ef4d5756"
+      "bytes": 5572,
+      "sha256": "d806b080d7d02c7b941179a1edf03cbf83ec791baa88fbc7f73a690f7dd770ec"
     },
     {
       "path": "figures/paper_figures/nature_style.py",
-      "bytes": 47232,
-      "sha256": "9df11c1e54b5af6e053e046f114c05635930aec970fbc3c4d9c00cbe028b0b95"
+      "bytes": 47243,
+      "sha256": "ff1fdff0d365779b0bf5a4a2b7a9ed3470878465f9fcebe60c4eb70887bfcd93"
     },
     {
       "path": "figures/redraw_all_figures.py",

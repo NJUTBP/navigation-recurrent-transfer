@@ -55,7 +55,7 @@ PALETTE = {
     "relation_dark": "#5F4A84",    # L* 36
     "relation_light": "#A58FCB",   # L* 62
     "random": "#6B7075",           # L* 47  random recurrent controls (final revision; was #8D9296, L* 60)
-    "matched": "#80858A",          # L* 55  matched random control (Phase F / mechanism)
+    "matched": "#6D597A",          # L* 41  muted purple-grey matched control (Phase F / mechanism)
     "fresh": "#6B7075",            # L* 47  fresh-random control: same untrained distribution as 'random' (final revision; was #B4B8BC, L* 75)
     "input": "#6FA8B8",            # L* 66  input-path / W_in manipulations
     "recurrent": "#3F7486",        # L* 46  core / W_rec manipulations

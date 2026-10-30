@@ -17,8 +17,8 @@ from .nature_style import FIG_WIDTH, difference_spec, role
 #: difference rule (mix of navigation and DR colours, DR marker), as in Fig. 3C.
 NAV_MINUS_DR = difference_spec(role("navigation"), role("dr"))
 SPECS = [
-    ("aligned_nav_minus_dr", "Aligned endpoint task", r"$\Delta\mathrm{Acc}_{\mathrm{test}}$ (Nav. − DR)", NAV_MINUS_DR["color"]),
-    ("symbolic1000_nav_minus_dr", "Arbitrary symbols, 1,000 trials", r"$\Delta\mathrm{Acc}_{\mathrm{test}}$ (Nav. − DR)", NAV_MINUS_DR["color"]),
+    ("aligned_nav_minus_dr", "Aligned endpoint task", "Test accuracy difference (Nav. − DR)", NAV_MINUS_DR["color"]),
+    ("symbolic1000_nav_minus_dr", "Arbitrary symbols, 1,000 trials", "Test accuracy difference (Nav. − DR)", NAV_MINUS_DR["color"]),
     ("symbolic_low_auc_nav_minus_dr", "Arbitrary symbols, 10–200 trials", r"$\Delta\mathrm{AUC}_{\mathrm{10\!:\!200}}$ (Nav. − DR)", NAV_MINUS_DR["color"]),
 ]
 
@@ -77,7 +77,7 @@ def build(ctx: FigureContext):
             "spearman_rho": rho, "spearman_p": ps,
         })
 
-    # Keep the panel-letter anchors independent of the mathematical label height.
+    # Keep the panel-letter anchors independent of the axis-label height.
     place_panel_labels(fig, [(axs[0], "A", {"x_fig": 0.011334035759897833}),
                              (axs[1], "B", {"x_fig": 0.3514350458609079}),
                              (axs[2], "C")])

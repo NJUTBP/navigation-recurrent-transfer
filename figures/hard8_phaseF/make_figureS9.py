@@ -159,7 +159,7 @@ def panel_anchors(ax):
     ax.set_ylim(max(yp for yp, _ in rows) + .55, -.55)  # inverted: first contrast on top
     ax.set_xlim(-.038, .060)
     ax.set_xticks([-.02, 0, .02, .04])
-    ax.set_xlabel(r"$\Delta\mathrm{Acc}_{\mathrm{test}}$")
+    ax.set_xlabel("Test accuracy difference")
 
     style_axis(ax, max_y_ticks=6, max_x_ticks=5)
     # Group brackets live outside the data area, in the tick-label column.

@@ -172,7 +172,7 @@ def build(ctx: FigureContext):
     # Labelled ends enclose every source-level difference (B: -0.15 to 0.77,
     # C: -0.057 to 0.085); the zero reference line stays clear of the y axis.
     _panel_forest(ax_b, paired, contrasts, "F4_accuracy_1000",
-                  xlabel=r"$\Delta\mathrm{Acc}_{\mathrm{test}}$", xlim=(-0.4, 0.88),
+                  xlabel="Test accuracy difference", xlim=(-0.4, 0.88),
                   xticks=[-0.4, 0, 0.4, 0.8], xminor=[-0.2, 0.2, 0.6])
     _panel_forest(ax_c, paired, contrasts, "F4_logAUC_10_200",
                   xlabel=r"$\Delta\mathrm{AUC}_{\mathrm{10\!:\!200}}$", xlim=(-0.1, 0.1),

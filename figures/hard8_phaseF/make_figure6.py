@@ -46,7 +46,7 @@ FOLLOW = figure_paths.PHASEF_TABLES
 OUT = figure_paths.OUT
 
 NAV = PALETTE['navigation']
-MATCHED = PALETTE['matched']      # L* 55, distinguishable from NAV in greyscale
+MATCHED = PALETTE['matched']      # matched-control condition colour
 FRESH = PALETTE['fresh']          # L* 47 (final revision)
 BASELINE = PALETTE['relation']
 ROLE_OF = {'Navigation': 'navigation', 'Matched control': 'matched', 'Fresh-random control': 'fresh'}
@@ -189,8 +189,12 @@ def panel_horizon(ax):
         y = z['mean'].to_numpy(float)
         se = z['sem'].to_numpy(float)
         ax.fill_between(x, y - se, y + se, color=spec['color'], alpha=BAND_ALPHA, lw=0, zorder=1)
-        ax.plot(x, y, **line_kw(spec, zorder=5 if cond == PRIMARY_NAV else 3))
+        kw = line_kw(spec, zorder=5 if cond == PRIMARY_NAV else 3)
+        if cond == PRIMARY_FRESH:
+            kw['ms'] += 1.1
+        ax.plot(x, y, **kw)
         handles[label] = legend_handle(spec, label)
+        handles[label].set_markersize(kw['ms'])
     ax.axvline(5.5, color=PALETTE['neutral_mid'], lw=.8, ls=(0, (3, 2)), zorder=0)
     reference_line(ax, 1 / 64)
     accuracy_axis(ax, label='Test accuracy')
