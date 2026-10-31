@@ -2,7 +2,7 @@
 """Redraw the computational figures of the article from the figure source data.
 
     python figures/redraw_all_figures.py --aggregate data/aggregate_full --out outputs/figures
-    python figures/redraw_all_figures.py --figures Figure7,SupplementaryFigureS12
+    python figures/redraw_all_figures.py --figures Figure7,SupplementaryFigureS11
 
 The builders read only the frozen tables in <aggregate>/figure_source_data and
 <aggregate>/hard8x8_phaseF_followup; no experiment, aggregation or statistical test is rerun.
@@ -112,7 +112,7 @@ def main() -> int:
     ap.add_argument("--out", type=Path, default=REPOSITORY_ROOT / "outputs" / "figures",
                     help="output directory (default: outputs/figures); must not lie inside the source data")
     ap.add_argument("--figures", default=None,
-                    help="comma-separated figure names, e.g. Figure6,SupplementaryFigureS12 (default: all)")
+                    help="comma-separated figure names, e.g. Figure6,SupplementaryFigureS11 (default: all)")
     args = ap.parse_args()
 
     known = [figure.number for figure in in_paper_order()]

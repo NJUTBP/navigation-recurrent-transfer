@@ -19,7 +19,7 @@ The ten navigation sources are the independent statistical unit throughout: targ
 | Frozen-core transfer and controls, 4 × 4 task (Figs. 3–5, S4) | `code/gpm_cmap/experiments/exp5_abstract_pathint.py`, `exp7_adapter_rescue.py`, `exp8_symbolic_adapter.py`; per-source driver `lsf_best_validation/`; 7,000-trial baseline points `extensions/symbolic_baseline7000_extension_v1/` |
 | Orchestration and statistics of the 4 × 4 cohort | `code/multinav/`; aggregation `topology/schoyen_formal_figureA3_patch_v1/unified_aggregate/` |
 | Extended 8 × 8 task, "Phase F" (Figs. 6, S5, S6) | `tools/hard8x8_phaseF_fullscale_v1/` (protocol, training, collection, tests); `tools/FigureA5_PhaseF_workflow_v1/` (copies the results into the figure data) |
-| Mechanistic analyses (Figs. 7, S7–S9, S11, S12) | `tools/mechanism_v1/` ([index](tools/mechanism_v1/README.md)) |
+| Mechanistic analyses (Figs. 7, S7–S11) | `tools/mechanism_v1/` ([index](tools/mechanism_v1/README.md)) |
 | Topology analyses (Figs. S2, S3) | `topology/` |
 | Re-evaluation of the released models | `tools/reevaluation/` |
 | Figure reproduction | `figures/` ([figures/README.md](figures/README.md)) |
@@ -47,7 +47,7 @@ Use Python 3.11 for the pinned figure environment. To rebuild and re-evaluate ta
 |---|---|---|
 | in this repository: `data/aggregate_full/` | Source data of every computational figure (CSV/JSON) | Level 1 |
 | `P1_pretrained_checkpoints.tar` | Selected navigation (seeds 6101–6110) and delayed-reconstruction (seeds 7101–7110) networks, weights only, with training histories | Levels 2–3 |
-| `P2_target_checkpoints.tar` | Frozen-core target models of Figs. 6–7, S5–S8 and S12 (the frozen core is not stored; it is rebuilt from P1 and the recorded seeds) | Level 2 |
+| `P2_target_checkpoints.tar` | Frozen-core target models of Figs. 6–7, S5–S8 and S11 (the frozen core is not stored; it is rebuilt from P1 and the recorded seeds) | Level 2 |
 | `P3_source_level_results.tar.gz` | Source-, cell- and target-level results, split manifests and protocols of all formal experiments | Levels 1–2 |
 
 Model weights and source-level results are available from [Zenodo, DOI: 10.5281/zenodo.23660866](https://doi.org/10.5281/zenodo.23660866). Extract the packages **into the repository root**; they create `sources/` and `rerun_best_validation/` with the original relative paths, which the code reads without further configuration:
@@ -72,7 +72,7 @@ Level 1 needs only this repository and runs on a CPU in about a minute:
 
 ```bash
 python figures/redraw_all_figures.py --aggregate data/aggregate_full --out outputs/figures
-python figures/redraw_all_figures.py --aggregate data/aggregate_full --out outputs/figures --figures Figure7,SupplementaryFigureS12
+python figures/redraw_all_figures.py --aggregate data/aggregate_full --out outputs/figures --figures Figure7,SupplementaryFigureS11
 python figures/export_source_data_final.py --aggregate data/aggregate_full --out outputs/source_data_final
 ```
 
@@ -96,9 +96,9 @@ The first command writes `Figure2` … `Figure7` and `SupplementaryFigureS1` …
 | S7 | Extended budget, gain and additive controls | `SupplementaryFigureS8` |
 | S8 | Multi-step state maintenance | `SupplementaryFigureS9` |
 | S9 | Refitting of the navigation mappings | `SupplementaryFigureS11` |
-| S10 | Grid-like unit fraction and transfer | `FigureA6` |
-| S11 | Prespecified source-measure analyses | `SupplementaryFigureS10` |
-| S12 | Rescaling by path length and source | `SupplementaryFigureS12` |
+| S10 | Prespecified source-measure analyses | `SupplementaryFigureS10` |
+| S11 | Rescaling by path length and source | `SupplementaryFigureS12` |
+| S12 | Grid-like unit fraction and transfer | `FigureA6` |
 
 The folder names are builder identifiers; `figures/figure_numbering.py` is the single table that relates them to the article. [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md) lists, for every figure, the plotting and experiment code, the data read and where each statistic of the text is computed.
 
@@ -112,14 +112,14 @@ python tools/reevaluation/reevaluate_models.py --family phasef --out outputs/ree
 python tools/reevaluation/reevaluate_models.py --family e09a   --out outputs/reeval_e09a.csv
 python tools/reevaluation/reevaluate_models.py --family e6     --out outputs/reeval_e6.csv
 python tools/reevaluation/reevaluate_models.py --family e6i    --out outputs/reeval_e6i.csv
-# Supplementary Fig. S12: task-state retention and the figure's source data
+# Supplementary Fig. S11: task-state retention and the figure's source data
 python tools/reevaluation/task_state_retention.py --out outputs/task_state_retention.csv
 python tools/mechanism_v1/E6_retention_intervention_v1/scripts/export_figureS12_source_data.py \
     --mech-root rerun_best_validation/followups/mechanism_v1 \
-    --task-state-csv outputs/task_state_retention.csv --out outputs/S12_source_data
+    --task-state-csv outputs/task_state_retention.csv --out outputs/S11_source_data
 ```
 
-`reevaluate_models.py` rebuilds every model (navigation core from P1, transformed core from the recorded seed, interface and readout from P2), evaluates the four test sets and compares the accuracies with the stored `metrics.csv` (tolerance 0.002); a deviation gives a nonzero exit status, and `--limit N` evaluates only the first N models. The families are `phasef` (Figs. 6, S5, S8), `e09a` (S7), `e6` (Figs. 7b–d, S12) and `e6i` (Figs. 7e, S12). Missing packages or a missing PyTorch installation are reported before any computation. Source-side analyses of the pretrained cores (retention κ, Fig. 7d; source measures, Fig. S11) and the navigation and topology analyses (Figs. 2, S2) run from P1 with the scripts listed in [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md). The 4 × 4 target models are not released; Figs. 3–5 and S4 are reproduced at Levels 1 and 3.
+`reevaluate_models.py` rebuilds every model (navigation core from P1, transformed core from the recorded seed, interface and readout from P2), evaluates the four test sets and compares the accuracies with the stored `metrics.csv` (tolerance 0.002); a deviation gives a nonzero exit status, and `--limit N` evaluates only the first N models. The families are `phasef` (Figs. 6, S5, S8), `e09a` (S7), `e6` (Figs. 7b–d, S11) and `e6i` (Figs. 7e, S11). Missing packages or a missing PyTorch installation are reported before any computation. Source-side analyses of the pretrained cores (retention κ, Fig. 7d; source measures, Fig. S10) and the navigation and topology analyses (Figs. 2, S2) run from P1 with the scripts listed in [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md). The 4 × 4 target models are not released; Figs. 3–5 and S4 are reproduced at Levels 1 and 3.
 
 ## Reproducing the experiments
 
@@ -144,7 +144,7 @@ The 8 × 8 and mechanism scripts write below `rerun_best_validation/`, the same 
 |---|---|---|
 | Redraw one figure | this repository | `python figures/redraw_all_figures.py --figures Figure6` |
 | Re-evaluate a few 8 × 8 models | P1–P3, PyTorch | `python tools/reevaluation/reevaluate_models.py --family phasef --limit 3 --out outputs/reeval_smoke.csv` |
-| Re-evaluate the rescaling models (Figs. 7e, S12) | P1–P3, PyTorch | `python tools/reevaluation/reevaluate_models.py --family e6i --out outputs/reeval_e6i.csv` |
+| Re-evaluate the rescaling models (Figs. 7e, S11) | P1–P3, PyTorch | `python tools/reevaluation/reevaluate_models.py --family e6i --out outputs/reeval_e6i.csv` |
 | Retrain one 8 × 8 cell | P1, GPU | `run_group.py --source-seed 6101 --target-seed 84001 --group learned_interface` |
 | Rerun the 4 × 4 experiments of one source | P1, GPU | `run_best_validation_source.py ... --source-seed 6101 --family main` |
 

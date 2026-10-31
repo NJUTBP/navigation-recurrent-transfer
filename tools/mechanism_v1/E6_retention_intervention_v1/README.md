@@ -18,4 +18,4 @@ python tools/mechanism_v1/E6_retention_intervention_v1/scripts/run_intervention.
 python tools/mechanism_v1/E6_retention_intervention_v1/scripts/collect_intervention.py
 ```
 
-A GPU is needed for practical run times. Output: `rerun_best_validation/followups/mechanism_v1/E6_retention_intervention/`. P2 contains the 60 trained models (`reevaluate_models.py --family e6i`). `scripts/export_figureS12_source_data.py` writes the Supplementary Fig. S12 tables from these outputs and the task-state retention table of `tools/reevaluation/task_state_retention.py`. Figures: 7e, S12.
+A GPU is needed for practical run times. Output: `rerun_best_validation/followups/mechanism_v1/E6_retention_intervention/`. P2 contains the 60 trained models (`reevaluate_models.py --family e6i`). `scripts/export_figureS12_source_data.py` writes the Supplementary Fig. S11 tables from these outputs and the task-state retention table of `tools/reevaluation/task_state_retention.py`. Figures: 7e, S11.

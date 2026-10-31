@@ -9,13 +9,13 @@ Follow-up analyses of the extended 8 × 8 task (`tools/hard8x8_phaseF_fullscale_
 | `E0_1_nonrecurrent_baselines_v1` | Non-recurrent algorithmic baselines on the Phase F splits | yes (10 cells) | S7 |
 | `E0_67_forward_diagnostics_v1` | Recurrence ablation and order shuffling (E0.6), error displacement (E0.7), state diagnostics and δ (E0.4) | no (forward passes) | 7a, S8 |
 | `E5b_delta_prediction_v1` | Gain ratio predicted by the one-step rectified displacement δ (E5b′) | no | S8 |
-| `E234_source_measures_v1` | Source-side measures E2–E4 of navigation and matched cores | no | S11 |
-| `E6_rho_scan_v1` | Signed-mixing ρ series of cores: transfer at seven ρ levels and source measures | yes (210 cells) | 7b, 7c, S11 |
+| `E234_source_measures_v1` | Source-side measures E2–E4 of navigation and matched cores | no | S10 |
+| `E6_rho_scan_v1` | Signed-mixing ρ series of cores: transfer at seven ρ levels and source measures | yes (210 cells) | 7b, 7c, S10 |
 | `E6_autonomous_retention_v1` | Autonomous recurrent retention κ of all ρ cores (C1) | no | 7d |
-| `E6_retention_intervention_v1` | Recurrent rescaling W_rec → c W_rec (impairment and rescue) | yes (60 cells) | 7e, S12 |
+| `E6_retention_intervention_v1` | Recurrent rescaling W_rec → c W_rec (impairment and rescue) | yes (60 cells) | 7e, S11 |
 | `E6_navigation_separability_v1` | Refit of the navigation interface of every ρ core | interface refits (210 cells) | S9 |
 | `E1_interface_harvest_v1` | Magnitude and shape of the learned relation interfaces of the 4 × 4 symbolic adapters | no | – |
-| `verdicts_v1` | Evaluation of the prespecified E2–E4 and E6 tests with Holm correction | no | 7, S11 |
+| `verdicts_v1` | Evaluation of the prespecified E2–E4 and E6 tests with Holm correction | no | 7, S10 |
 
 Dependencies: E0.9a provides the g = 1 anchor of E5c, the ρ = 0 anchor of E6 and the learned gains of E234; E0_67 provides δ for E234 (working point Bstar); E5c's post hoc analysis provides the observations of E5b′; E6 provides the cores of C1, the separability control and the intervention, whose rescaling factor c is the retention ratio measured by C1.
 

@@ -39,7 +39,7 @@ PAPER_FIGURES: tuple[PaperFigure, ...] = (
                 ("figure_source_data/FigureA3",), "Topology, reduced-dynamics and path-invariance tests"),
     PaperFigure("SupplementaryFigureS3", "paper_figures.make_figureA4_topology", "build", "FigureA4",
                 ("figure_source_data/FigureA4",), "Torus-like topology visualization"),
-    PaperFigure("SupplementaryFigureS10", "paper_figures.make_figureA6_associations", "build", "FigureA6",
+    PaperFigure("SupplementaryFigureS12", "paper_figures.make_figureA6_associations", "build", "FigureA6",
                 ("figure_source_data/FigureA6",), "Grid-like unit fraction versus transfer"),
     PaperFigure("Figure6", "hard8_phaseF.make_figure6", "make_figure6", "Figure6",
                 ("figure_source_data/FigureA5",), "Extended 8 x 8 task (tables shared with S5 and S6)"),
@@ -57,11 +57,11 @@ PAPER_FIGURES: tuple[PaperFigure, ...] = (
                 "Extended optimization, gain calibration and additive controls"),
     PaperFigure("SupplementaryFigureS8", "hard8_phaseF.make_figureS8", "make_s8", "SupplementaryFigureS8",
                 ("figure_source_data/SupplementaryFigureS9",), "Multi-step state maintenance and error accumulation"),
-    PaperFigure("SupplementaryFigureS11", "hard8_phaseF.make_figureS9", "make_s9", "SupplementaryFigureS9",
+    PaperFigure("SupplementaryFigureS10", "hard8_phaseF.make_figureS9", "make_s9", "SupplementaryFigureS9",
                 ("figure_source_data/SupplementaryFigureS10",), "Prespecified source-measure analyses"),
     PaperFigure("SupplementaryFigureS9", "hard8_phaseF.make_figureS10", "make_s10", "SupplementaryFigureS10",
                 ("figure_source_data/SupplementaryFigureS11",), "Refitting of navigation-specific mappings"),
-    PaperFigure("SupplementaryFigureS12", "hard8_phaseF.make_figureS12", "make_s12", "SupplementaryFigureS12",
+    PaperFigure("SupplementaryFigureS11", "hard8_phaseF.make_figureS12", "make_s12", "SupplementaryFigureS12",
                 ("figure_source_data/SupplementaryFigureS12",), "Rescaling interventions by path length and source"),
 )
 

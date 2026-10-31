@@ -22,4 +22,4 @@ python tools/mechanism_v1/E6_rho_scan_v1/scripts/collect_rho_scan.py
 
 Recommended order: one ρ = 0 cell, then the anchor levels (ρ = 0, 0.1, 0.9), then the remaining levels.
 
-Output: `rerun_best_validation/followups/mechanism_v1/E6_rho_scan/source_<s>/target_<t>/rho_<thousandths>/` (for example `rho_0100`) and `aggregate/RHO_SCAN_RESULT.md`. Dependencies: `extended_common.py` (E0.9a), `source_measures.py` (E234), `delta_common.py` (E5b′). P2 contains the 210 trained models (`reevaluate_models.py --family e6`). Figures: 7b, 7c; tests in `verdicts_v1` (S11).
+Output: `rerun_best_validation/followups/mechanism_v1/E6_rho_scan/source_<s>/target_<t>/rho_<thousandths>/` (for example `rho_0100`) and `aggregate/RHO_SCAN_RESULT.md`. Dependencies: `extended_common.py` (E0.9a), `source_measures.py` (E234), `delta_common.py` (E5b′). P2 contains the 210 trained models (`reevaluate_models.py --family e6`). Figures: 7b, 7c; tests in `verdicts_v1` (S10).

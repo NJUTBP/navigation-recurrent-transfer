@@ -1,4 +1,4 @@
-"""Build the source data of Supplementary Fig. S12 (rescaling interventions by path length and source).
+"""Build the source data of Supplementary Fig. S11 (rescaling interventions by path length and source).
 
 Inputs are existing outputs of the formal experiments (no training):
   <mech>/E6_rho_scan/source_*/target_*/rho_0000|rho_0100/per_length.csv

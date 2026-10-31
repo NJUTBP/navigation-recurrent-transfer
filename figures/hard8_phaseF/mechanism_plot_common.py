@@ -1,4 +1,4 @@
-"""Shared presentation layer for Figure 7 and Supplementary Figures S7, S8, S9, S11 and S12.
+"""Shared presentation layer for Figure 7 and Supplementary Figures S7, S8, S9, S10 and S11.
 
 These builders are presentation-only.  They read exclusively from the formally
 frozen tables under ``aggregate_full/figure_source_data`` and never touch the

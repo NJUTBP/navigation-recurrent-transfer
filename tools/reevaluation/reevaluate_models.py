@@ -2,7 +2,7 @@
 """Level-2 check: rebuild released frozen-core target models and recompute their test accuracies.
 
 Families: phasef (Fig. 6, S5, S8; conditions navigation/matched_random/fresh_random with scalar gain),
-e09a (S7), e6 (Fig. 7b-d, S12), e6i (Fig. 7e, S12). For every model the four test-set accuracies are
+e09a (S7), e6 (Fig. 7b-d, S11), e6i (Fig. 7e, S11). For every model the four test-set accuracies are
 recomputed and compared with the stored metrics.csv of the original run (tolerance 0.002).
 
   NRT_PROJECT_ROOT=/path/to/project python tools/reevaluation/reevaluate_models.py --family e6i --out outputs/reeval_e6i.csv

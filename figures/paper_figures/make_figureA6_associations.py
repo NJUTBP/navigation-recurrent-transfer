@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Figure S10 (builder FigureA6): exploratory source-level associations of grid-like unit fraction and transfer."""
+"""Supplementary Figure S12 (builder FigureA6): exploratory source-level associations of grid-like unit fraction and transfer."""
 from __future__ import annotations
 from pathlib import Path
 import matplotlib

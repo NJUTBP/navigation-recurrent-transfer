@@ -2,7 +2,7 @@
  "comment": "Paths are relative to the cluster project root (multinav_paper_v1). Each entry is derived from FIGURE_DATA_MAP.md. Alternative globs are tried in order; the dry run reports which one matched.",
  "packages": {
   "P1_pretrained_checkpoints": "Selected navigation (6101-6110) and delayed-reconstruction (7101-7110) checkpoints, weights only, with training histories. Levels 2 and 3.",
-  "P2_target_checkpoints": "Frozen-core target models (core omitted on disk; rebuilt from P1 and recorded seeds) for Figs. 6-7, S5-S8, S12. Level 2.",
+  "P2_target_checkpoints": "Frozen-core target models (core omitted on disk; rebuilt from P1 and recorded seeds) for Figs. 6-7, S5-S8, S11. Level 2.",
   "P3_source_level_results": "Source-, cell- and target-level result tables, split manifests and protocols for all formal experiments. Levels 1-2."
  },
  "exclude_names": [

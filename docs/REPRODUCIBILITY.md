@@ -8,7 +8,7 @@
 | 2 | Accuracies, retention and source-side measures recomputed from trained networks | + P1, P2, P3 | GPU recommended |
 | 3 | Networks retrained from code, configurations and seeds | + P1 (or retrain P1 too) | GPU, hours to days |
 
-Coverage of Level 2: pretrained cores (Figs. 2, 7d, S1, S2, S11), Phase-F scalar-gain models (Figs. 6, S5, S8, 7a), E0.9a (S7), E6 and rescaling models (Figs. 7b–e, S12). The 4 × 4 experiments (Figs. 3–5, S4), the factorial path-invariance models (S2), the navigation-interface refits (S9) and the full-finetune conditions are reproduced at Levels 1 and 3.
+Coverage of Level 2: pretrained cores (Figs. 2, 7d, S1, S2, S10), Phase-F scalar-gain models (Figs. 6, S5, S8, 7a), E0.9a (S7), E6 and rescaling models (Figs. 7b–e, S11). The 4 × 4 experiments (Figs. 3–5, S4), the factorial path-invariance models (S2), the navigation-interface refits (S9) and the full-finetune conditions are reproduced at Levels 1 and 3.
 
 ## Seeds and data generation
 
@@ -37,7 +37,7 @@ Extract P1–P3 into the repository root, then run the commands in the README. `
 3. 8 × 8 task: `tools/hard8x8_phaseF_fullscale_v1/scripts/run_group.py` for every source × split × group, then `collect_fullscale.py` and `tools/FigureA5_PhaseF_workflow_v1/freeze_phaseF_figureA5_into_aggregate.py --aggregate <new aggregate>`.
 4. Mechanisms: `run_*.py` then `collect_*.py` in each `tools/mechanism_v1/*` folder (dependencies in [tools/mechanism_v1/README.md](../tools/mechanism_v1/README.md)), then `verdicts_v1/scripts/compute_verdicts.py`.
 5. Topology: `topology/schoyen_topology_best_validation_cluster_v3/torus_chain.py`, then `topology/schoyen_formal_figureA3_patch_v1/run_figureA3_source.py`.
-6. Figure source data: `figures/source_data_builders/prepare_source_data.py` (4 × 4, pretraining and topology folders), the Phase F freeze script and the S12 exporter.
+6. Figure source data: `figures/source_data_builders/prepare_source_data.py` (4 × 4, pretraining and topology folders), the Phase F freeze script and the S11 exporter.
 
 Scripts resolve the project root from `NRT_PROJECT_ROOT` (default: the repository root). The 8 × 8 and mechanism scripts write below `<project root>/rerun_best_validation/`, which is also where P3 is extracted; use a separate working copy for new runs. The multinav, best-validation and topology drivers write to the output root given on their command line (`outputs/multinav`, `--output-root`, `--result-root`).
 

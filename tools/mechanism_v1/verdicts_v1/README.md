@@ -17,4 +17,4 @@
 python tools/mechanism_v1/verdicts_v1/scripts/compute_verdicts.py
 ```
 
-Defaults read the P3 layout below `rerun_best_validation/followups/mechanism_v1/` (`--step6`, `--e6`, `--e09a-metrics`, `--out`). A completed output folder is skipped; a non-empty incomplete one stops the run. Figures: 7 and S11 (statistics).
+Defaults read the P3 layout below `rerun_best_validation/followups/mechanism_v1/` (`--step6`, `--e6`, `--e09a-metrics`, `--out`). A completed output folder is skipped; a non-empty incomplete one stops the run. Figures: 7 and S10 (statistics).

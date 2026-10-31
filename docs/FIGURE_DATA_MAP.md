@@ -28,9 +28,9 @@ Paths of plotting data are relative to `data/aggregate_full/`; experiment output
 | S7 | SupplementaryFigureS7 | Extended budget, gain operating curve, additive horizon | `hard8_phaseF/make_figureS7.py` | `tools/mechanism_v1/E0_9a_extended_budget_v1`, `E5c_gain_sweep_v1`, `E0_1_nonrecurrent_baselines_v1` | `SupplementaryFigureS8/` | P2: 60 E0.9a models (`e09a`) | – |
 | S8 | SupplementaryFigureS8 | Multi-step state maintenance, ablation and order shuffling, error growth, δ prediction | `hard8_phaseF/make_figureS8.py` | `E0_67_forward_diagnostics_v1` (on the Phase F scalar models), `E5b_delta_prediction_v1` | `SupplementaryFigureS9/` (panelE_Hnav_autonomous_retention.csv is not plotted) | P2 (`phasef`) | – |
 | S9 | SupplementaryFigureS10 | Refitting of the navigation-specific mappings | `hard8_phaseF/make_figureS10.py` | `E6_navigation_separability_v1` | `SupplementaryFigureS11/` | – | 210 refits: Levels 1 and 3 |
-| S10 | FigureA6 | Grid-like unit fraction versus transfer | `paper_figures/make_figureA6_associations.py` | statistics in `figures/source_data_builders/prepare_source_data.py` from source-level tables | `FigureA6/` (grid_transfer_associations, association_statistics) | – | Level 1; the builder writes its recomputed statistics to `outputs/figures/_builder_outputs/FigureA6_association_statistics.csv` |
-| S11 | SupplementaryFigureS9 | Prespecified source-measure analyses | `hard8_phaseF/make_figureS9.py` | `E234_source_measures_v1`, `verdicts_v1` | `SupplementaryFigureS10/` | P1 (source side only) | – |
-| S12 | SupplementaryFigureS12 | Rescaling interventions by path length and source | `hard8_phaseF/make_figureS12.py` | data: `tools/mechanism_v1/E6_retention_intervention_v1/scripts/export_figureS12_source_data.py`; task-state retention `tools/reevaluation/task_state_retention.py` | `SupplementaryFigureS12/` (panels a–c, s12_statistics.json) | P2 (`e6`, `e6i`) | panel c uses the released task-state retention table `data/source_level_results/mechanism_v1/E6_task_state_retention.csv` |
+| S10 | SupplementaryFigureS9 | Prespecified source-measure analyses | `hard8_phaseF/make_figureS9.py` | `E234_source_measures_v1`, `verdicts_v1` | `SupplementaryFigureS10/` | P1 (source side only) | – |
+| S11 | SupplementaryFigureS12 | Rescaling interventions by path length and source | `hard8_phaseF/make_figureS12.py` | data: `tools/mechanism_v1/E6_retention_intervention_v1/scripts/export_figureS12_source_data.py`; task-state retention `tools/reevaluation/task_state_retention.py` | `SupplementaryFigureS12/` (panels a–c, s12_statistics.json) | P2 (`e6`, `e6i`) | panel c uses the released task-state retention table `data/source_level_results/mechanism_v1/E6_task_state_retention.csv` |
+| S12 | FigureA6 | Grid-like unit fraction versus transfer | `paper_figures/make_figureA6_associations.py` | statistics in `figures/source_data_builders/prepare_source_data.py` from source-level tables | `FigureA6/` (grid_transfer_associations, association_statistics) | – | Level 1; the builder writes its recomputed statistics to `outputs/figures/_builder_outputs/FigureA6_association_statistics.csv` |
 
 ## Supplementary tables
 
@@ -51,8 +51,8 @@ All tests use the ten source networks as the independent unit: exact sign-flip t
 |---|---|---|
 | 4 × 4 contrasts (Figs. 3–5, S4) | `aggregate_best_validation_full_v2.py`, `code/multinav/stats.py` | `Figure3/4/5/`, `FigureA2/` `contrasts.csv`, `paired_differences.csv` |
 | 8 × 8 families (Fig. 6, Tables S4–S5) | `collect_fullscale.py` | `hard8x8_phaseF_followup/*contrasts.csv` |
-| Mechanism tests (Fig. 7, S7–S9, S11) | collectors `tools/mechanism_v1/*/scripts/collect_*.py`, `verdicts_v1/scripts/compute_verdicts.py` | `*_statistics.json` in the figure folders; P3 `aggregate/` |
-| Rescaling ranges and Δα (S12) | `export_figureS12_source_data.py` | `SupplementaryFigureS12/s12_statistics.json` |
-| Associations (S10) | `prepare_source_data.py` | `FigureA6/association_statistics.csv` |
+| Mechanism tests (Fig. 7, S7–S9, S10) | collectors `tools/mechanism_v1/*/scripts/collect_*.py`, `verdicts_v1/scripts/compute_verdicts.py` | `*_statistics.json` in the figure folders; P3 `aggregate/` |
+| Rescaling ranges and Δα (S11) | `export_figureS12_source_data.py` | `SupplementaryFigureS12/s12_statistics.json` |
+| Associations (S12) | `prepare_source_data.py` | `FigureA6/association_statistics.csv` |
 
 `tests/test_figure_statistics.py` checks that the stored 4 × 4 contrasts are means over the ten navigation sources of the stored paired differences and that the stored association statistics follow from `grid_transfer_associations.csv`.

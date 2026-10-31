@@ -1,4 +1,4 @@
-"""Figure numbers, builders and source-data folders are complete and unchanged."""
+"""Figure numbers, builders and source-data folders match the article."""
 import re
 import sys
 from pathlib import Path
@@ -18,8 +18,8 @@ BUILDER_TO_FIGURE = {
     "FigureA3": "SupplementaryFigureS2", "FigureA4": "SupplementaryFigureS3", "FigureA2": "SupplementaryFigureS4",
     "SupplementaryFigureS5": "SupplementaryFigureS5", "SupplementaryFigureS6": "SupplementaryFigureS6",
     "SupplementaryFigureS7": "SupplementaryFigureS7", "SupplementaryFigureS8": "SupplementaryFigureS8",
-    "SupplementaryFigureS9": "SupplementaryFigureS11", "SupplementaryFigureS10": "SupplementaryFigureS9",
-    "FigureA6": "SupplementaryFigureS10", "SupplementaryFigureS12": "SupplementaryFigureS12",
+    "SupplementaryFigureS9": "SupplementaryFigureS10", "SupplementaryFigureS10": "SupplementaryFigureS9",
+    "FigureA6": "SupplementaryFigureS12", "SupplementaryFigureS12": "SupplementaryFigureS11",
 }
 FIGURE_TO_SOURCE_DATA = {
     "Figure2": ("figure_source_data/Figure2",), "Figure3": ("figure_source_data/Figure3",),
@@ -32,9 +32,9 @@ FIGURE_TO_SOURCE_DATA = {
     "SupplementaryFigureS7": ("figure_source_data/SupplementaryFigureS8",),
     "SupplementaryFigureS8": ("figure_source_data/SupplementaryFigureS9",),
     "SupplementaryFigureS9": ("figure_source_data/SupplementaryFigureS11",),
-    "SupplementaryFigureS10": ("figure_source_data/FigureA6",),
-    "SupplementaryFigureS11": ("figure_source_data/SupplementaryFigureS10",),
-    "SupplementaryFigureS12": ("figure_source_data/SupplementaryFigureS12",),
+    "SupplementaryFigureS10": ("figure_source_data/SupplementaryFigureS10",),
+    "SupplementaryFigureS11": ("figure_source_data/SupplementaryFigureS12",),
+    "SupplementaryFigureS12": ("figure_source_data/FigureA6",),
 }
 
 

@@ -1,4 +1,4 @@
-"""Supplementary Figure S12: recurrent rescaling interventions by path length and source.
+"""Supplementary Figure S11: recurrent rescaling interventions by path length and source.
 
 Reads ``figure_source_data/SupplementaryFigureS12`` (written by
 tools/mechanism_v1/E6_retention_intervention_v1/scripts/export_figureS12_source_data.py) and draws

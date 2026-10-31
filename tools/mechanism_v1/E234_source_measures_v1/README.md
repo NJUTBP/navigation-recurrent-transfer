@@ -21,4 +21,4 @@ python tools/mechanism_v1/E234_source_measures_v1/scripts/run_source_measures.py
 python tools/mechanism_v1/E234_source_measures_v1/scripts/collect_source_measures.py
 ```
 
-50 cells (forward passes and ridge regressions, a few minutes each on one GPU). Output: `rerun_best_validation/followups/mechanism_v1/E234_source_measures/` (`aggregate/SOURCE_MEASURES_RESULT.md`). `scripts/source_measures.py` is also used by E6. Figure: S11.
+50 cells (forward passes and ridge regressions, a few minutes each on one GPU). Output: `rerun_best_validation/followups/mechanism_v1/E234_source_measures/` (`aggregate/SOURCE_MEASURES_RESULT.md`). `scripts/source_measures.py` is also used by E6. Figure: S10.

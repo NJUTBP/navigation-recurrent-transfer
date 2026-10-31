@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-step retention on task states (Supplementary Fig. S12c) for the E6 rho = 0, 0.10 cores and the two
+"""One-step retention on task states (Supplementary Fig. S11c) for the E6 rho = 0, 0.10 cores and the two
 rescaling arms. Rebuilds each frozen-core target model from the navigation checkpoint and recorded seeds,
 checks its stored test accuracy (Gate R), rolls out 256 seen-composition test trials of length 12, samples
 128 visited states and computes kappa(h) = ||ReLU(W_rec h)|| / ||h|| (Eq. 12). GPU recommended.

@@ -1,4 +1,4 @@
-"""Supplementary Figure S11 (builder SupplementaryFigureS9): prespecified source-measure analyses.
+"""Supplementary Figure S10 (builder SupplementaryFigureS9): prespecified source-measure analyses.
 
 Reads figure_source_data/SupplementaryFigureS10 (panel tables, PANEL_CONTRACT.json,
 s10_statistics.json); nothing is recomputed.
